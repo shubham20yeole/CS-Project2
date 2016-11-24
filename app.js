@@ -322,43 +322,7 @@ app.use(session({
   secure: true,
   ephemeral: true
 }));
-var config = {
-    host: 'ftp.byethost7.com',
-    port: 21,
-    user: 'b8_19205430',
-    password: 'Shubham4194'
-}
-var ftpClient = require('ftp-client'),
-client = new ftpClient(config, 'all');
-var fs = require("fs");
-var multer  = require('multer');
-var upload = multer({ dest: 'uploads/' });
-
-// Process upload file
-app.post('/file_upload/', upload.single('filename'), function(request, response) {
-
-    var fileName = request.body.filename;
-    console.log(fileName);
-
-    var filePath = request.file.path;
-    console.log(filePath);
-
-    var file = __dirname + "/uploads/" +  fileName;
-    fs.readFile(filePath, function(err, data) {
-        fs.writeFile(file, data, function(err) {
-            if (err) {
-                console.log(err);
-            } else {
-                responseData = {
-                    'message' : 'File uploaded successfully',
-                    'fileName' : fileName
-                };
-            }
-
-        })
-    });
-     res.redirect('/blog');
-});
+// 
 app.post('/postproperty/', function(req, res){
 console.log(req.body.file);
 client.connect(function () {
