@@ -332,54 +332,68 @@ app.use(session({
   secure: true,
   ephemeral: true
 }));
-// var config = {
-//     host: 'ftp.byethost7.com',
-//     port: 21,
-//     user: 'b8_19205430',
-//     password: 'Shubham4194'
-// }
-// var ftpClient = require('ftp-client'),
-// client = new ftpClient(config, 'all');
-// var fs = require("fs");
-// var multer  = require('multer');
-// var upload = multer({ dest: 'uploads/' });
+var config = {
+    host: 'ftp.byethost7.com',
+    port: 21,
+    user: 'b8_19205430',
+    password: 'Shubham4194'
+}
+var ftpClient = require('ftp-client'),
+client = new ftpClient(config, 'all');
+var fs = require("fs");
+var multer  = require('multer');
+var upload = multer({ dest: 'uploads/' });
+var cln = require('ftp');
+var c = new cln();
+c.on('ready', function() {
+    c.list(function(err, list) {
+      if (err) throw err;
+      console.dir(list);
+      c.end();
+    });
+  });
+  c.connect(config);
 
-// // Process upload file
-// app.post('/file_upload/', upload.single('filename'), function(request, response) {
+// Process upload file
+app.post('/file_upload/', upload.single('filename'), function(request, response) {
 
-//     var fileName = request.body.filename;
-//     console.log(fileName);
+    var fileName = request.body.filename;
+    console.log(fileName);
 
-//     var filePath = request.file.path;
-//     console.log(filePath);
+    var filePath = request.file.path;
+    console.log(filePath);
 
-//     var file = __dirname + "/uploads/" +  fileName;
-//     fs.readFile(filePath, function(err, data) {
-//         fs.writeFile(file, data, function(err) {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 responseData = {
-//                     'message' : 'File uploaded successfully',
-//                     'fileName' : fileName
-//                 };
-//             }
+    var file = __dirname + "/uploads/" +  fileName;
+    fs.readFile(filePath, function(err, data) {
+        fs.writeFile(file, data, function(err) {
+            if (err) {
+                console.log(err);
+            } else {
+                responseData = {
+                    'message' : 'File uploaded successfully',
+                    'fileName' : fileName
+                };
+            }
 
-//         })
-//     });
-//      res.redirect('/blog');
-// });
+        })
+    });
+     res.redirect('/blog');
+});
 app.post('/postproperty/', function(req, res){
-// console.log(req.body.file);
-// client.connect(function () {
+console.log(req.body.file);
+client.connect(function () {
  
-//     client.upload(['RentalProject/public/css/**'], '/public_html/shubham', {
-//         baseDir: 'RentalProject/public',
-//         overwrite: 'older'
-//     }, function (result) {
-//         console.log(result);
-//     });
-// });
+    client.upload(['RentalProject/public/css/**'], '/public_html/shubham', {
+        baseDir: 'RentalProject/public',
+        overwrite: 'older'
+    }, function (result) {
+       client.put('RentalProject/public/css/**', '/public_html/shubham', function(err) {
+      if (err) throw err;
+      client.end();
+    });
+        console.log(result);
+    });
+});
 
 console.log("success");
 var datetime = new Date();
@@ -401,12 +415,13 @@ console.log(datetime);
       area: req.body.area,
       posted_date: req.body.blogdata
     }
-    db.property.insert(newProperty, function(err, result){
-      if(err){
-        console.log(err);
-      }
-    res.redirect('/blog');
-  });
+  //   db.property.insert(newProperty, function(err, result){
+  //     if(err){
+  //       console.log(err);
+  //     }
+  // });
+        res.redirect('/blog');
+
 });
 app.post('/view/blog/comment', function(req, res){
 
