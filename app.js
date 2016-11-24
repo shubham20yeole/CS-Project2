@@ -8,7 +8,7 @@ var expressValidator = require('express-validator');
 var mongojs = require('mongojs')
 var mongodb = require('mongodb')
 // var db = mongojs('mongodb://ds143717.mlab.com:43717/shubham', ['users']);
-var collections = ["users", "blog", "comments", "property"]
+var collections = ["users", "blog", "comments", "property", "images"]
 
 var db = mongojs('mongodb://shubham20.yeole:shubham20.yeole@ds163387.mlab.com:63387/paceteam3', collections)
 
@@ -278,7 +278,19 @@ app.get('/dashboard', function(req, res) {
 //   });
 //   } )
 // });
-
+// client.connect(function () {
+ 
+//     client.upload(['RentalProject/public/css/**'], '/public_html/shubham', {
+//         baseDir: 'RentalProject/public',
+//         overwrite: 'older'
+//     }, function (result) {
+//        client.put('RentalProject/public/css/**', '/public_html/shubham', function(err) {
+//       if (err) throw err;
+//       client.end();
+//     });
+//         console.log(result);
+//     });
+// });
 app.get('/dashboard/:id', function(req, res) {
 
   var loginstatus = null;
@@ -352,7 +364,7 @@ c.on('ready', function() {
       c.end();
     });
   });
-  c.connect(config);
+  // c.connect(config);
 
 // Process upload file
 app.post('/file_upload/', upload.single('filename'), function(request, response) {
@@ -379,48 +391,71 @@ app.post('/file_upload/', upload.single('filename'), function(request, response)
     });
      res.redirect('/blog');
 });
-app.post('/postproperty/', function(req, res){
-console.log(req.body.file);
-client.connect(function () {
- 
-    client.upload(['RentalProject/public/css/**'], '/public_html/shubham', {
-        baseDir: 'RentalProject/public',
-        overwrite: 'older'
-    }, function (result) {
-       client.put('RentalProject/public/css/**', '/public_html/shubham', function(err) {
-      if (err) throw err;
-      client.end();
-    });
-        console.log(result);
-    });
+
+
+
+app.post('/uploadimages', function(req, res) {
+  console.log("In upload image 1");
+  db.images.update({timestamp: req.body.timestamp},{$set : {"imege1": req.body.image1}},{upsert:true,multi:true}) 
+  res.send('Ok'); 
 });
 
-console.log("success");
-var datetime = new Date();
-console.log(datetime);
-    var newProperty = {
-      phone: req.body.phone,
-      email: req.body.email,
-      telephone: req.body.telephone,
-      staddress: req.body.staddress,
-      city: req.body.city,
-      state: req.body.state,
-      zip: req.body.zip,
-      county: req.body.county,
-      country: req.body.country,
-      bedroom: req.body.bedroom,
-      kitchen: req.body.kitchen,
-      bathroom: req.body.bathroom,
-      propertytype: req.body.propertytype,
-      area: req.body.area,
-      posted_date: req.body.blogdata
-    }
-  //   db.property.insert(newProperty, function(err, result){
-  //     if(err){
-  //       console.log(err);
-  //     }
-  // });
-        res.redirect('/blog');
+app.post('/uploadimages2', function(req, res) {
+  console.log("In upload image 2");
+  db.images.update({timestamp: req.body.timestamp},{$set : {"imege2": req.body.image2}},{upsert:true,multi:true}) 
+  res.send('Ok'); 
+});
+
+app.post('/uploadimages3', function(req, res) {
+  console.log("In upload image 3");
+  db.images.update({timestamp: req.body.timestamp},{$set : {"imege3": req.body.image3}},{upsert:true,multi:true}) 
+  res.send('Ok'); 
+});
+
+app.post('/uploadimages4', function(req, res) {
+  console.log("In upload image 4");
+  db.images.update({timestamp: req.body.timestamp},{$set : {"imege4": req.body.image4}},{upsert:true,multi:true}) 
+  res.send('Ok'); 
+});
+
+app.get('/showimages', function(req, res) {
+   db.images.find(function (err, docs) {
+    res.render("showimages.ejs",{images: docs});
+  })
+});
+ 
+
+app.post('/postproperty/', function(req, res){
+    var datetime = new Date();
+    console.log(datetime);
+        var newProperty = {
+          phone: req.body.phone,
+          email: req.body.email,
+          telephone: req.body.telephone,
+          staddress: req.body.staddress,
+          city: req.body.city,
+          state: req.body.state,
+          zip: req.body.zip,
+          county: req.body.county,
+          country: req.body.country,
+          bedroom: req.body.bedroom,
+          kitchen: req.body.kitchen,
+          bathroom: req.body.bathroom,
+          propertytype: req.body.propertytype,
+          area: req.body.area,
+          image1: req.body.image1,
+          posttime: req.body.posttime,
+          discription: req.body.discription,
+          posted_date: req.body.blogdata
+        }
+        db.property.insert(newProperty, function(err, result){
+        
+          if(err){
+            console.log(err);
+          }
+      });
+
+      res.redirect('/postadd');
 
 });
 app.post('/view/blog/comment', function(req, res){
