@@ -63,7 +63,7 @@ app.use(expressValidator({
  var errmsg = "Computer Science Project";
 app.get('/', function(req, res){
   
-    res.render("index.ejs");  
+    res.render("googlemap");  
 });
 
 app.post('/users/add', function(req, res){
