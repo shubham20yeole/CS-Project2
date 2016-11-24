@@ -8,22 +8,16 @@ var expressValidator = require('express-validator');
 var mongojs = require('mongojs')
 var mongodb = require('mongodb')
 // var db = mongojs('mongodb://ds143717.mlab.com:43717/shubham', ['users']);
-var collections = ["users", "blog", "comments"]
+var collections = ["users", "blog", "comments", "property"]
 
-var db = mongojs('mongodb://shubham20.yeole:shubham20.yeole@ds143717.mlab.com:43717/shubham', collections)
+var db = mongojs('mongodb://shubham20.yeole:shubham20.yeole@ds163387.mlab.com:63387/paceteam3', collections)
 
 var app = express();
 var ObjectId = mongojs.ObjectId;
 var passport = require("passport")
 var blog=db.collection('blog');
 var session = require('client-sessions');
-/*var logger = function(req, res, next){
-  console.log("Logging...");
-  next();
-} 
-mongodb://ds143717.mlab.com:43717/shubham
-var db = mongojs('//mongodb://shubham20.yeole:shubham20.yeole@ds143717.mlab.com:43717/shubham', ['users'])
-app.use(logger);*/
+
 
 // View Engine
 app.set('view engine', 'ejs');
@@ -68,78 +62,14 @@ app.use(expressValidator({
 }));
  var errmsg = "Computer Science Project";
 app.get('/', function(req, res){
-   var blogviewmsg = "You are viewing blogs of all category";
-  var loginstatus = null;
-  if(req.session.users==null){
-    loginstatus = "false";
-      }else{
-    loginstatus = "true";
-  }
-  db.blog.find(function (err, docs) {
-    res.render("dashboard.ejs",{
-    blog: docs,
-    users: req.session.users,
-    message: blogviewmsg,
-    session: loginstatus
-  });
-  } )
   
+    res.render("index.ejs");  
 });
-// 
-// ********************************************************LINKEDIN*******************************************
-
-
-var LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
- 
-passport.use(new LinkedInStrategy({
-  clientID: '8613rjqvsnd5dw',
-  clientSecret: 'KWN3zJhKff6aES0X',
-  callbackURL: "http://127.0.0.1:3000/auth/linkedin/callback",
-  scope: ['r_emailaddress', 'r_basicprofile'],
-  state: true
-
-}, function(accessToken, refreshToken, profile, done) {
-  console.log(id);
-  // asynchronous verification, for effect... 
-  process.nextTick(function () {
-
-    // To keep the example simple, the user's LinkedIn profile is returned to 
-    // represent the logged-in user. In a typical application, you would want 
-    // to associate the LinkedIn account with a user record in your database, 
-    // and return that user instead. 
-    return done(null, profile);
-  });
-}));
-
-
-
-app.get('/auth/linkedin',
-  passport.authenticate('linkedin', { state: 'SOME STATE'  }),
-  function(req, res){
-    // The request will be redirected to LinkedIn for authentication, so this 
-    // function will not be called. 
-  });
-
-
-
-// http://127.0.0.1:3000/auth/linkedin/callback
-app.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
-  successRedirect: '/',
-  failureRedirect: '/login'
-}));
-
-
-
-
-
-// ********************************************************LINKEDIN*******************************************
 
 app.post('/users/add', function(req, res){
-  req.checkBody('firstname', 'First name is required').notEmpty();
-  req.checkBody('lastname', 'Lastr name is required').notEmpty();
-  req.checkBody('email', 'Email is required').notEmpty();
 
-  var errors = req.validationErrors();
+
+  
   var datetime = new Date();
     var loginstatus = null;
       if(req.session.users==null){
@@ -150,18 +80,7 @@ app.post('/users/add', function(req, res){
  db.users.findOne({ email: req.body.email }, function(err, users) {
     if (!users) {
           var students = "Shubham is Pace CS student";
-          if(errors){
-               var blogviewmsg = "You are viewing blogs of all category";
- 
-                db.blog.find(function (err, docs) {
-                    res.render("dashboard.ejs",{
-                    blog: docs,
-                    users: req.session.users,
-                    message: blogviewmsg,
-                    session: loginstatus
-                });
-              })
-              }else{
+        
               var psd = req.body.password;
               if(req.body.password==null){
                 psd = "w$9jKp3e$!Zy_Ned";
@@ -170,8 +89,7 @@ app.post('/users/add', function(req, res){
               }
               console.log("success");
               var newUser = {
-              firstname: req.body.firstname,
-              lastname: req.body.lastname,
+              fullname: req.body.firstname,
               email: req.body.email,
               phone: req.body.phone,
               date: datetime,
@@ -189,7 +107,7 @@ app.post('/users/add', function(req, res){
         req.session.users = newUser;
         res.redirect('/blog');
   });
-  }
+  
       
     } else {
         db.users.findOne({ email: req.body.email }, function(err, users) {
@@ -211,21 +129,6 @@ app.post('/users/add', function(req, res){
 }
 });
 });
-function regLogFun(){
-
-
-}
-
-
-// app.delete('/users/delete/:id', function(req, res){
-//   console.log(req.params.id);
-//   db.users.remove({_id: ObjectId(req.params.id)}, function(err, result){
-//     if(err){
-//       console.log("err");
-//     }
-//     res.redirect('/');
-//   });
-// });
 
 app.get('/users/delete/:id', function(req, res){
   console.log(req.params.id);
@@ -419,27 +322,76 @@ app.use(session({
   secure: true,
   ephemeral: true
 }));
+// var config = {
+//     host: 'ftp.byethost7.com',
+//     port: 21,
+//     user: 'b8_19205430',
+//     password: 'Shubham4194'
+// }
+// var ftpClient = require('ftp-client'),
+// client = new ftpClient(config, 'all');
+// var fs = require("fs");
+// var multer  = require('multer');
+// var upload = multer({ dest: 'uploads/' });
 
+// // Process upload file
+// app.post('/file_upload/', upload.single('filename'), function(request, response) {
 
-app.post('/addblog/', function(req, res){
-  
+//     var fileName = request.body.filename;
+//     console.log(fileName);
+
+//     var filePath = request.file.path;
+//     console.log(filePath);
+
+//     var file = __dirname + "/uploads/" +  fileName;
+//     fs.readFile(filePath, function(err, data) {
+//         fs.writeFile(file, data, function(err) {
+//             if (err) {
+//                 console.log(err);
+//             } else {
+//                 responseData = {
+//                     'message' : 'File uploaded successfully',
+//                     'fileName' : fileName
+//                 };
+//             }
+
+//         })
+//     });
+//      res.redirect('/blog');
+// });
+app.post('/postproperty/', function(req, res){
+// console.log(req.body.file);
+// client.connect(function () {
+ 
+//     client.upload(['RentalProject/public/css/**'], '/public_html/shubham', {
+//         baseDir: 'RentalProject/public',
+//         overwrite: 'older'
+//     }, function (result) {
+//         console.log(result);
+//     });
+// });
+
 console.log("success");
 var datetime = new Date();
 console.log(datetime);
-    var newBlog = {
-      title: req.body.title,
-      category: req.body.category,
-      imagename: req.body.category.toLowerCase(),
-      like: req.body.like,
-      dislike: req.body.dislike,
-      views: req.body.views,
-      long: req.body.long,
-      lat: req.body.lat,
-      date: datetime,
-      name: req.session.users.firstname +" "+req.session.users.lastname,
-      data: req.body.blogdata
+    var newProperty = {
+      phone: req.body.phone,
+      email: req.body.email,
+      telephone: req.body.telephone,
+      staddress: req.body.staddress,
+      city: req.body.city,
+      state: req.body.state,
+      zip: req.body.zip,
+      county: req.body.county,
+      country: req.body.country,
+      bedroom: req.body.bedroom,
+      kitchen: req.body.kitchen,
+      bathroom: req.body.bathroom,
+      propertytype: req.body.propertytype,
+      area: req.body.area,
+      posted_date: req.body.blogdata
     }
-    db.blog.insert(newBlog, function(err, result){
+    db.property.insert(newProperty, function(err, result){
       if(err){
         console.log(err);
       }
@@ -465,9 +417,9 @@ app.post('/view/blog/comment', function(req, res){
 });
 
 
-app.get('/prism/', function(req, res){
+app.get('/registerlogin', function(req, res){
 
-   res.render("prism.ejs");
+   res.render("signupin.ejs");
  
 });
 
