@@ -68,8 +68,6 @@ app.get('/', function(req, res){
 
 app.post('/users/add', function(req, res){
 
-
-  
   var datetime = new Date();
     var loginstatus = null;
       if(req.session.users==null){
@@ -324,17 +322,6 @@ app.use(session({
 }));
 // 
 app.post('/postproperty/', function(req, res){
-console.log(req.body.file);
-client.connect(function () {
- 
-    client.upload(['RentalProject/public/css/**'], '/public_html/shubham', {
-        baseDir: 'RentalProject/public',
-        overwrite: 'older'
-    }, function (result) {
-        console.log(result);
-    });
-});
-
 console.log("success");
 var datetime = new Date();
 console.log(datetime);
