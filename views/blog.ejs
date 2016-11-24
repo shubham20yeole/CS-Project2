@@ -68,6 +68,15 @@ and is wrapped around the whole page content, except for the footer in this exam
   <div class="w3-card-4 w3-margin w3-white" style="padding: 2%">
   <h1>Welcome to Shubham Blog!</h1>
   <% if(session=='false'){%>
+   <h3>File Upload:</h3>
+        Select a file to upload: <br />
+        <form action="/file_upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="filename" size="50" />
+            <br />
+            <input type="submit" value="Upload File" />
+        </form>
+
+
       <p style="color: red">
         Please Sign In or Sign Up to write new posts.<br><br>
         <span class="errmsg">Use login with facebook for quick login.</span>
@@ -83,14 +92,55 @@ and is wrapped around the whole page content, except for the footer in this exam
     
  <button style="float: right;" id="submit">Save Post</button>
 
-<input type="file" /><input type="button" onclick="alert(this.previousSibling.value);" value="select file and press the button" />
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#accordion" ).accordion();
+  } );
+  </script>
+</head>
+<body>
+</div>
 
-      <input type="file" name="phone" placeholder="Phone"><br><br>
+<div id="accordion">
+  <h3>Section 1</h3>
+  <div>
+    <p>
+   
+    </p>
+  </div>
+  <h3>Section 2</h3>
+  <div>
+    <p>
+      
+
+    </p>
+  </div>
+  <h3>Section 3</h3>
+  <div>
+    <p>
+
+    </p>
+  </div>
+  <h3>Section 4</h3>
+  <div><p>
+  
+    </p></div>
+    <h3>Section 4</h3>
+  <div><p>
+  
+    </p></div>
+
+</div>
+
       <input type="text" name="filepath" id="filepath" placeholder="filepath"><br><br>
       <div id="disp_tmp_path"></div>
 
     <form method="post" action="postproperty">
+      <input type="file" name="file" size="50" /><br><br>
 
       <input type="text" name="phone" placeholder="Phone"><br><br>
       <input type="number" name="email" placeholder="Email"><br><br>
@@ -123,9 +173,6 @@ and is wrapped around the whole page content, except for the footer in this exam
 
       <input type="submit" value="Post Add">
     </form>
-
-
-
 
 
 
