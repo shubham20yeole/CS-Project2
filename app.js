@@ -61,9 +61,19 @@ app.use(expressValidator({
   }
 }));
  var errmsg = "Computer Science Project";
+
+
 app.get('/', function(req, res){
   
     res.render("index.ejs");  
+});
+
+app.get('/blank', function(req, res){
+   res.render("blank.ejs");  
+});
+
+app.get('/postadd', function(req, res){
+   res.render("postadd.ejs");  
 });
 
 app.post('/users/add', function(req, res){
