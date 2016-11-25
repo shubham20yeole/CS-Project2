@@ -1,4 +1,5 @@
 <% include partials/blankheader.ejs %>
+<link href="theme/css/postadd.css" rel="stylesheet">    
 
   <!-- Start Proerty header  -->
 
@@ -26,62 +27,16 @@
       <div class="row">
 
         <div class="col-md-8">
-          <div class="aa-properties-content">            
+          <div class="aa-properties-content" id="postform">            
             <!-- Start properties content body -->
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMAWPMDGHGh-KUNMkjSIlMBD1JMtTfbxk&callback=initMap">
-    </script>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<div>
-     <h3> Enter an adress and press the button</h3>
 
-    <input id="address" type="text" placeholder="Enter address here" />
-    <button id="btn">Get LatLong</button>
-    <div>
-        <p>Latitude:
-            <input type="text" id="latitude" readonly />
-        </p>
-        <p>Longitude:
-            <input type="text" id="longitude" readonly />
-        </p>
-    </div>
-</div>
 
-<script type="text/javascript">
-/* This showResult function is used as the callback function*/
+   
 
-function showResult(result) {
-    document.getElementById('latitude').value = result.geometry.location.lat();
-    document.getElementById('longitude').value = result.geometry.location.lng();
-}
-
-function getLatitudeLongitude(callback, address) {
-    // If adress is not supplied, use default value 'Ferrol, Galicia, Spain'
-    address = address || 'Ferrol, Galicia, Spain';
-    // Initialize the Geocoder
-    geocoder = new google.maps.Geocoder();
-    if (geocoder) {
-        geocoder.geocode({
-            'address': address
-        }, function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                callback(results[0]);
-            }
-        });
-    }
-}
-
-var button = document.getElementById('btn');
-
-button.addEventListener("click", function () {
-    var address = document.getElementById('address').value;
-    getLatitudeLongitude(showResult, address)
-});
-</script>
-
-            <div class="aa-properties-details">
-            <h1>Post New Property</h1>
+            <div class="aa-properties-details" >
+            <h3>POST NEW PROPERTY</h3>            
             <table width="100%">
             <tr>
             <td>
@@ -98,16 +53,18 @@ button.addEventListener("click", function () {
                 <input type="text" name="phone" placeholder="Phone">
                 <input type="text" name="email" placeholder="Email">
                 <input type="text" name="telephone" placeholder="Telephone"><br><br>
+                <input type="hidden" name="latitude" id="latitude" placeholder="longitude" readonly="true">
+                <input type="hidden" name="longitude" id="longitude" placeholder="latitude" readonly="true">
 
-
+                <% include partials/map.ejs %>
+                <p id="longlati"></p>
                 <input type="text" name="posttime" id="posttime" placeholder="Street Address"><br><br>
-                <input type="text" name="staddress" placeholder="Street Address">
-                <input type="text" name="city" placeholder=" city">
-                <input type="text" name="state" placeholder=" state"><br><br>
-                <input type="text" name="zip" placeholder=" zip">
+                <input type="text" name="staddress" id="staddress" placeholder="Street Address">
+                <input type="text" name="city" id="city" placeholder=" city">
+                <input type="text" name="state" id="state" placeholder=" state"><br><br>
+                <input type="text" name="zip" id="zip" placeholder=" zip">
                 <input type="text" name="county" placeholder=" county">
                 <input type="text" name="country" placeholder=" country"><br><br>
-
                 <select id="categoryselect">
                   <option value="Other">Category</option>
                   <option value="Houses">Houses</option>

@@ -1,7 +1,42 @@
 $( document ).ready(function() {
     $("#timestamp").val(new Date().valueOf());
+    $("#map").hide();
+
 
 });
+ $(document).on("keyup","#city,#state, #staddress, #zip",function() {
+    $("#map").show().addClass("animated rotateInDownRight");
+    var address1 = $('#staddress').val()+", "+$('#city').val()+", "+$('#state').val()+", "+$('#zip').val();
+    var address = document.getElementById('address').value;
+    getLatitudeLongitude(showResult, address1);
+});
+
+
+function showResult(result) {
+    document.getElementById('latitude').value = result.geometry.location.lat();
+    document.getElementById('longitude').value = result.geometry.location.lng();
+    initMap(result.geometry.location.lat(),result.geometry.location.lng());
+    $("#longlati").text("Latitude: "+result.geometry.location.lat()+", Longitude: "+result.geometry.location.lng());
+}
+
+function getLatitudeLongitude(callback, address) {
+    // If adress is not supplied, use default value 'Ferrol, Galicia, Spain'
+    address = address || 'Ferrol, Galicia, Spain';
+    // Initialize the Geocoder
+    geocoder = new google.maps.Geocoder();
+    if (geocoder) {
+        geocoder.geocode({
+            'address': address
+        }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                callback(results[0]);
+            }
+        });
+    }
+}
+
+
+
  
 $(document).on("change","#file",function() { 
         var input = document.getElementById("file");
