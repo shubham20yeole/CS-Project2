@@ -7,7 +7,6 @@ $( document ).ready(function() {
  $(document).on("keyup","#city,#state, #staddress, #zip",function() {
     $("#map").show().addClass("animated rotateInDownRight");
     var address1 = $('#staddress').val()+", "+$('#city').val()+", "+$('#state').val()+", "+$('#zip').val();
-    var address = document.getElementById('address').value;
     getLatitudeLongitude(showResult, address1);
 });
 
