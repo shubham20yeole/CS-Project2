@@ -242,14 +242,14 @@
                   <img style="max-height: 200px; min-height: 200px; " src="<%= property.image1 %>" alt="img">
                 </a>
                 <div class="aa-tag for-sale">
-                  For Sale
+                  <%= property.addtype %>
                 </div>
                 <div class="aa-properties-item-content">
                   <div class="aa-properties-info">
-                    <span>5 Rooms</span>
-                    <span>2 Beds</span>
-                    <span>3 Baths</span>
-                    <span>1100 SQ FT</span>
+                    <span><%= property.kitchen %> Kitchen</span>
+                    <span><%= property.bathroom %> Bathroom</span>
+                    <span><%= property.bedroom %> Bedroom</span>
+                    <span><%= property.area %> SQ FT</span>
                   </div>
                   <div class="aa-properties-about">
                     <h3><a href="#"><%= property.propertytype %></a></h3>

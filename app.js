@@ -77,7 +77,7 @@ app.use(expressValidator({
 
 // .sort({datefield: -1},
 app.get('/', function(req, res){
-   db.property.find({ sort: { 'timestamp' : -1 } , limit:11}, function (err, docs) {
+   db.property.find( function (err, docs) {
     res.render("index.ejs",{property: docs});
   })
 });
@@ -456,6 +456,7 @@ app.post('/postproperty/', function(req, res){
           bedroom: req.body.bedroom,
           kitchen: req.body.kitchen,
           bathroom: req.body.bathroom,
+          addtype: req.body.addtype,
           propertytype: req.body.propertytype,
           area: req.body.area,
           dateField: datetime,
