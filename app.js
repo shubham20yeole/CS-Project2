@@ -26,7 +26,7 @@ app.set('views', path.join(__dirname, 'views'));
 // body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-
+app.use(express.body({limit: '50mb'}));
 // set static path
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -62,10 +62,11 @@ app.use(expressValidator({
 }));
  var errmsg = "Computer Science Project";
 
-
+// .sort({datefield: -1},
 app.get('/', function(req, res){
-  
-    res.render("index.ejs");  
+   db.property.find({ sort: { 'timestamp' : -1 } , limit:11}, function (err, docs) {
+    res.render("index.ejs",{property: docs});
+  })
 });
 
 app.get('/blank', function(req, res){
@@ -433,6 +434,7 @@ app.post('/postproperty/', function(req, res){
           email: req.body.email,
           telephone: req.body.telephone,
           staddress: req.body.staddress,
+          timestamp: req.body.timestamp,
           city: req.body.city,
           state: req.body.state,
           zip: req.body.zip,
@@ -443,6 +445,7 @@ app.post('/postproperty/', function(req, res){
           bathroom: req.body.bathroom,
           propertytype: req.body.propertytype,
           area: req.body.area,
+          dateField: datetime,
           image1: req.body.image1,
           posttime: req.body.posttime,
           discription: req.body.discription,

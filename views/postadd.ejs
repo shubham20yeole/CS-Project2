@@ -104,52 +104,71 @@
         <div class="col-md-8">
           <div class="aa-properties-content">            
             <!-- Start properties content body -->
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+
             <div class="aa-properties-details">
-            <input type="file" name="file" id="file" size="50" /><button id="uploadimage">Upload Image 1</button><br><br>
-            <input type="file" name="file" id="file2" size="50" /><button id="uploadimage2">Upload Image 2</button> <br><br>
-            <input type="file" name="file" id="file3" size="50" /><button id="uploadimage3">Upload Image 3</button> <br><br>
-            <input type="file" name="file" id="file4" size="50" /><button id="uploadimage4">Upload Image 4</button> <br><br>
-            
-            <div id="showpath">dd</div>
+            <h1>Post New Property</h1>
+            <table width="100%">
+            <tr>
+            <td>
+            <input type="file" name="file" id="file"/></td><td><input type="file" name="file" id="file2"/><input type="hidden" id="image2" name="image2"></td></tr>
+            <tr>
+            <td>
+            <input type="file" name="file" id="file3"/><input type="hidden" id="image3" name="image3"></td>
+            <td><input type="file" name="file" id="file4"/><input type="hidden" id="image4" name="image4"></td></tr></table>
+          
           
            <form method="post" action="postproperty">
                 <input type="text" name="timestamp" id="timestamp" placeholder="timestamp"><br><br>
-                <input type="text" id="image1" name="image1"><input type="text" id="image2" name="image2">
-                <input type="text" id="image3" name="image3"><input type="text" id="image4" name="image4">
-                <input type="text" name="phone" placeholder="Phone"><br><br>
-                <input type="number" name="email" placeholder="Email"><br><br>
-                <input type="number" name="telephone" placeholder="Telephone"><br><br>
+                <input type="hidden" id="image1" name="image1">
+                <input type="text" name="phone" placeholder="Phone">
+                <input type="text" name="email" placeholder="Email">
+                <input type="text" name="telephone" placeholder="Telephone"><br><br>
 
 
                 <input type="text" name="posttime" id="posttime" placeholder="Street Address"><br><br>
-                <input type="text" name="staddress" placeholder="Street Address"><br><br>
-                <input type="text" name="city" placeholder=" city"><br><br>
+                <input type="text" name="staddress" placeholder="Street Address">
+                <input type="text" name="city" placeholder=" city">
                 <input type="text" name="state" placeholder=" state"><br><br>
-                <input type="text" name="zip" placeholder=" zip"><br><br>
-                <input type="text" name="county" placeholder=" county"><br><br>
+                <input type="text" name="zip" placeholder=" zip">
+                <input type="text" name="county" placeholder=" county">
                 <input type="text" name="country" placeholder=" country"><br><br>
 
-                <input type="number" name="bedroom" placeholder="Bedroom"><br><br>
-                <input type="number" name="kitchen" placeholder="Kitchen"><br><br>
-                <input type="number" name="bathroom" placeholder="Bathroom"><br><br>
-
-
-                <select id="propertytype">
-                  <option value="other">Select Category under which this post should come</option>
-                  <option value="houses">Houses</option>
-                  <option value="appartments">Appartment</option>
-                  <option value="shop">Shop</option>
-                  <option value="payingguest">Paying Guest</option>
-                  <option value="townhome">Town Home</option>
-                  <option value="farmhouse">Farm House</option>
+                <select id="categoryselect">
+                  <option value="Other">Category</option>
+                  <option value="Houses">Houses</option>
+                  <option value="Appartments">Appartment</option>
+                  <option value="Shop">Shop</option>
+                  <option value="Paying Guest">Paying Guest</option>
+                  <option value="Town Home">Town Home</option>
+                  <option value="Farm House">Farm House</option>
+                </select>
+                <select id="addselect">
+                  <option value="Sale">Type</option>
+                  <option value="Sale">For Sale</option>
+                  <option value="Rent">For Rent</option>
                 </select><br><br>
-                <input type="text" name="propertytype" placeholder="propertytype"><br><br>
-                <input type="text" name="area" placeholder="Area in sq feets"><br><br>
+                <input type="number" name="bedroom" placeholder="Bedroom">
+                <input type="number" name="kitchen" placeholder="Kitchen">
+                <input type="number" name="bathroom" placeholder="Bathroom"><br><br>
+                <input type="hidden" name="propertytype" id="propertytype" placeholder="propertytype">
+                <input type="hidden" name="addtype" id="addtype" placeholder="propertytype"><br><br>
+                <input type="number" name="area" placeholder="Area in sq feets">
+                <input type="number" name="cost" placeholder="Price in USD">
                 <input type="text" name="discription" placeholder="Discription"><br><br>
 
-                <input type="submit" value="Post Add">
+                <input type="submit" style="display:none;" id="submitForm" value="Post Add">
               </form>
+              <button id="uploadimage">Save Post</button><div id="loader"></div>
 
+              <div id="lodardiv"></div>
+              <div id="div1" style="display:none;">Upload image 1: <b>Successfull</b></div>
+              <div id="div2" style="display:none;">Upload image 2: <b>Successfull</b></div>
+              <div id="div3" style="display:none;">Upload image 3: <b>Successfull</b></div>
+              <div id="div4" style="display:none;">Upload image 4: <b>Successfull</b></div>
+              <div id="div5" style="display:none;">Submitting - Property : <b>DONE</b></div><br>
             </div>          
           </div>
         </div>

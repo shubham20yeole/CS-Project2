@@ -1,5 +1,6 @@
 $( document ).ready(function() {
     $("#timestamp").val(new Date().valueOf());
+
 });
  
 $(document).on("change","#file",function() { 
@@ -15,31 +16,33 @@ $(document).on("change","#file",function() {
         }
     });
 $(document).on("click","#uploadimage",function() { 
-   $.post( "/uploadimages/", { timestamp: $("#timestamp").val(), image1: $("#image1").val()})
-    .done(function( data ) {
-        $( "#showpath" ).append('<div style="font-weight: bold; background-color: #f9f7f8; padding: 2%; color: #3F51B5">Image 1 Uploaded Successfully</div>').addClass("animated slideInDown");
-    });
-});
 
-$(document).on("click","#uploadimage2",function() { 
+    $( "#lodardiv" ).append('<img src="images/load.gif" width=70" height="70">');
+
    $.post( "/uploadimages2/", { timestamp: $("#timestamp").val(), image2: $("#image2").val()})
     .done(function( data ) {
-        $( "#image1" ).append('<div style="font-weight: bold; background-color: #f9f7f8; padding: 2%; color: #3F51B5">Uploaded Successfully</div>').addClass("animated slideInDown");
     });
-});
 
-$(document).on("click","#uploadimage3",function() { 
-   $.post( "/uploadimages3/", { timestamp: $("#timestamp").val(), image3: $("#image3").val()})
+    $.post( "/uploadimages3/", { timestamp: $("#timestamp").val(), image3: $("#image3").val()})
     .done(function( data ) {
-        $( "#image1" ).append('<div style="font-weight: bold; background-color: #f9f7f8; padding: 2%; color: #3F51B5">Uploaded Successfully</div>').addClass("animated slideInDown");
     });
-});
-
-$(document).on("click","#uploadimage4",function() { 
-   $.post( "/uploadimages4/", { timestamp: $("#timestamp").val(), image4: $("#image4").val()})
+    $.post( "/uploadimages4/", { timestamp: $("#timestamp").val(), image4: $("#image4").val()})
     .done(function( data ) {
-        $( "#image1" ).append('<div style="font-weight: bold; background-color: #f9f7f8; padding: 2%; color: #3F51B5">Uploaded Successfully</div>').addClass("animated slideInDown");
     });
+   // 
+   var imgsrc1 = $("#image1").val();
+   var imgsrc2 = $("#image2").val();
+   var imgsrc3 = $("#image3").val();
+   var imgsrc4 = $("#image4").val();
+    window.scrollTo(0,document.body.scrollHeight);
+    $("#div1").delay(2000).fadeIn().append(' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="'+imgsrc1+'" width="42" height="42">').addClass("animated tada").hide();
+    $("#div2").delay(3000).fadeIn().append(' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="'+imgsrc2+'" width="42" height="42">').addClass("animated tada").hide();
+    $("#div3").delay(400).fadeIn().append(' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="'+imgsrc3+'" width="42" height="42">').addClass("animated tada").hide();
+    $("#div4").delay(5000).fadeIn().append(' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="'+imgsrc4+'" width="42" height="42">').addClass("animated tada").hide();
+    $("#div5").delay(6000).fadeIn().append(' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="'+imgsrc1+'" width="42" height="42">').addClass("animated tada").hide();
+    setTimeout(function(){
+         $("#submitForm").delay(7000).click();
+      },7000);
 });
 
 
@@ -86,7 +89,14 @@ var options = {
 $("#posttime").val(date.toLocaleTimeString("en-us", options));
 
 
-
+$(document).on("change","#categoryselect",function() { 
+      var category = $(this).val();
+      $("#propertytype").val(category);
+    });
+$(document).on("change","#addselect",function() { 
+      var addtype = $(this).val();
+      $("#addtype").val(addtype);
+    });
 // $(document).on("change","#file2",function() { 
 //         var input = document.getElementById("file");
 //         var fReader = new FileReader();

@@ -234,10 +234,12 @@
         </div>
         <div class="aa-latest-properties-content">
           <div class="row">
-            <div class="col-md-4">
+          <% property.forEach(function(property){%>
+
+  <div class="col-md-4">
               <article class="aa-properties-item">
                 <a href="#" class="aa-properties-item-img">
-                  <img src="theme/img/item/1.jpg" alt="img">
+                  <img style="max-height: 200px; min-height: 200px; " src="<%= property.image1 %>" alt="img">
                 </a>
                 <div class="aa-tag for-sale">
                   For Sale
@@ -250,18 +252,24 @@
                     <span>1100 SQ FT</span>
                   </div>
                   <div class="aa-properties-about">
-                    <h3><a href="#">Appartment Title</a></h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestiae vero ducimus quibusdam odit vitae.</p>                      
+                    <h3><a href="#"><%= property.propertytype %></a></h3>
+                    <p><%= property.discription %></p>   
+                                         
+                    <p><%= property.area %></p>                      
+                   
                   </div>
                   <div class="aa-properties-detial">
                     <span class="aa-price">
-                      $35000
+                     <p>$<%= property.area %></p> 
                     </span>
                     <a href="#" class="aa-secondary-btn">View Details</a>
                   </div>
                 </div>
               </article>
             </div>
+  
+<%}) %>
+            
             <div class="col-md-4">
               <article class="aa-properties-item">
                 <a href="#" class="aa-properties-item-img">
