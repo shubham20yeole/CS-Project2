@@ -24,11 +24,24 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // body parser middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb',extended: false}));
 
 // set static path
-
+// var getRawBody = require('raw-body')
+// var typer = require('media-typer')
+ 
+// app.use(function (req, res, next) {
+//   getRawBody(req, {
+//     length: req.headers['content-length'],
+//     limit: '1mb',
+//     encoding: typer.parse(req.headers['content-type']).parameters.charset
+//   }, function (err, string) {
+//     if (err) return next(err)
+//     req.text = string
+//     next()
+//   })
+// })
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname)));
 app.use(session({
