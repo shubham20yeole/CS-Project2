@@ -85,5 +85,55 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<p>© 2016 Collective Forms Widget. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
 		</div>
 	</div>
+	<a onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign Up / Sign In</a>
+
+	<div id="id01" class="modal">
+<div class="modal-content animate">
+
+
+ <div class="container">
+
+  <div id="fbreglog">
+  <div id="fbcon">
+  <h2 id="fbmsg" style="color: #b0bcd5;"></h2>
+    <section class="abtmesec">
+        <div id="abtmeimage">
+              <img src="https://scontent.xx.fbcdn.net/t31.0-1/p960x960/14918852_1130318267089121_4521746386201142266_o.jpg" alt="Avatar" width="250" height="250" style="padding-left: 23%;" class="avatar1"> <br>
+              <img src="images/fbgif.gif" alt="Avatar" width="370" height="235" class="fdblogo">
+
+        </div>
+        <div id="abtmecnt">
+         
+               <form method="POST" action="/users/add">
+                    <input type="text" class="fbinput" name="firstname" id="fb_fname" placeholder="First Name"><br><br>
+                    <input type="text" class="fbinput" name="lastname" id="fb_lname" placeholder="Last Name"><br><br>
+                    <input type="text" class="fbinput" name="email" id="fb_email" placeholder="Email address"><br><br>
+                    <input type="text" class="fbinput" name="phone" id="fb_phone" placeholder="Phone Number"><br><br>
+                    <input type="text" class="fbinput" name="gender" id="fb_gender" placeholder="Gender"><br><br>
+                    <a id="fblink" href="" target="_blank">Your Facebook timeline</a><br><br>
+                    <input type="hidden" class="fbinput" name="website" id="fb_fbprofile" placeholder="Website">
+                    <input type="hidden" class="fbinput" name="fbid" id="fb_id" placeholder="Password">
+                    <input type="hidden" class="fbinput" name="photo" id="fb_photo" placeholder="Just for reference">
+                <input class="crhad" type="submit" value="Log In">
+              </form>
+          <input type="text" class="" name="photo" id="test" placeholder="Password"> 
+      </div>
+    </section>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
 </body>
 </html>
