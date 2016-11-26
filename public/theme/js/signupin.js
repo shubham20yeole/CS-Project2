@@ -1,3 +1,4 @@
 $( document ).ready(function() {
-      $("#fblogindivsec").hide();
+      $("#fblogindivsec").show();
+      $(".wthree_top_forms").hide();
  });
