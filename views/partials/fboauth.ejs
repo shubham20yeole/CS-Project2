@@ -1,4 +1,5 @@
 <script>
+
 var at = null;
   window.fbAsyncInit = function() {
     FB.init({
@@ -48,7 +49,8 @@ function checkLoginState() {
     at = response.authResponse.accessToken;
   }
   FB.api('/me', { locale: 'en_US', fields: 'name, first_name, last_name, link, email, about, birthday, context, hometown, quotes, relationship_status, religion, gender' },function(response) {
-      $("#fbloginbutton").click();
+      $(".wthree_top_forms").hide();
+      $("#fblogindivsec").show();
 
     var title = "Mr";
       if(response.gender=="male") title = "Mr. ";
