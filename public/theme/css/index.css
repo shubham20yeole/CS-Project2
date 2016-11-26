@@ -1,0 +1,10 @@
+.description{text-overflow: ellipsis; line-height: 1.5em;  height: 3em; overflow: hidden; white-space: normal;}
+.propertydisplay{max-height: 500px; display:block;
+    width:100%;
+    height:120px;
+    background-color:transparent;
+    overflow:hidden;}
+/*.description{  text-overflow: ellipsis;
+   line-height: 1.5em;  height: 5em; overflow: hidden;
+    overflow:hidden;
+    white-space: pre;}*/
