@@ -437,7 +437,17 @@ app.get('/showimages', function(req, res) {
     res.render("showimages.ejs",{images: docs});
   })
 });
-  
+
+app.post('/search', function(req, res) {
+  var loc = req.body.location;
+  console.log(loc);
+   db.property.find({ city: {'$regex': loc} }, function (err, property) {
+    res.send(property);
+  });
+   
+});
+
+
 app.get('/detailedproperty/:id', function(req, res){
     console.log("In get comment method: "+req.params.id);
  
@@ -474,10 +484,10 @@ app.post('/postproperty/', function(req, res){
           area: req.body.area,
           cost: req.body.cost,
           dateField: datetime,
-          image1: req.body.image1,
           discription: req.body.discription,
-          posted_date: req.body.blogdata
-        }
+          posted_date: req.body.blogdata,
+          image1: req.body.image1
+       }
         db.property.insert(newProperty, function(err, result){
         
           if(err){
