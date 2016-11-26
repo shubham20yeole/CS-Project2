@@ -12,11 +12,13 @@ $(document).on("keyup change","#searchloccation, #searchcategory, #searchtype, #
     .done(function( data ) 
     	{				
     		$('#searchtable').show();
-    		$("#searchmsg").text("We have: "+data.length+" results for "+loc+" like city. Find below.");
+
+    		$("#searchlength").text(data.length);
+    		$("#searchcity").text(loc);
     		$("#displaysearch").text("");
     		var xL = data.length;
 			for(i=0; i<xL; i++){
-				$('#displaysearch').append('<tr><td> '+data[i].city+': '+data[i].staddress+'</td><td> Price:'+data[i].cost+'</td><td>'+data[i].area+' SQ Feet</td><td>'+data[i].bedroom+'</td><td><a href="detailedproperty/'+data[i].timestamp+'">View More</a></td></tr>'); // do what
+				$('#displaysearch').append('<tr><td> '+data[i].city+': '+data[i].staddress+'</td><td> Price:'+data[i].cost+'</td><td>'+data[i].area+' SQ Feet</td><td>'+data[i].bedroom+'</td><td><a class="link" href="detailedproperty/'+data[i].timestamp+'">View More</a></td></tr>'); // do what
 			}
     	});
 });
