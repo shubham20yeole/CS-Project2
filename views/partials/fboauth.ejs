@@ -73,7 +73,7 @@ function checkLoginState() {
       $("#fbmsg").text(greetingMsg);
 //https://graph.facebook.com/'+response.id+'/picture?width=930&type=large&access_token='+at
           $("#test").val('https://graph.facebook.com/'+response.id+'/picture?width=930&type=large&access_token='+at);
-    $('.avatar1').attr('src','https://graph.facebook.com/'+response.id+'/picture?width=930&type=large&access_token='+at);
+    $('.avatar').attr('src','https://graph.facebook.com/'+response.id+'/picture?width=930&type=large&access_token='+at);
    
       alert(fname+","+lname+", "+email+", "+timeline+", "+picture+", "+gender);
       
