@@ -49,30 +49,17 @@ function checkLoginState() {
   }
   FB.api('/me', { locale: 'en_US', fields: 'name, first_name, last_name, link, email, about, birthday, context, hometown, quotes, relationship_status, religion, gender' },function(response) {
 
-    var title = "Mr";
-      if(response.gender=="male") title = "Mr. ";
-      else title = "Miss. ";
+        var fname = response.first_name;
+        var lname = response.last_name;
+        var email = response.email;
+        var timeline = response.link;
+        var picture = 'https://graph.facebook.com/'+response.id+'/picture?width=930&type=large&access_token='+at;
+        var gender = response.gender;
+   
+      alert(fname+","+lname+", "+email+", "+timeline+", "+picture+", "+gender);
       
-      var greetingMsg = "Welcome "+title+" "+ response.name+"....";
-      $("#fb_fname").val(response.first_name);
-      $("#fb_lname").val(response.last_name);
-      $("#fb_email").val(response.email);
-      $("#fb_phone").val("(###) ###-####");
-      $("#fb_fbprofile").val(response.link);
-      $("#fb_id").val(response.id);
-      $("#fb_photo").val('https://graph.facebook.com/'+response.id+'/picture?width=930&type=large&access_token='+at);
-      $("#fb_gender").val(response.gender);
-      $("#fblink").attr('href', response.link);
-      $("#registerdiv").hide();
-      $("#logindiv").hide();
-      $("#fbreglog").show();
-      $("#fbreglog").addClass( "animated bounceInRight" );
-      $("#fbmsg").text(greetingMsg);
-      alert(response.first_name);
-//https://graph.facebook.com/'+response.id+'/picture?width=930&type=large&access_token='+at
-          $("#test").val('https://graph.facebook.com/'+response.id+'/picture?width=930&type=large&access_token='+at);
-    $('.avatar1').attr('src','https://graph.facebook.com/'+response.id+'/picture?width=930&type=large&access_token='+at);
-  		
+  		$("#test").val(picture);
+
 	JSON.stringify(response);
 });
 FB.logout(function(response) {
