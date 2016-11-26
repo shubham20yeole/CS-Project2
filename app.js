@@ -87,12 +87,11 @@ app.get('/blank', function(req, res){
 });
 
 app.get('/postadd', function(req, res){
-   res.render("postadd.ejs");  
+  var property = "";
+  res.render("postadd.ejs",{property});  
 });
 
 app.post('/users/add', function(req, res){
-
-
   
   var datetime = new Date();
     var loginstatus = null;
