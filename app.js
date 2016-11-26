@@ -11,7 +11,7 @@ var mongodb = require('mongodb')
 var collections = ["users", "blog", "comments", "property", "images"]
 
 var db = mongojs('mongodb://shubham20.yeole:shubham20.yeole@ds163387.mlab.com:63387/paceteam3', collections)
-
+ 
 var app = express();
 var ObjectId = mongojs.ObjectId;
 var passport = require("passport")
@@ -437,12 +437,22 @@ app.get('/showimages', function(req, res) {
     res.render("showimages.ejs",{images: docs});
   })
 });
+  
+app.get('/detailedproperty/:id', function(req, res){
+    console.log("In get comment method: "+req.params.id);
  
+  db.property.findOne({ timestamp: req.params.id}, function (err, property) {
+     db.images.findOne({ timestamp: req.params.id}, function (err, images) {
+    res.render("detailedproperty.ejs",{property: property, images: images});
+  });
+  });
+});
 
 app.post('/postproperty/', function(req, res){
     var datetime = new Date();
-    console.log(datetime);
+    console.log(req.body.propertyfeatures);
         var newProperty = {
+          title: req.body.title,
           phone: req.body.phone,
           email: req.body.email,
           telephone: req.body.telephone,
@@ -453,15 +463,18 @@ app.post('/postproperty/', function(req, res){
           zip: req.body.zip,
           county: req.body.county,
           country: req.body.country,
+          latitude: req.body.latitude,
+          longitude: req.body.longitude,
           bedroom: req.body.bedroom,
           kitchen: req.body.kitchen,
           bathroom: req.body.bathroom,
           addtype: req.body.addtype,
           propertytype: req.body.propertytype,
+          features: req.body.propertyfeatures,
           area: req.body.area,
+          cost: req.body.cost,
           dateField: datetime,
           image1: req.body.image1,
-          posttime: req.body.posttime,
           discription: req.body.discription,
           posted_date: req.body.blogdata
         }
