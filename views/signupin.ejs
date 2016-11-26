@@ -11,25 +11,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //for-mobile-apps -->
   <link  rel="stylesheet" type="text/css" media="all" href="/css/signupin/style.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,400italic,300italic,600italic,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
 	<div class="main">
-	<img src="" id="avtar1"> <form method="POST" action="/users/add">
-                    <input type="text" class="fbinput" name="firstname" id="fb_fname" placeholder="First Name"><br><br>
-                    <input type="text" class="fbinput" name="lastname" id="fb_lname" placeholder="Last Name"><br><br>
-                    <input type="text" class="fbinput" name="email" id="fb_email" placeholder="Email address"><br><br>
-                    <input type="text" class="fbinput" name="phone" id="fb_phone" placeholder="Phone Number"><br><br>
-                    <input type="text" class="fbinput" name="gender" id="fb_gender" placeholder="Gender"><br><br>
-                    <a id="fblink" href="" target="_blank">Your Facebook timeline</a><br><br>
-                    <input type="hidden" class="fbinput" name="website" id="fb_fbprofile" placeholder="Website">
-                    <input type="hidden" class="fbinput" name="fbid" id="fb_id" placeholder="Password">
-                    <input type="hidden" class="fbinput" name="photo" id="fb_photo" placeholder="Just for reference">
-                <input class="crhad" type="submit" value="Log In">
-              </form>
-          Photo link<input type="text" class="" name="photo" id="test" placeholder="Photo link"> 
+						   <% include partials/login %>
+
 		<h1>REGISTER / LOGIN / RESET PASSWORD</h1>
 		<div class="wthree_top_forms">
 			<div class="agile-info_w3ls hvr-buzz-out">
@@ -99,6 +87,5 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<p>© 2016 Collective Forms Widget. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
 		</div>
 	</div>
-
 </body>
 </html>
