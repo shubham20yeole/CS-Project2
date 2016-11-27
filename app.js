@@ -557,14 +557,18 @@ app.post('/login', function(req, res) {
     }
   });
 });
-
+ // db.users.remove({_id: ObjectId(req.params.id)}, function(err, result){
+      // res.send(req.params.id+" Test");
+  // });
 app.get('/newpassword/:id', function(req, res){
     console.log("In get comment method: "+req.params.id);
-  db.users.findOne({ _id: req.params.id}, function (err, users) {
-    res.render("setnewpassword.ejs",{email: users.email});
-  });
+  db.users.findOne({_id: ObjectId(req.params.id)}, function (err, users) {
+ console.log(users);
+    res.render("setnewpassword.ejs",{users: users});
+      }); 
+
 });
-app.get('/newpasswordupdate/', function(req, res){
+app.post('/newpasswordupdate', function(req, res){
     console.log("In newpasswordupdate method: "+req.body.email);
   db.users.update({ email: req.body.email}, {$set:{password: req.body.password}}, function (err, result) {
       // sendEmail(req.body.email, "Password Reset", "We received a request to reset the password for your account. If you requested a reset for "+email+", click the button below. <br><br><a href='https://usa-real-estates.herokuapp.com/newpassword/"+users._id+"' target='_blank'>SET NEW PASSWORD</a><br><br>e this email.Please click on Use temporary password as temppassword","Password reset on USA REAL ESTATES");
@@ -580,7 +584,7 @@ app.post('/resetpassword', function(req, res) {
       res.render("signupin.ejs", {errmsg: errmsg});
     } else {
       db.users.update({ email: req.body.email}, {$set:{password: "temppassword"}}, function (err, result) {
-      sendEmail(email, "Password Reset", "We received a request to reset the password for your account. If you requested a reset for "+email+", click the button below. <br><br><a href='https://usa-real-estates.herokuapp.com/newpassword/"+users._id+"' target='_blank'>SET NEW PASSWORD</a><br><br>e this email.Please click on Use temporary password as temppassword","Password reset on USA REAL ESTATES");
+      sendEmail(email, "Password Reset", "<br>We received a request to reset the password for your account.<br> If you requested a reset for "+email+", <br>click the button below. <br><br><a style='padding: 1%; background-color: #6a67ce; color: #e1e0f5;' href='https://usa-real-estates.herokuapp.com/newpassword/"+users._id+"' target='_blank'>SET NEW PASSWORD</a><br><br>e this email.Please click on Use temporary password as temppassword","Password reset on USA REAL ESTATES");
       res.render("signupin.ejs", {errmsg: "Temporary password has been sent to "+email+". Please check your email to reset new password."});
     });
     }
