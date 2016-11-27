@@ -571,12 +571,12 @@ app.post('/detailedproperty/sendinterestinproperty', function(req, res){
   
   var description = req.body.personaldiscription;
   var title = name+" is interested in your property at USA REAL ESTATES";
-  var message = "<br><br><p color='#F2AB27'>"+name+"</p> can move in from: <p color='#F2AB27'>"+dateodmovein+"</p><br><br>Moreover, "+name+" also left a message for you. Here it is: <br><br><p color='#F2AB27'>"+description+"</p><br><br>You can reach back to <p color='#F2AB27'>"+name+"</p> at <p color='#F2AB27'>"+email+"</p> email address <br><br>Thank you for using our service.<br><br>";
+  var message = "<br><br><span style='color: #4f4e56;'>"+name+"</span> can move in from: <span style='color: #4f4e56;'>"+dateodmovein+"</span><br><br>Moreover, "+name+" also left a message for you. Here it is: <br><br><span style='color: #4f4e56;'>"+description+"</span><br><br>You can reach back to <span style='color: #4f4e56;'>"+name+"</span> at <span style='color: #4f4e56;'>"+email+"</span> email address <br><br>Thank you for using our service.<br><br>";
   var subject = name+" is interested in your property at USA REAL ESTATES";
 
   var description1 = req.body.personaldiscription;
   var title1 = "Confirmation of your interest";
-  var message1 = "<br><br>It looks like you have shown interest in <p color='#F2AB27'>"+propertyaddress+"</p> and we have successfully sent your thoughts to owner of mentioned property. You will here back soon if property owner is statisfied with your mentioned Quote<br><br>Thank you for using our service. ";
+  var message1 = "<br><br>It looks like you have shown interest in <span style='color: #4f4e56;'>"+propertyaddress+"</span> and we have successfully sent your thoughts to owner of mentioned property. You will here back soon if property owner is statisfied with your mentioned Quote<br><br>Thank you for using our service. ";
   var subject1 = "USA REAL ESTATES sent your message to property owner";
 
   sendEmail(emailofposter, title, message, subject);
@@ -658,7 +658,7 @@ app.get('/send',function(req,res){
   var text2 = "Thank you for contacting me. I appreciate your time for reviewing my blog<br><br>";
   var text3 = "My name is Shubham Yeole. I am full stack developer from Pace University Computer Sciece major and I am actively seeking full time opprtunity in software development position. I have successfully received your email on shubham20.yeole@gmail.com and will reply you back as soon as possible";
   var result = text1 + " "+text2+" "+text3;
-  var emailBody = '<div><div style="background-color: #3B2F63; color: #b0abc0; padding-top: 5%; padding-left: 2%; padding-right: 2%; padding-bottom: 2%; font-size: 1.5em;">Thank you for vising our website.<div style="color: #d7d5df; font-size: 1.5em;"><br><a style="color: #d7d5df;" href="https://www.linkedin.com/in/shubhamyeole">LinkedIn</a><br><a style="color: #d7d5df;" href="https://www.facebook.com/sy06736n">Facebook</a><br><a style="color: #d7d5df;" href="http://stackoverflow.com/users/5451749/shubham-yeole">StackOverflow</a><br><a style="color: #d7d5df;" href="https://github.com/shubham20yeole">GitHub</a></div><br><br><div style="padding: 3%; background-color: #d7d5df; color: #3B2F63;">'+result+'<br><br></div><p style="font-weight: bold;">'+signature+'</p><br><br><div style="padding: 2%; background-color: white; color: black;">&copy; 2016 usa-real-estates.herokuapp.com. All Rights Reserved.</div></div></div>';
+  var emailBody = '<div><div style="background-color: #3B2F63; color: #b0abc0; padding-top: 5%; padding-left: 2%; padding-right: 2%; padding-bottom: 2%; font-size: 1.5em;">Thank you for vising our website.<div style="color: #d7d5df; font-size: 1.5em;"><br><a style="color: #d7d5df;" href="https://www.linkedin.com/in/shubhamyeole">LinkedIn</a><br><a style="color: #d7d5df;" href="https://www.facebook.com/sy06736n">Facebook</a><br><a style="color: #d7d5df;" href="http://stackoverflow.com/users/5451749/shubham-yeole">StackOverflow</a><br><a style="color: #d7d5df;" href="https://github.com/shubham20yeole">GitHub</a></div><br><br><div style="padding: 3%; background-color: #d7d5df; color: #3B2F63;">'+result+'<br><br></div><span style="font-weight: bold;">'+signature+'</span><br><br><div style="padding: 2%; background-color: white; color: black;">&copy; 2016 usa-real-estates.herokuapp.com. All Rights Reserved.</div></div></div>';
   var subject = "Thank you for viewing my Java-NodeJS-Blog"; 
       var mailOptions={
         from : "shubham20.yeole@gmail.com",
