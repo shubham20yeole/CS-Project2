@@ -518,7 +518,7 @@ app.post('/view/blog/comment', function(req, res){
 
 app.get('/registerlogin', function(req, res){
 
-   res.render("signupin.ejs");
+   res.render("signupin.ejs", {errmsg: ""});
  
 });
 
@@ -558,11 +558,33 @@ app.post('/login', function(req, res) {
   });
 });
 
+app.get('/newpassword/:id', function(req, res){
+    console.log("In get comment method: "+req.params.id);
+  db.users.findOne({ _id: req.params.id}, function (err, users) {
+    res.render("setnewpassword.ejs",{email: users.email});
+  });
+});
+app.get('/newpasswordupdate/', function(req, res){
+    console.log("In newpasswordupdate method: "+req.body.email);
+  db.users.update({ email: req.body.email}, {$set:{password: req.body.password}}, function (err, result) {
+      // sendEmail(req.body.email, "Password Reset", "We received a request to reset the password for your account. If you requested a reset for "+email+", click the button below. <br><br><a href='https://usa-real-estates.herokuapp.com/newpassword/"+users._id+"' target='_blank'>SET NEW PASSWORD</a><br><br>e this email.Please click on Use temporary password as temppassword","Password reset on USA REAL ESTATES");
+      res.render("signupin.ejs", {errmsg: "Password successfully Reset."});
+    });
+});
 
-app.get('/resetpassword', function(req, res) {
- sendEmail("shubham20.yeole@gmail.com", "testing","Subject");
-    res.render("signupin.ejs");
-
+app.post('/resetpassword', function(req, res) {
+    var email = req.body.email;
+     db.users.findOne({ email: req.body.email }, function(err, users) {
+    if (!users) {
+      errmsg = 'Email not registered...'; 
+      res.render("signupin.ejs", {errmsg: errmsg});
+    } else {
+      db.users.update({ email: req.body.email}, {$set:{password: "temppassword"}}, function (err, result) {
+      sendEmail(email, "Password Reset", "We received a request to reset the password for your account. If you requested a reset for "+email+", click the button below. <br><br><a href='https://usa-real-estates.herokuapp.com/newpassword/"+users._id+"' target='_blank'>SET NEW PASSWORD</a><br><br>e this email.Please click on Use temporary password as temppassword","Password reset on USA REAL ESTATES");
+      res.render("signupin.ejs", {errmsg: "Temporary password has been sent to "+email+". Please check your email to reset new password."});
+    });
+    }
+  });
 });
 
 var nodemailer = require("nodemailer");
@@ -577,14 +599,11 @@ var smtpTransport = nodemailer.createTransport(smtpTransport({
         pass : "Shubham4194"
     }
 }));
-function sendEmail(email, message, subject){
-  var text1 = "Hello "+email+"<br>";
-  var text2 = "Thank you for contacting me. I appreciate your time for reviewing my blog<br><br>";
-  var text3 = message;
-  var result = text1 + " "+text2+" "+text3;
-  var emailBody = '<div><div style="background-color: #3B2F63; color: #b0abc0; padding-top: 5%; padding-left: 2%; padding-right: 2%; padding-bottom: 2%; font-size: 1.5em;">Thank you for vising our website.<div style="color: #d7d5df; font-size: 1.5em;"><br><a style="color: #d7d5df;" href="https://www.linkedin.com/in/shubhamyeole">LinkedIn</a><br><a style="color: #d7d5df;" href="https://www.facebook.com/sy06736n">Facebook</a><br><a style="color: #d7d5df;" href="http://stackoverflow.com/users/5451749/shubham-yeole">StackOverflow</a><br><a style="color: #d7d5df;" href="https://github.com/shubham20yeole">GitHub</a></div><br><br><div style="padding: 3%; background-color: #d7d5df; color: #3B2F63;">'+result+'<br><br></div><p style="font-weight: bold;">'+signature+'</p><br><br><div style="padding: 2%; background-color: white; color: black;">&copy; 2016 usa-real-estates.herokuapp.com. All Rights Reserved.</div></div></div>';
-  var signature = "Thank you,<br>Shubham Yeole,<br>Full Stack Developer,<br>Phone: +1(201) 887-5323<br>";
-
+function sendEmail(email, title, message, subject){
+var emailBody = '<div style="padding: 2%; text-align: center; background-color: #efefef"><div style="padding: 2%; text-align: center; background-color: #fcfcfc"><h1 style="color: #606060">WELCOME TO USA REAL ESTATES</h1><img src="http://shubhamyeole.byethost8.com/public_html/logo.jpg" width="150" height="150"><h2>[TITLE]</h2><h5>[MESSAGE]</h5><h6>[SIGNATURE]</h6><hr><h6 style="color: #808080">You are getting this email because you have signed up for emails update.</h6><h6 style="color: #808080">For more information visit our website at <a style="color: #808080" href="https://usa-real-estates.herokuapp.com/">USA REAL ESTATES</a></h6></div></div>';
+emailBody = emailBody.replace("[TITLE]", title);
+emailBody = emailBody.replace("[MESSAGE]", "Hello "+email+"<br><br>"+message);
+emailBody = emailBody.replace("[SIGNATURE]", 'By Shubham Yeole');
 
  var mailOptions={
         from : "shubham20.yeole@gmail.com",
@@ -595,14 +614,7 @@ function sendEmail(email, message, subject){
     }
     console.log(mailOptions);
     smtpTransport.sendMail(mailOptions, function(error, response){
-        if(error){
-            console.log(error);
-            res.end("error");
-        }else{
-            console.log(response.response.toString());
-            console.log("Message sent: " + response.message);
-            res.end("sent");
-        }
+       
     });
 }
 app.get('/send',function(req,res){
