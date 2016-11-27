@@ -560,6 +560,33 @@ app.post('/login', function(req, res) {
  // db.users.remove({_id: ObjectId(req.params.id)}, function(err, result){
       // res.send(req.params.id+" Test");
   // });
+app.post('/detailedproperty/sendinterestinproperty', function(req, res){
+  console.log("In newpasswordupdate method: "+req.body.email);
+  var name = req.body.name;
+  var emailofposter = req.body.emailofposter;
+  var email = req.body.email;
+  var dateodmovein = req.body.dateodmovein;
+  var timestamp = req.body.timestamp;
+  var propertyaddress = req.body.propertyaddress;
+  
+  var description = req.body.personaldiscription;
+  var title = name+" is interested in your property at USA REAL ESTATES";
+  var message = "<br><br><p color='#F2AB27'>"+name+"</p> can move in from: <p color='#F2AB27'>"+dateodmovein+"</p><br><br>Moreover, "+name+" also left a message for you. Here it is: <br><br><p color='#F2AB27'>"+description+"</p><br><br>You can reach back to <p color='#F2AB27'>"+name+"</p> at <p color='#F2AB27'>"+email+"</p> email address <br><br>Thank you for using our service.<br><br>";
+  var subject = name+" is interested in your property at USA REAL ESTATES";
+
+  var description1 = req.body.personaldiscription;
+  var title1 = "Confirmation of your interest";
+  var message1 = "<br><br>It looks like you have shown interest in <p color='#F2AB27'>"+propertyaddress+"</p> and we have successfully sent your thoughts to owner of mentioned property. You will here back soon if property owner is statisfied with your mentioned Quote<br><br>Thank you for using our service. ";
+  var subject1 = "USA REAL ESTATES sent your message to property owner";
+
+  sendEmail(emailofposter, title, message, subject);
+  sendEmail(email, title1, message1, subject1);
+  db.property.findOne({ timestamp: timestamp}, function (err, property) {
+      db.images.findOne({ timestamp: timestamp}, function (err, images) {
+      res.render("detailedproperty.ejs",{property: property, images: images});
+    });
+  });
+});
 app.get('/newpassword/:id', function(req, res){
     console.log("In get comment method: "+req.params.id);
   db.users.findOne({_id: ObjectId(req.params.id)}, function (err, users) {

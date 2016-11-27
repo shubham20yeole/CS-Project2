@@ -48,7 +48,32 @@
               
              </div>
              <!-- Properties social share -->
-            
+             <div class="aa-properties-social">
+               <ul>
+                 <li>Want to Rent this Room?</li>
+                 <li><button>Contact Property</button></li>
+               </ul>
+               <br><br><br><div id="contactdiv">
+               <form action="sendinterestinproperty" method="post">
+               <label>Your Name*</label><br>
+               <input type="text" name="name" id="contactname" value="Shubham Yeole"><br><br>
+                <label>Your Email Address*</label><br>
+               <input type="text" name="email" id="contactemail" value="sy06736n@pace.edu"><br><br>
+               <input type="text" name="emailofposter" value="<%= property.email %>"><br><br>
+               <input type="text" name="propertyaddress" value="<%= property.staddress %>, <%= property.city %>, <%= property.state %>, <%= property.zip %>"><br><br>
+               <label>You Can Move in From (Optional)</label><br>
+               <input type="date" name="dateodmovein" id="dateofmovein"><br><br>
+               <input type="text" name="timestamp" id="timestampdd" value="<%= property.timestamp %>"><br><br>
+               <label>Description*</label><br>
+               <textarea name="personaldiscription" id="personaldiscription" placeholder="Description">Two rooms are available for share in a Townhouse.
+Townhouse is furnished and has washer and dryer in the property.
+The Property is loacated in private quite neighborhood in North Brunswick NJ.
+The property is off Route 27, closer to Indian Grocery and Restaurants.
+The property is close to Costco, BJ and Regal Cinema on Route 1.</textarea><br><br>
+               <input type="submit" value="Send Email">
+               </form>
+               </div>
+             </div>
              <!-- Nearby properties -->
              
             </div>           
