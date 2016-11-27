@@ -12,6 +12,7 @@ blockquote,q{quotes:none;}
 blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
 table{border-collapse:collapse;border-spacing:0;}
 /* start editing from here */
+.main{background:#00a78e;}
 a{text-decoration:none;}
 .txt-rt{text-align:right;}/* text align right */
 .txt-lt{text-align:left;}/* text align left */
@@ -30,7 +31,6 @@ img{max-width:100%;}
 html, body{
     font-size: 100%;
 	font-family: 'Source Sans Pro', sans-serif;
-	background:#00a78e;
 }
 h1,h2,h3,h4,h5,h6,a,p{
 	margin:0;

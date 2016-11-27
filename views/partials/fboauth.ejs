@@ -49,7 +49,7 @@ function checkLoginState() {
     at = response.authResponse.accessToken;
   }
   FB.api('/me', { locale: 'en_US', fields: 'name, first_name, last_name, link, email, about, birthday, context, hometown, quotes, relationship_status, religion, gender' },function(response) {
-      $(".wthree_top_forms").hide();
+      $(".main").hide();
       $("#fblogindivsec").show();
 
     var title = "Mr";
@@ -74,7 +74,7 @@ function checkLoginState() {
 //https://graph.facebook.com/'+response.id+'/picture?width=930&type=large&access_token='+at
           $("#test").val('https://graph.facebook.com/'+response.id+'/picture?width=930&type=large&access_token='+at);
     $('.avatar').attr('src','https://graph.facebook.com/'+response.id+'/picture?width=930&type=large&access_token='+at);
-   
+
       alert(fname+","+lname+", "+email+", "+timeline+", "+picture+", "+gender);
       
   		$("#test").val(picture);

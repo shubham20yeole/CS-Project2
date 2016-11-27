@@ -1,6 +1,6 @@
 
 .fbinput {
-    width: 30%;
+    width: 70%;
   display: inline-block;
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
@@ -73,15 +73,16 @@ input[type="submit"] {
     border: 2px solid #3B2F63;
 }
 img.avatar {
-    width: 70%;
+    width: 80%;
     border-radius: 50%;
 }
-
+img.fbgifavtar{ width: 100%; border-radius: 50%;}
 input[type="submit"]:hover {
     background-color: #3B2F63;
     color: white;
 }
 #fblogindivsec{
+	background-color: #3b5998;
 	text-align: center;
 }
 /*  SECTIONS  */
@@ -114,3 +115,4 @@ input[type="submit"]:hover {
 	.col {  margin: 1% 0 1% 0%; }
 	.span_3_of_3, .span_2_of_3, .span_1_of_3 { width: 100%; }
 }
+#fblogindivsec h1{ font-size: 4em; color: white; }
