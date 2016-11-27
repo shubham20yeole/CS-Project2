@@ -570,7 +570,7 @@ app.get('/newpassword/:id', function(req, res){
 });
 app.post('/newpasswordupdate', function(req, res){
     console.log("In newpasswordupdate method: "+req.body.email);
-  db.users.update({ email: req.body.email}, {$set:{password: req.body.password}}, function (err, result) {
+  db.users.update({ email: req.body.email}, {$set:{password: req.body.passcode}}, function (err, result) {
       // sendEmail(req.body.email, "Password Reset", "We received a request to reset the password for your account. If you requested a reset for "+email+", click the button below. <br><br><a href='https://usa-real-estates.herokuapp.com/newpassword/"+users._id+"' target='_blank'>SET NEW PASSWORD</a><br><br>e this email.Please click on Use temporary password as temppassword","Password reset on USA REAL ESTATES");
       res.render("signupin.ejs", {errmsg: "Password successfully Reset."});
     });
