@@ -1,5 +1,5 @@
 <% include partials/header1.ejs %>
- 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
   <section id="aa-property-header">
     <div class="container">
       <div class="row">
@@ -44,38 +44,36 @@
                	<h4>Propery Features</h4>
                
                <ul id="append"></ul>
-               <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fusa-real-estates.herokuapp.com%2Fdetailedproperty%2F<%= property.timestamp%>&layout=button_count&size=small&mobile_iframe=true&appId=298310910569242&width=69&height=20" width="89" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe><br><script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script><script type="IN/Share" data-url="https://usa-real-estates.herokuapp.com/detailedproperty/<%= property.timestamp %>" data-counter="right"></script><br>
+               <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fusa-real-estates.herokuapp.com%2Fdetailedproperty%2F<%= property.timestamp%>&layout=button_count&size=small&mobile_iframe=true&appId=298310910569242&width=69&height=20" width="89" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe><br>               <div id="scrollatbottom"></div>
+<script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script><script type="IN/Share" data-url="https://usa-real-estates.herokuapp.com/detailedproperty/<%= property.timestamp %>" data-counter="right"></script><br>
               
              </div>
              <!-- Properties social share -->
              <div class="aa-properties-social">
                <ul>
-                 <li>Want to Rent this Room?</li>
-                 <li><button>Contact Property</button></li>
+                 <li>Want to Rent this Room?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                 <li></li>
                </ul>
-               <br><br><br><div id="contactdiv">
+               <a href="#scrollatbottom" id="ctnprpbtn">CONTACT PROPERTY</a>
+               <div id="contactdiv">
                <form action="sendinterestinproperty" method="post">
                <label>Your Name*</label><br>
-               <input type="text" name="name" id="contactname" value="Shubham Yeole"><br><br>
+               <input type="text" name="name" id="contactname" placeholder="Enter Name" required><br><br>
                 <label>Your Email Address*</label><br>
-               <input type="text" name="email" id="contactemail" value="sy06736n@pace.edu"><br><br>
-               <input type="text" name="emailofposter" value="<%= property.email %>"><br><br>
-               <input type="text" name="propertyaddress" value="<%= property.staddress %>, <%= property.city %>, <%= property.state %>, <%= property.zip %>"><br><br>
+               <input type="text" name="email" id="contactemail" placeholder="Enter Email" required><br><br>
+               <input type="hidden" name="emailofposter" value="<%= property.email %>">
+               <input type="hidden" name="propertyaddress" value="<%= property.staddress %>, <%= property.city %>, <%= property.state %>, <%= property.zip %>">
                <label>You Can Move in From (Optional)</label><br>
+
                <input type="date" name="dateodmovein" id="dateofmovein"><br><br>
-               <input type="text" name="timestamp" id="timestampdd" value="<%= property.timestamp %>"><br><br>
+               <input type="hidden" name="timestamp" id="timestampdd" value="<%= property.timestamp %>">
                <label>Description*</label><br>
-               <textarea name="personaldiscription" id="personaldiscription" placeholder="Description">Two rooms are available for share in a Townhouse.
-Townhouse is furnished and has washer and dryer in the property.
-The Property is loacated in private quite neighborhood in North Brunswick NJ.
-The property is off Route 27, closer to Indian Grocery and Restaurants.
-The property is close to Costco, BJ and Regal Cinema on Route 1.</textarea><br><br>
-               <input type="submit" value="Send Email">
+               <textarea name="personaldiscription" id="personaldiscription" placeholder="Description" required></textarea><br><br>
+               <input type="submit" id="sendemail" value="Send Email">
                </form>
                </div>
              </div>
              <!-- Nearby properties -->
-             
             </div>           
           </div>
         </div>
