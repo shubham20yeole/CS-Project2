@@ -50,79 +50,77 @@ $(document).on("change","#file",function() {
        
         }
     });
-$(document).on("click","#uploadimage",function() { 
-var file = $("#file").val();
-var title = $("#title").val();
-var phone = $("#phone").val();
-var email = $("#email").val();
-var staddress = $("#staddress").val();
-var city = $("#city").val();
-var state = $("#state").val();
-var zip = $("#zip").val();
-var country = $("#country").val();
-var propertytype = $("#propertytype").val();
-var addtype = $("#addtype").val();
-var bedroom = $("#bedroom").val();
-var kitchen = $("#kitchen").val();
-var bathroom = $("#bathroom").val();
-var area = $("#area").val();
-var cost = $("#cost").val();
-var discription = $("#discription").val();
-var errmsg = "";
-var count = 0;
-    if(file == ""){ errmsg = errmsg + "Please select first image. <br>"; count++; }
-    if(title == ""){ errmsg = errmsg + "Title is required<br>"; count++; }
-    if(phone==""){ errmsg = errmsg + "Phone is required<br>"; count++;}
-    if(email == ""){ errmsg = errmsg + "Email is required<br>"; count++;}
-    if(staddress == ""){ errmsg = errmsg + "St Address is required<br>"; count++;}
-    if(city == ""){ errmsg = errmsg + "City is required<br>"; count++;}
-    if(state == ""){ errmsg = errmsg + "State is required<br>"; count++;}
-    if(zip == ""){ errmsg = errmsg + "Zip is required<br>"; count++;}
-    if(country == ""){ errmsg = errmsg + "Country is required<br>"; count++;}
-    if(propertytype == ""){ errmsg = errmsg + "Category is required<br>"; count++;}
-    if(addtype == ""){ errmsg = errmsg + "Add type is required<br>"; count++;}
-    if(bedroom == ""){ errmsg = errmsg + "Bedroom is required<br>"; count++;}
-    if(kitchen == ""){ errmsg = errmsg + "Kitchen is required<br>"; count++;}
-    if(bathroom == ""){ errmsg = errmsg + "Washroom/Bathroom is required<br>"; count++;}
-    if(area == ""){ errmsg = errmsg + "Property Area is required<br>"; count++;}
-    if(cost == ""){ errmsg = errmsg + "Price is required<br>"; count++;}
-    if(discription == ""){ errmsg = errmsg + "Discription is required<br>"; count++;}
-    $("#showerror").text("Total "+count+" errors in the form.");
-    $("#showerror").append("<br>"+errmsg);
+// $(document).on("click","#uploadimage",function() { 
+// var title = $("#title").val();
+// var phone = $("#phone").val();
+// var email = $("#email").val();
+// var staddress = $("#staddress").val();
+// var city = $("#city").val();
+// var state = $("#state").val();
+// var zip = $("#zip").val();
+// var country = $("#country").val();
+// var propertytype = $("#propertytype").val();
+// var addtype = $("#addtype").val();
+// var bedroom = $("#bedroom").val();
+// var kitchen = $("#kitchen").val();
+// var bathroom = $("#bathroom").val();
+// var area = $("#area").val();
+// var cost = $("#cost").val();
+// var discription = $("#discription").val();
+// var errmsg = "";
+// var count = 0;
+//     if(title == ""){ errmsg = errmsg + "Title is required<br>"; count++; }
+//     if(phone==""){ errmsg = errmsg + "Phone is required<br>"; count++;}
+//     if(email == ""){ errmsg = errmsg + "Email is required<br>"; count++;}
+//     if(staddress == ""){ errmsg = errmsg + "St Address is required<br>"; count++;}
+//     if(city == ""){ errmsg = errmsg + "City is required<br>"; count++;}
+//     if(state == ""){ errmsg = errmsg + "State is required<br>"; count++;}
+//     if(zip == ""){ errmsg = errmsg + "Zip is required<br>"; count++;}
+//     if(country == ""){ errmsg = errmsg + "Country is required<br>"; count++;}
+//     if(propertytype == ""){ errmsg = errmsg + "Category is required<br>"; count++;}
+//     if(addtype == ""){ errmsg = errmsg + "Add type is required<br>"; count++;}
+//     if(bedroom == ""){ errmsg = errmsg + "Bedroom is required<br>"; count++;}
+//     if(kitchen == ""){ errmsg = errmsg + "Kitchen is required<br>"; count++;}
+//     if(bathroom == ""){ errmsg = errmsg + "Washroom/Bathroom is required<br>"; count++;}
+//     if(area == ""){ errmsg = errmsg + "Property Area is required<br>"; count++;}
+//     if(cost == ""){ errmsg = errmsg + "Price is required<br>"; count++;}
+//     if(discription == ""){ errmsg = errmsg + "Discription is required<br>"; count++;}
+//     $("#showerror").text("Total "+count+" errors in the form.");
+//     $("#showerror").append("<br>"+errmsg);
 
-    if(count == 0){
-        $("#showerror").append("<br>SUBMIT THHE FORM");
+//     if(count == 0){
+//         $("#showerror").append("<br>SUBMIT THHE FORM");
 
-       $( "#lodardiv" ).append('<img src="images/load.gif" width=70" height="70">');
+//        $( "#lodardiv" ).append('<img src="images/load.gif" width=70" height="70">');
 
-       $.post( "/uploadimages2/", { timestamp: $("#timestamp").val(), image2: $("#image2").val()})
-        .done(function( data ) {
-        });
+//        $.post( "/uploadimages2/", { timestamp: $("#timestamp").val(), image2: $("#image2").val()})
+//         .done(function( data ) {
+//         });
 
-        $.post( "/uploadimages3/", { timestamp: $("#timestamp").val(), image3: $("#image3").val()})
-        .done(function( data ) {
-        });
-        $.post( "/uploadimages4/", { timestamp: $("#timestamp").val(), image4: $("#image4").val()})
-        .done(function( data ) {
-        });
-       // 
-       var imgsrc1 = $("#image1").val();
-       var imgsrc2 = $("#image2").val();
-       var imgsrc3 = $("#image3").val();
-       var imgsrc4 = $("#image4").val();
-        window.scrollTo(0,document.body.scrollHeight);
-            $("#div1").delay(2000).fadeIn().append(' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="'+imgsrc1+'" width="42" height="42">').addClass("animated tada").hide();
-            $("#div2").delay(3000).fadeIn().append(' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="'+imgsrc2+'" width="42" height="42">').addClass("animated tada").hide();
-            $("#div3").delay(400).fadeIn().append(' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="'+imgsrc3+'" width="42" height="42">').addClass("animated tada").hide();
-            $("#div4").delay(5000).fadeIn().append(' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="'+imgsrc4+'" width="42" height="42">').addClass("animated tada").hide();
-            $("#div5").delay(6000).fadeIn().append(' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="'+imgsrc1+'" width="42" height="42">').addClass("animated tada").hide();
-        setTimeout(function(){
-             $("#submitForm").delay(7000).click();
-          },7000);
-    }else{
-        $("#showerror").append("<br>Do not submit the form");
-    }
-});
+//         $.post( "/uploadimages3/", { timestamp: $("#timestamp").val(), image3: $("#image3").val()})
+//         .done(function( data ) {
+//         });
+//         $.post( "/uploadimages4/", { timestamp: $("#timestamp").val(), image4: $("#image4").val()})
+//         .done(function( data ) {
+//         });
+//        // 
+//        var imgsrc1 = $("#image1").val();
+//        var imgsrc2 = $("#image2").val();
+//        var imgsrc3 = $("#image3").val();
+//        var imgsrc4 = $("#image4").val();
+//         window.scrollTo(0,document.body.scrollHeight);
+//             $("#div1").delay(2000).fadeIn().append(' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="'+imgsrc1+'" width="42" height="42">').addClass("animated tada").hide();
+//             $("#div2").delay(3000).fadeIn().append(' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="'+imgsrc2+'" width="42" height="42">').addClass("animated tada").hide();
+//             $("#div3").delay(400).fadeIn().append(' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="'+imgsrc3+'" width="42" height="42">').addClass("animated tada").hide();
+//             $("#div4").delay(5000).fadeIn().append(' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="'+imgsrc4+'" width="42" height="42">').addClass("animated tada").hide();
+//             $("#div5").delay(6000).fadeIn().append(' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="'+imgsrc1+'" width="42" height="42">').addClass("animated tada").hide();
+//         setTimeout(function(){
+//              $("#submitForm").delay(7000).click();
+//           },7000);
+//     }else{
+//         $("#showerror").append("<br>Do not submit the form");
+//     }
+// });
 
 
 $(document).on("change","#file2",function() { 
@@ -194,56 +192,54 @@ $(document).ready(function() {
     $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
         e.preventDefault(); $(this).parent('div').remove(); x--;
     })
+
+    var wrapper1         = $(".input_fields_wrap1"); //Fields wrapper
+    var add_button1      = $(".add_field_button1"); //Add button ID
+    
+    var y = 1; //initlal text box count
+    $(add_button1).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(y < max_fields){ //max input box allowed
+            y++; //text box increment
+            $(wrapper1).append('<div>f_'+y+'<input type="file" name="file" class="f" id="f_'+y+'">'+
+            'n_'+y+'<input type="text" name="filename" class="n" id="n_'+y+'">'+
+            'l_'+y+'<input type="text" name="filelinks" id="l_'+y+'" class="l">'+
+            'i_'+y+'<img src="" id="i_'+y+'" class="i" width="32" height="32">'+
+            '<a href="#" class="remove_field1">Remove</a></div>'); //add input box
+        }
+    });
+    
+    $(wrapper1).on("click",".remove_field1", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); y--;
+    })
 });
-// $(document).on("change","#file2",function() { 
-//         var input = document.getElementById("file");
-//         var fReader = new FileReader();
-//         fReader.readAsDataURL(input.files[0]);
-//         fReader.onloadend = function(event){
-//         var img = document.getElementById("file");
-
-//         img.src = event.target.result;
-
-//         $("#image2").text(img.src);
-//         $("#showpath").append('Hello: <img id="" src='+img.src+'>');
-//         }
-//     });
-
-// (function($){
-//     // document onReady wrapper
-//     $(document).ready(function(){
-//         // check for the nefarious IE
-//         if($.browser.msie) {
-//             // capture the file input fields
-//             var fileInput = $('input[type="file"]');
-//             // add presentational <span> tags "underneath" all file input fields for styling
-//             fileInput.after(
-//                 $(document.createElement('span')).addClass('file-underlay')
-//             );
-//             // bind onClick to get the file-path and update the style <div>
-//             fileInput.click(function(){
-//                 // need to capture $(this) because setTimeout() is on the
-//                 // Window keyword 'this' changes context in it
-//                 var fileContext = $(this);
-//                 // capture the timer as well as set setTimeout()
-//                 // we use setTimeout() because IE pauses timers when a file dialog opens
-//                 // in this manner we give ourselves a "pseudo-onChange" handler
-//                 var ieBugTimeout = setTimeout(function(){
-//                     // set vars
-//                     var filePath     = fileContext.val(),
-//                         fileUnderlay = fileContext.siblings('.file-underlay');
-//                     // check for IE's lovely security speil
-//                     if(filePath.match(/fakepath/)) {
-//                         // update the file-path text using case-insensitive regex
-//                         filePath = filePath.replace(/C:\\fakepath\\/i, '');
-//                     }
-//                     // update the text in the file-underlay <span>
-//                     fileUnderlay.text(filePath);
-//                     $("#showpath").text(filePath);
-//                     // clear the timer var
-//                     clearTimeout(ieBugTimeout);
-//                 }, 10);
-//             });
-//         }
-//     });
-// })(jQuery);
+$(document).on("change",".f",function() { 
+        var id = $(this).attr('id');
+        var ids = get_numbers(id);
+        var input = document.getElementById(id);
+        var fReader = new FileReader();
+        fReader.readAsDataURL(input.files[0]);
+        fReader.onloadend = function(event){
+        var img = document.getElementById(id);
+        img.src = event.target.result;
+        alert(ids[0]);
+        $('#i_'+ids[0]).attr('src',img.src);
+        var fullPath = $("#f_"+ids[0]).val();
+            if (fullPath) {
+                var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+                var filename = fullPath.substring(startIndex);
+                if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                    filename = filename.substring(1);
+                }
+                var namewillbe = filename.split('.');
+                var stamp = new Date().valueOf();
+                var photoname = namewillbe[0]+"-"+ids[0]+"-ModifiedByShubham-"+stamp+"."+namewillbe[1];
+                var photolink = "https://s3.amazonaws.com/shubhambucket123/"+photoname;
+                $("#l_"+ids[0]).val(photolink);
+                $("#n_"+ids[0]).val(photoname);
+            }       
+        }
+    });
+ function get_numbers(input) {
+    return input.match(/[0-9]+/g);
+}

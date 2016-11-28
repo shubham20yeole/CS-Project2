@@ -122,7 +122,7 @@ body a:hover,body a{
     -o-background-size: cover;
     -ms-background-size: cover;
 }
-.agile-info_w3ls input[type="text"],.agile-info_w3ls input[type="password"],.agile-info_w3ls input[type="email"]{
+.agile-info_w3ls input[type="text"], .agile-info_w3ls input[type="file"],.agile-info_w3ls input[type="password"],.agile-info_w3ls input[type="email"]{
     outline: none;
     padding: 10px 10px 10px 40px;
     font-size: 14px;

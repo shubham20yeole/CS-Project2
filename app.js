@@ -26,22 +26,6 @@ app.set('views', path.join(__dirname, 'views'));
 // body parser middleware
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb',extended: false}));
-
-// set static path
-// var getRawBody = require('raw-body')
-// var typer = require('media-typer')
- 
-// app.use(function (req, res, next) {
-//   getRawBody(req, {
-//     length: req.headers['content-length'],
-//     limit: '1mb',
-//     encoding: typer.parse(req.headers['content-type']).parameters.charset
-//   }, function (err, string) {
-//     if (err) return next(err)
-//     req.text = string
-//     next()
-//   })
-// })
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname)));
 app.use(session({
@@ -75,9 +59,70 @@ app.use(expressValidator({
 }));
  var errmsg = "Computer Science Project";
 
+var fs = require('fs');
+var S3FS = require('s3fs');
+var s3fsImpl = new S3FS('shubhambucket123', {
+  accessKeyId:'AKIAJ654LHXUQ5QYDGCQ',
+  secretAccessKey:'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'
+});
+
+s3fsImpl.create();
+ 
+var multiparty = require('connect-multiparty'),
+  multipartyMiddleware = multiparty();
+app.use(multipartyMiddleware);
+    app.use(function(req, res, next){
+      fs.appendFile('logs.txt', req.path + "token:" + req.query.access_token+'', 
+        function(err){
+          next();
+        });
+  });
+
+app.use(function(req, res, next) {
+  if (req.session && req.session.users) {
+    db.users.findOne({ email: req.session.users.email }, function(err, users) {
+      if (users) {
+        req.users = users;
+        delete req.users.password; // delete the password from the session
+        req.session.users = users;  //refresh the session value
+        res.locals.users = users;
+      }
+      // finishing processing the middleware and run the route
+      next();
+    });
+  } else {
+    var users = {
+              fullname: 'Anonymous',
+              email: 'N/A',
+              phone: 'N/A',
+              date: 'N/A',
+              website: 'N/A',
+              password: 'N/A',
+              fbid: 'N/A',
+              gender: 'N/A',
+              photo: 'N/A',
+              type: 'N/A',
+            }
+      res.locals.users = users;
+
+    next();
+  }
+});
+
+function requireLogin (req, res, next) {
+  if (!req.users) {
+    errmsg = "Please login to use this feature";
+    res.redirect('/');
+  } else {
+    next();
+  }
+};
+
+
 // .sort({datefield: -1},
-app.get('/', function(req, res){
-   db.property.find( function (err, docs) {
+app.get('/', function(req, res){      
+  
+  db.property.find( function (err, docs) {
     res.render("index.ejs",{property: docs});
   })
 });
@@ -111,6 +156,14 @@ app.post('/users/add', function(req, res){
                 psd = req.body.password; 
               }
               console.log("success");
+              var file = req.files.file;
+              console.log("File: "+file+", File Path: "+file.path+", originalFilename: "+file.originalFilename);
+              var stream = fs.createReadStream(file.path);
+              return s3fsImpl.writeFile(req.body.photoname, stream).then(function(){
+                fs.unlink(file.path, function(err){
+                  if(err) console.log(err);
+                })
+                
               var newUser = {
               fullname: req.body.firstname,
               email: req.body.email,
@@ -128,7 +181,8 @@ app.post('/users/add', function(req, res){
                 console.log(err);
               }
         req.session.users = newUser;
-        res.redirect('/blog');
+        res.redirect('/');
+        });
   });
   
       
@@ -236,31 +290,6 @@ app.get('/ajax/', function(req, res) {
 
 
 
-app.use(function(req, res, next) {
-  if (req.session && req.session.users) {
-    db.users.findOne({ email: req.session.users.email }, function(err, users) {
-      if (users) {
-        req.users = users;
-        delete req.users.password; // delete the password from the session
-        req.session.users = users;  //refresh the session value
-        res.locals.users = users;
-      }
-      // finishing processing the middleware and run the route
-      next();
-    });
-  } else {
-    next();
-  }
-});
-function requireLogin (req, res, next) {
-  if (!req.users) {
-    errmsg = "Please login to use this feature";
-    res.redirect('/');
-  } else {
-    next();
-  }
-};
-
 
 app.get('/dashboard', function(req, res) {
   var blogviewmsg = "You are viewing blogs of all category";
@@ -345,7 +374,7 @@ app.get('/logout/', function(req, res) {
   console.log("I am here");
 
   req.session.reset();
-  res.redirect('/dashboard');
+  res.redirect('/');
 });
 
 app.use(session({
@@ -459,7 +488,24 @@ app.get('/detailedproperty/:id', function(req, res){
 
 app.post('/postproperty/', function(req, res){
     var datetime = new Date();
-    console.log(req.body.propertyfeatures);
+      var file = req.files.file;
+      var filename = req.body.filename;
+      var filelinks = req.body.filelinks;
+      var propertyphoto = "";
+      var allphoto = "";
+      for(i=0; i<file.length; i++){
+        propertyphoto = filelinks[0];
+        allphoto = allphoto + filelinks[i]+" ";
+        console.log("File: "+file[i]+", File Path: "+file[i].path+", originalFilename: "+file[i].originalFilename);
+        var stream = fs.createReadStream(file[i].path);
+        s3fsImpl.writeFile(filename[i], stream).then(function(){
+        fs.unlink(file[i].path, function(err){
+          if(err) console.log(err);
+        })
+      })
+      }
+      console.log("propertyphoto: "+propertyphoto+", allphoto: "+allphoto);
+      console.log(req.body.propertyfeatures);
         var newProperty = {
           title: req.body.title,
           phone: req.body.phone,
@@ -485,7 +531,8 @@ app.post('/postproperty/', function(req, res){
           dateField: datetime,
           discription: req.body.discription,
           posted_date: req.body.blogdata,
-          image1: req.body.image1
+          image1: propertyphoto,
+          images: allphoto
        }
         db.property.insert(newProperty, function(err, result){
         
@@ -522,23 +569,8 @@ app.get('/registerlogin', function(req, res){
  
 });
 
-app.get('/blog/', function(req, res) {
 
-  var loginstatus = null;
-  if(req.session.users==null){
-    loginstatus = "false";
-  }else{
-      loginstatus = "true";
-  }
- res.render('blog',{session : loginstatus, users: req.session.users});
- });
 
-app.get('/googlemap/', function(req, res) {
-
-    res.render('googlemap',{session : "true",users: req.session.users});
-     
-  
-});
 
 app.post('/login', function(req, res) {
   db.users.findOne({ email: req.body.email }, function(err, users) {
@@ -549,7 +581,7 @@ app.post('/login', function(req, res) {
       if (req.body.password === users.password) {
         // sets a cookie with the user's info
         req.session.users = users;
-        res.redirect('/blog');
+        res.redirect('/');
       } else {
         errmsg = 'Incorrect Password...';
         res.redirect('/');
@@ -703,4 +735,31 @@ app.get('/send',function(req,res){
 
 app.listen(port, function() {
   console.log('Listening on port ' + port)
+});
+
+app.post('/testUpload', function(req, res){
+  var file = req.files.file;
+  var filename = req.body.filename;
+  var filelinks = req.body.filelinks;
+  var propertyphoto = "";
+  var allphoto = "";
+  for(i=0; i<file.length; i++){
+    propertyphoto = filelinks[0];
+    allphoto = allphoto + filelinks[i]+" ";
+    console.log("File: "+file[i]+", File Path: "+file[i].path+", originalFilename: "+file[i].originalFilename);
+    var stream = fs.createReadStream(file[i].path);
+    s3fsImpl.writeFile(filename[i], stream).then(function(){
+    fs.unlink(file[i].path, function(err){
+      if(err) console.log(err);
+    })
+  })
+}
+console.log("propertyphoto: "+propertyphoto+", allphoto: "+allphoto);
+res.send("DONE");
 })
+
+app.get('/testAPI', function(req, res){
+  res.json({SecretData: 'abc123'});
+});
+
+
