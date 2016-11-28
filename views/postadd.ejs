@@ -34,6 +34,19 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="aa-properties-details" >
             <h3>POST NEW PROPERTY</h3>
+          <% if(users.fullname == 'Anonymous'){%>
+             <h1>Welcome to USA REAL ESTATES!</h1>
+              <p style="color: red">
+              Please Sign In or Sign Up to post adds.<br><br>
+                <span id="fbloginmsg">Use login with facebook for quick login.</span>
+              </p>
+              <br><br>
+              <a href="registerlogin" style="width:auto;" class="loginButton">Sign Up / Sign In / Login with Facebook</a>
+              <br><br>
+              <%}else{%> 
+               
+             
+
            <form method="post" action="postproperty" enctype="multipart/form-data">
                  <br><br><lable>1. PROPERTY IMAGES...</lable><br><br>
                  <button class="add_field_button1">Add More Images</button><br><br>
@@ -110,6 +123,7 @@
               <div id="div3" style="display:none;">Upload image 3: <b>Successfull</b></div>
               <div id="div4" style="display:none;">Upload image 4: <b>Successfull</b></div>
               <div id="div5" style="display:none;">Submitting - Property : <b>DONE</b></div><br>
+               <%}%> 
             </div>          
           </div>
         </div>
@@ -221,40 +235,8 @@
   <!-- / Properties  -->
 
   <!-- Footer -->
-  <footer id="aa-footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-        <div class="aa-footer-area">
-          <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="aa-footer-left">
-               <p>Developed by <a rel="nofollow" href="#">Team 3</a></p>
-              </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="aa-footer-middle">
-                <a href="https://www.facebook.com/sy06736n" target="_blank"><i class="fa fa-facebook"></i></a>
-                <a href="https://twitter.com/Shubham20Yeole" target="_blank"><i class="fa fa-twitter"></i></a>
-                <a href="https://www.linkedin.com/in/shubhamyeole" target="_blank"><i class="fa fa-linkedin"></i></a>
-                <a href="https://github.com/shubham20yeole" target="_blank"><i class="fa fa-github"></i></a>
-              </div>
-            </div>
-            <div class="col-md-6 col-sm-12 col-xs-12">
-              <div class="aa-footer-right">
-                <a href="/" target="_blank">Home</a>
-                <a href="/postadd" target="_blank">Post Add</a>
-                <a href="/registerlogin" target="_blank">Sign Up</a>
-                <!-- <a href="#">FAQ</a>
-                <a href="#">Privacy & Term</a> -->
-              </div>
-            </div>            
-          </div>
-        </div>
-      </div>
-      </div>
-    </div>
-  </footer>
+  <% include partials/footer.ejs %>
+
   <!-- / Footer -->
 
 <!-- jQuery library -->

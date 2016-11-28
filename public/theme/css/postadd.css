@@ -13,6 +13,9 @@
 #title:focus {
     width: 700px;
 }
+.loginButton{background-color: black; color: white; padding: 3%; cursor: pointer;}
+.loginButton:hover{background-color: #f4f4f4; color: black;}
+#fbloginmsg{ font-size: 2em; font-weight: bold }
 .aa-properties-content lable{font-weight: bold; font-size: 1.1em;}
 .aa-properties-content hr{color: black;}
 #showerror{color: red; font-weight: bold;}

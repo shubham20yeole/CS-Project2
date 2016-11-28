@@ -181,7 +181,7 @@ app.post('/users/add', function(req, res){
                 console.log(err);
               }
         req.session.users = newUser;
-        res.redirect('/');
+        res.redirect('/postadd');
         });
   });
   
@@ -581,7 +581,7 @@ app.post('/login', function(req, res) {
       if (req.body.password === users.password) {
         // sets a cookie with the user's info
         req.session.users = users;
-        res.redirect('/');
+        res.redirect('/postadd');
       } else {
         errmsg = 'Incorrect Password...';
         res.redirect('/');
