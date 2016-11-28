@@ -126,6 +126,11 @@ app.get('/', function(req, res){
     res.render("index.ejs",{property: docs});
   })
 });
+app.get('/gallery', function(req, res){      
+  db.property.find( function (err, docs) {
+    res.render("gallery.ejs",{property: docs});
+  })
+});
 
 app.get('/blank', function(req, res){
    res.render("blank.ejs");  
@@ -195,7 +200,7 @@ app.post('/users/add', function(req, res){
             if (req.body.email+"w$9jKp3e$!Zy_Ned" === users.fbid) {
               // sets a cookie with the user's info
              req.session.users = users;
-              res.redirect('/blog');
+              res.redirect('/postadd');
             } else {
               errmsg = 'Password does not match';
               res.redirect('/');
