@@ -71,8 +71,8 @@
               <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="aa-header-right">
                    <% if(users.fullname == 'Anonymous'){%>
-                    <a href="registerlogin" class="aa-register">Register</a>
-                    <a href="registerlogin" class="aa-login">Login</a> 
+                    <a href="../registerlogin" class="aa-register">Register</a>
+                    <a href="../registerlogin" class="aa-login">Login</a> 
                   <%}else{%> 
                       <img src="<%=users.photo%>" width="32" height="32"> 
                       <a href="/logout" class="aa-login"><%= users.fullname %></a>

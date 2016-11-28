@@ -25,13 +25,14 @@
           <div class="aa-properties-content">            
             <!-- Start properties content body -->
             <div class="aa-properties-details">
+            <div id="imaages"></div>
              <div class="aa-properties-details-img">
                <img src="<%= property.image1 %>" alt="img">
-               <img src="<%= images.imege2 %>" alt="img">
-               <img src="<%= images.imege3 %>" alt="img">
-               <img src="<%= images.imege4 %>" alt="img">
-             </div>
+               <img src="<%= property.image1 %>" alt="img">
+               
              
+             </div>
+             <input type="text" value="<%= property.images %>" id="allimages">
              <input type="hidden" id="features" value="<%= property.features %>">
              
              <div class="aa-properties-info">

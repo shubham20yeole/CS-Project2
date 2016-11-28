@@ -31,55 +31,43 @@
             <!-- Start properties content body -->
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-<form action="testUpload" method="post" enctype="multipart/form-data">
-
-                <input type="submit" id="uploadimage">
-
-</form>
-   
-
-            <div class="aa-properties-details" >
-            <h3>POST NEW PROPERTY</h3>            
-           
-            <!-- <input type="file" name="file" id="file"/>
-            <input type="file" name="file" id="file2"/>
-            <input type="hidden" id="image2" name="image2">
-           
-            <input type="file" name="file" id="file3"/>
-            <input type="hidden" id="image3" name="image3">
-            <input type="file" name="file" id="file4"/>
-            <input type="hidden" id="image4" name="image4"> -->
-          
-          
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="aa-properties-details" >
+            <h3>POST NEW PROPERTY</h3>
            <form method="post" action="postproperty" enctype="multipart/form-data">
+                 <br><br><lable>1. PROPERTY IMAGES...</lable><br><br>
+                 <button class="add_field_button1">Add More Images</button><br><br>
                  <div class="input_fields_wrap1">
-                  <button class="add_field_button1">Add More Images</button>
                     <div>
-                      f_1<input type="file" name="file" id="f_1" class="f">
-                      n_1<input type="text" name="filename" id="n_1" class="n">
-                      l_1<input type="text" name="filelinks" id="l_1" class="l">
-                      i_1<img src="" id="i_1" class="i" width="32" height="32">
+                      <input type="file" name="file" id="f_1" class="f">
+                      <input type="hidden" name="filename" id="n_1" class="n">
+                      <input type="hidden" name="filelinks" id="l_1" class="l">
+                      <img src="http://i.imgur.com/8LaeZcN.png" id="i_1" class="i" width="32" height="32">
+                      <br>
                     </div>
-                </div><br><br>
-
-                <input type="text" name="title" id="title"  placeholder="Title"><br><br>
-                <input type="hidden" name="timestamp" id="timestamp" placeholder="timestamp"><br><br>
+                </div>
+                <hr>
+                <fieldset>
+                <lable>2. TITLE...</lable><br><br>
+                <input type="text" name="title" id="title"  placeholder="Title" required="true"><hr>
+                <input type="hidden" name="timestamp" id="timestamp" placeholder="timestamp">
                 <input type="hidden" id="image1" name="image1">
+                <lable>3. CONTACT INFORMATION...</lable><br><br>
                 <input type="text" name="phone" id="phone"  placeholder="Phone">
                 <input type="text" name="email" id="email"  placeholder="Email">
-                <input type="text" name="telephone" placeholder="Telephone"><br><br>
+                <input type="text" name="telephone" placeholder="Telephone"><hr>
                 <input type="hidden" name="latitude" id="latitude" placeholder="longitude" readonly="true">
                 <input type="hidden" name="longitude" id="longitude" placeholder="latitude" readonly="true">
-                <%= users.fullname %>
-
                 <% include partials/map.ejs %>
-                <p id="longlati"></p>
+                <div id="longlatidiv"><p id="longlati"></p></div>
+                <lable>4. PROPERTY LOCATION?</lable><br><br>
                 <input type="text" name="staddress"  id="staddress" placeholder="Street Address">
                 <input type="text" name="city"  id="city" placeholder=" city">
-                <input type="text" name="state"  id="state" placeholder=" state"><br><br>
+                <input type="text" name="state"  id="state" placeholder=" state">
                 <input type="text" name="zip"  id="zip" placeholder=" zip">
                 <input type="text" name="county" placeholder=" county">
-                <input type="text" name="country" id="country" placeholder=" country"><br><br>
+                <input type="text" name="country" id="country" placeholder=" country"><hr>
+                <lable>5. PROPERTY TYPE...</lable><br><br>
                 <select id="categoryselect">
                   <option value="Other">Category</option>
                   <option value="Houses">Houses</option>
@@ -93,26 +81,28 @@
                   <option value="Sale">Type</option>
                   <option value="Sale">For Sale</option>
                   <option value="Rent">For Rent</option>
-                </select><br><br>
-
+                </select><hr>
+                
+                <lable>6. PROPERTY FEATURES...</lable><br><br>
                 <div class="input_fields_wrap">
-                  <button class="add_field_button">Add More Fields</button>
+                  <button class="add_field_button">Add More Fields</button><br><br>
                   <div><input type="text" name="propertyfeatures"  placeholder="Property Feature"></div>
                 </div><br><br>
 
-
+                <lable>7. ROOM / KITCHEN / WASHROOM...</lable><br><br>
                 <input type="text" name="bedroom" id="bedroom"  placeholder="Bedroom">
                 <input type="text" name="kitchen" id="kitchen"  placeholder="Kitchen">
-                <input type="text" name="bathroom" id="bathroom"  placeholder="Bathroom"><br><br>
+                <input type="text" name="bathroom" id="bathroom"  placeholder="Bathroom"><hr>
                 <input type="hidden" name="propertytype"  id="propertytype" placeholder="propertytype">
-                <input type="hidden" name="addtype"  id="addtype" placeholder="propertytype"><br><br>
+                <input type="hidden" name="addtype"  id="addtype" placeholder="propertytype">
+                <lable>8. AREA / PRICE / DESCRIPTION...</lable><br><br>
                 <input type="text" name="area"  id="area" placeholder="Area in sq feets">
                 <input type="text" name="cost"  id="cost" placeholder="Price in USD">
-                <input type="text" name="discription" id="discription"  placeholder="Discription"><br><br>
-
-                <input type="submit" id="submitForm" value="Actual Post Add">
+                <input type="text" name="discription" id="discription"  placeholder="Discription"><hr>
+                </fieldset>
+                <input type="submit" style="display:none;" id="submitForm" value="Actual Post Add">
               </form>
-              <button id="uploadimage">Save Post</button><div id="loader"></div>
+              <input type="submit" value="Save Post" id="uploadimage"><div id="loader"></div>
               <div id="showerror"></div>
               <div id="lodardiv"></div>
               <div id="div1" style="display:none;">Upload image 1: <b>Successfull</b></div>
@@ -239,24 +229,24 @@
           <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="aa-footer-left">
-               <p>Designed by <a rel="nofollow" href="http://www.markups.io/">MarkUps.io</a></p>
+               <p>Developed by <a rel="nofollow" href="#">Team 3</a></p>
               </div>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="aa-footer-middle">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-google-plus"></i></a>
-                <a href="#"><i class="fa fa-youtube"></i></a>
+                <a href="https://www.facebook.com/sy06736n" target="_blank"><i class="fa fa-facebook"></i></a>
+                <a href="https://twitter.com/Shubham20Yeole" target="_blank"><i class="fa fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/in/shubhamyeole" target="_blank"><i class="fa fa-linkedin"></i></a>
+                <a href="https://github.com/shubham20yeole" target="_blank"><i class="fa fa-github"></i></a>
               </div>
             </div>
             <div class="col-md-6 col-sm-12 col-xs-12">
               <div class="aa-footer-right">
-                <a href="#">Home</a>
-                <a href="#">Support</a>
-                <a href="#">License</a>
-                <a href="#">FAQ</a>
-                <a href="#">Privacy & Term</a>
+                <a href="/" target="_blank">Home</a>
+                <a href="/postadd" target="_blank">Post Add</a>
+                <a href="/registerlogin" target="_blank">Sign Up</a>
+                <!-- <a href="#">FAQ</a>
+                <a href="#">Privacy & Term</a> -->
               </div>
             </div>            
           </div>
