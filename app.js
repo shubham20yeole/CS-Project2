@@ -120,12 +120,17 @@ function requireLogin (req, res, next) {
 
 
 // .sort({datefield: -1},
-app.get('/', function(req, res){      
-  
-  db.property.find( function (err, docs) {
+app.get('/', function(req, res){       
+  db.property.find({}).sort({timestamp: -1}).limit(9).toArray(function (err, docs) {
     res.render("index.ejs",{property: docs});
   })
 });
+  // app.get('/', function(req, res){       
+  //        db.property.find({}).limit(1).toArray(function (err, docs) {
+  //        res.render("index.ejs",{property: docs});
+  //      })
+  //   });
+
 app.get('/gallery', function(req, res){      
   db.property.find( function (err, docs) {
     res.render("gallery.ejs",{property: docs});
