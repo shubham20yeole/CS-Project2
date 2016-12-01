@@ -7,6 +7,18 @@ $( document ).ready(function() {
 	   $('#img').click(function () {
 		    $("input[type='file']").trigger('click');
 		})
+	    $('.fakesubmit').click(function () {
+		    var psd = $("#psd").val();
+		    var cpsd = $("#cpsd").val();
+		    var propertyfile = $("#file").val();
+		    if(propertyfile == ""){ $("#photoerrmsg").text("Image file is required"); }
+		    else{$("#photoerrmsg").text("Sab thik he bhai"); }
+		    if(psd === cpsd && psd!=""){
+		      $("#regsubmit").trigger('click');
+		    }else{
+		    	alert("Password does not match or empty password.");
+		    }
+		})
  });
 $(document).on("change","#file",function() { 
 

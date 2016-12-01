@@ -208,83 +208,51 @@ app.post('/loginwithfacebook', function(req, res){
   });
 });
 
-app.post('/users/add', function(req, res){
-  
-  var datetime = new Date();
-    var loginstatus = null;
-      if(req.session.users==null){
-          loginstatus = "false";
-        }else{
-          loginstatus = "true";
-        }
+// Ftp.auth('b8_19205430', 'Shubham4194', function(err, list) {
+//   console.log("Hello World: "+err);
+//   Ftp.put(file.path, 'htdocs/public_html/'+req.body.photoname, function(err2) {
+//     if (err) console.log("Put Method: "+err2);
+//   });
+// });
+
+app.post('/adduser', function(req, res){
+var datetime = new Date();
+var email = req.body.email;
  db.users.findOne({ email: req.body.email }, function(err, users) {
     if (!users) {
-          var students = "Shubham is Pace CS student";
-        
-              var psd = req.body.password;
-              if(req.body.password==null){
-                psd = "w$9jKp3e$!Zy_Ned";
-              }else{
-                psd = req.body.password; 
-              }
-              console.log("success");
-              var file = req.files.file;
-              console.log("File: "+file+", File Path: "+file.path+", originalFilename: "+file.originalFilename);
-              Ftp.auth('b8_19205430', 'Shubham4194', function(err, list) {
-                console.log("Hello World: "+err);
-                Ftp.put(file.path, 'htdocs/public_html/'+req.body.photoname, function(err2) {
-                    if (err) console.log("Put Method: "+err2);
-                  });
-              });
-              // var stream = fs.createReadStream(file.path);
-              // return s3fsImpl.writeFile(req.body.photoname, stream).then(function(){
-              //   fs.unlink(file.path, function(err){
-              //     if(err) console.log(err);
-              //   })
-              var photoUrl = 'http://shubhamyeole.byethost8.com/public_html/'+req.body.photoname;
-              console.log(photoUrl);
-              var newUser = {
-              fullname: req.body.firstname,
-              email: req.body.email,
-              phone: req.body.phone,
-              date: datetime,
-              website: req.body.website,
-              password: req.body.password,
-              fbid: req.body.email+"w$9jKp3e$!Zy_Ned",
-              gender: req.body.gender,
-              photo: photoUrl,
-              type: 'user',
-            }
-        db.users.insert(newUser, function(err, result){
-              if(err){
-                console.log(err);
-              }
-        req.session.users = newUser;
-        res.render("message.ejs",{property: "REGISTERED", status: 'registered', message: 'Congratulations. Your are successfully registered...', link: '<a href="/propertiesbymaps">Click me to view our properties by google map...</a>'});
+      var file = req.files.file;
+      console.log("File: "+file+", File Path: "+file.path+", originalFilename: "+file.originalFilename);
+      // var stream = fs.createReadStream(file.path);
+      // return s3fsImpl.writeFile(req.body.photoname, stream).then(function(){
+      //   fs.unlink(file.path, function(err){
+      //     if(err) console.log(err);
+      //   })
+      Ftp.auth('b8_19205430', 'Shubham4194', function(err, list) {
+        console.log("Hello World: "+err);
+        Ftp.put(file.path, 'htdocs/public_html/user/'+req.body.photoname, function(err2) {
+          if (err) console.log("Put Method: "+err2);
         });
- 
-  
-      
-    } else {
-        db.users.findOne({ email: req.body.email }, function(err, users) {
-          if (!users) {
-            errmsg = 'User with email '+req.body.email+' address is not yet registered... Please Sign Up first';
-              res.redirect('/');
-          } else {
-            if (req.body.email+"w$9jKp3e$!Zy_Ned" === users.fbid) {
-              // sets a cookie with the user's info
-             req.session.users = users;
-              var url = req.body.preurl;
-              res.redirect(url);
-            } else {
-              errmsg = 'Password does not match';
-              res.redirect('/');
-            }
-      }
+      });
+      var photoUrl = 'http://shubhamyeole.byethost8.com/public_html/user/'+req.body.photoname;
+      console.log(photoUrl);
+      var newUser = {
+      fullname: req.body.firstname,
+      email: req.body.email,
+      phone: req.body.phone,
+      date: datetime,
+      website: req.body.website,
+      password: req.body.password,
+      gender: req.body.gender,
+      photo: photoUrl,
+      type: 'user',
+    }
+    db.users.insert(newUser, function(err, result){
+      if(err){console.log(err);}
+      req.session.users = newUser;
+        res.render("message.ejs",{property: "REGISTERED", status: 'registered', message: 'Congratulations. Your are successfully registered...', link: '<a href="/propertiesbymaps">Click me to view our properties by google map...</a>'});
+    });
+  } else {res.render("message.ejs",{property: "REGISTERED", status: 'registered', message: 'Sorry. We are currently unable to register you to our system. Your are already registered...', link: '<a href="/propertiesbymaps">Click me to view our properties by google map...</a>'});}
   });
-            
-}
-});
 });
 
 app.get('/users/delete/:id', function(req, res){
