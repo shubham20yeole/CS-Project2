@@ -181,25 +181,26 @@ app.post('/loginwithfacebook', function(req, res){
   
   // if users exist update session
   // else add user update session
-
+var datetime = new Date();
  db.users.findOne({ email: req.body.email }, function(err, users) {
     if (!users) {
        
-        var newusers = {
-              fullname: req.body.firstname,
-              email: req.body.email,
-              phone: 'N/A',
-              date: 'N/A',
-              website: 'N/A',
-              password: 'N/A',
-              fbid: 'N/A',
-              gender: 'N/A',
-              photo: req.body.photo,
-              type: 'N/A',
-            }
-        req.session.users = newusers;
+         var newUser = {
+          fullname: req.body.firstname,
+          email: req.body.email,
+          phone: req.body.phone,
+          date: datetime,
+          website: "N0 Website",
+          password: "password",
+          gender: 'male',
+          photo: req.body.photo,
+          type: 'user',
+        }
+        db.users.insert(newUser, function(err, result){
+          if(err){console.log(err);}
+          req.session.users = result;
         res.render("message.ejs",{property: "REGISTERED", status: 'registered', message: 'Congratulations. Your are successfully Logged in using facebook...', link: '<a href="/propertiesbymaps">Click me to view our properties by google map...</a>'});
-        
+        });
      } else {
         req.session.users = users;
         res.render("message.ejs",{property: "REGISTERED", status: 'registered', message: 'Congratulations. Your are successfully Logged in using facebook...', link: '<a href="/propertiesbymaps">Click me to view our properties by google map...</a>'});
