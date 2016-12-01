@@ -197,7 +197,6 @@ app.post('/loginwithfacebook', function(req, res){
               photo: req.body.photo,
               type: 'N/A',
             }
-        res.locals.users = newusers;
         req.session.users = newusers;
         res.render("message.ejs",{property: "REGISTERED", status: 'registered', message: 'Congratulations. Your are successfully Logged in using facebook...', link: '<a href="/propertiesbymaps">Click me to view our properties by google map...</a>'});
         
