@@ -36,7 +36,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<img src="images/fb.jpg" alt="Avatar" class="avatar">
 	</div>
 	<div class="col span_1_of_3">
-	<form method="POST" action="/users/add">
+	<form method="POST" action="/loginwithfacebook">
       <input type="text" name="preurl" class="preurl"><br><br>
       <input type="text" class="fbinput" name="firstname" id="fb_fname" placeholder="First Name"><br><br>
       <input type="text" class="fbinput" name="lastname" id="fb_lname" placeholder="Last Name"><br><br>
@@ -47,7 +47,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       <input type="hidden" class="fbinput" name="website" id="fb_fbprofile" placeholder="Website">
       <input type="hidden" class="fbinput" name="fbid" id="fb_id" placeholder="Password">
       <input type="hidden" class="fbinput" name="photo" id="fb_photo" placeholder="Just for reference">
-      <input class="crhad" type="submit" value="Log In">
+      <input class="crhad" type="submit" value="Log In with Facebook">
     </form>
     	<br><br><br><br><br><br>
 	<br><br><br><br><br><br>
@@ -62,22 +62,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <h1><a href='/'>GO BACK TO HOME</a></h1>
 <h2 style="color: #006455; font-size: 2em; text-align: center;"><%= errmsg %></h2>
 <h3></h3>
-		<div class="wthree_top_forms">
+						<form method="POST" action="/users/add" autocomplete="off" enctype="multipart/form-data">
+					    <input type="file" name="file" id="file" style="visibility:hidden;" required="">
+	<div class="wthree_top_forms">
 			<div class="agile-info_w3ls hvr-buzz-out">
 				<h3>Register</h3>
 				<div class="agile-info_w3ls_grid">
-					<form method="POST" action="/users/add" autocomplete="off" enctype="multipart/form-data">
 						<img src="images/defaultprofile.jpg" id="image" width="40" height="40"><br><br>
-					    <input type="file" name="file" id="file" required=""><br><br>
+					    <button id="img">Select Profile Photo</button>"><br><br>
+
 					    <input type="hidden" name="photo" id="photolink">
 					    <input type="hidden" name="timestamp" id="timestamp">
 					    <input type="hidden" name="photoname" id="photoname">
 					    <input type="text" class="halflogintext" name="firstname" placeholder="Full Name"><br>
-					    <input type="email" class="halflogintext" value="shubham20.yeole@gmail.com" name="email" placeholder="Email address">
-					    <input type="text" id="phone" value="2018875323" class="halflogintext" name="phone" placeholder="Phone Number"><br><br>
-					    <input type="text" class="logintext" name="website" value="Website" placeholder="Website"><br><br>
+					    <input type="email" class="halflogintext" name="email" placeholder="Email address">
+					    <input type="text" id="phone" value="" class="halflogintext" name="phone" placeholder="Phone Number"><br><br>
+					    <input type="text" class="logintext" name="website" value="" placeholder="Website"><br><br>
 					    <input type="hidden" name="gender" value="male" placeholder="Gender">
-					    <input type="password" value="Shubham4194" class="logintext" name="password" placeholder="Password"><br>
+					    <input type="password" value="" class="logintext" name="password" placeholder="Password"><br>
 					    <input class="crhad" type="submit" value="submit">
 					</form>
  
