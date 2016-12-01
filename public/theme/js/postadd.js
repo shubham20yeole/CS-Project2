@@ -1,7 +1,12 @@
 $( document ).ready(function() {
     $("#timestamp").val(new Date().valueOf());
     $("#longlatidiv").hide();
-    $("#map").hide();
+    $("#map").show();
+    var image = 'http://shubhamyeole.byethost8.com/public_html/property/3-1t1480565421109.jpg';
+    image.onerror = function () {
+    alert('error loading ' + this.src);
+     this.src = 'error.png'; // place your error.png image instead
+    };
 });
  $(document).on("keyup","#city,#state, #staddress, #zip",function() {
     $("#longlatidiv").show().addClass("animated rotateInDownRight");
@@ -53,6 +58,7 @@ $(document).on("change","#file",function() {
         }
     });
 $(document).on("click","#uploadimage",function() { 
+var propertyfile = $("#f_1").val();
 var title = $("#title").val();
 var phone = $("#phone").val();
 var email = $("#email").val();
@@ -71,6 +77,7 @@ var cost = $("#cost").val();
 var discription = $("#discription").val();
 var errmsg = "";
 var count = 0;
+    if(propertyfile == ""){ errmsg = errmsg + "Image file is required<br>"; count++; }
     if(title == ""){ errmsg = errmsg + "Title is required<br>"; count++; }
     if(phone==""){ errmsg = errmsg + "Phone is required<br>"; count++;}
     if(email == ""){ errmsg = errmsg + "Email is required<br>"; count++;}
@@ -222,8 +229,8 @@ $(document).on("change",".f",function() {
                 }
                 var namewillbe = filename.split('.');
                 var stamp = new Date().valueOf();
-                var photoname = namewillbe[0]+"-"+ids[0]+"-ModifiedByShubham-"+stamp+"."+namewillbe[1];
-                var photolink = "https://s3.amazonaws.com/shubhambucket123/"+photoname;
+                var photoname = namewillbe[0]+"-"+ids[0]+"t"+stamp+"."+namewillbe[1];
+                var photolink = "http://shubhamyeole.byethost8.com/public_html/property/"+photoname;
                 $("#l_"+ids[0]).val(photolink);
                 $("#n_"+ids[0]).val(photoname);
             }       

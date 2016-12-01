@@ -1,6 +1,9 @@
 $( document ).ready(function() {
       $("#fblogindivsec").hide();
       $("#timestamp").val(new Date().valueOf());
+      var oldURL = document.referrer;
+      if(oldURL == 'https://usa-real-estates.herokuapp.com/login') oldURL = 'https://usa-real-estates.herokuapp.com/';
+	  $(".preurl").val(oldURL);
  });
 $(document).on("change","#file",function() { 
 
@@ -22,7 +25,7 @@ $(document).on("change","#file",function() {
 			    var namewillbe = filename.split('.');
 			    var stamp = $("#timestamp").val();
 			    var photoname = namewillbe[0]+"-"+stamp+"."+namewillbe[1];
-			    var photolink = "https://s3.amazonaws.com/shubhambucket123/"+photoname;
+			    var photolink = "http://shubhamyeole.byethost8.com/public_html/"+photoname;
 			    $("#photolink").val(photolink);
 			    $("#photoname").val(photoname);
 			}       

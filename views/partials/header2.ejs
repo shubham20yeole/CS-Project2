@@ -1,28 +1,29 @@
-
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">    
-    <title>Home Property | Properties Details</title>
+    <title>Home Property | USA REAL ESTATES</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../theme/img/favicon.ico" type="image/x-icon">
     
-   
+    
     <!-- Font awesome -->
-    <link href="theme/css/font-awesome.css" rel="stylesheet">
+    <link href="../theme/css/font-awesome.css" rel="stylesheet">
     <!-- Bootstrap -->
-    <link href="theme/css/bootstrap.css" rel="stylesheet">   
+    <link href="../theme/css/bootstrap.css" rel="stylesheet">   
     <!-- slick slider -->
-    <link rel="stylesheet" type="text/css" href="theme/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="../theme/css/slick.css">
     <!-- price picker slider -->
-    <link rel="stylesheet" type="text/css" href="theme/css/nouislider.css">
+    <link rel="stylesheet" type="text/css" href="../theme/css/nouislider.css">
     <!-- Theme color -->
-    <link id="switcher" href="theme/css/theme-color/default-theme.css" rel="stylesheet">     
+    <link id="switcher" href="../theme/css/theme-color/default-theme.css" rel="stylesheet">     
+    <link href="../theme/css/header.css" rel="stylesheet">    
 
     <!-- Main style sheet -->
-    <link href="theme/css/style.css" rel="stylesheet">    
+    <link href="../theme/css/style.css" rel="stylesheet">    
+    <link href="../theme/css/detailedproperty.css" rel="stylesheet">    
 
    
     <!-- Google Font -->
@@ -48,6 +49,7 @@
     <a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
   <!-- END SCROLL TOP BUTTON -->
 
+
   <!-- Start header section -->
   <header id="aa-header">  
     <div class="container">
@@ -59,17 +61,27 @@
                 <div class="aa-header-left">
                   <div class="aa-telephone-no">
                     <span class="fa fa-phone"></span>
-                    1-900-523-3564
+                    1-201-887-5323
                   </div>
                   <div class="aa-email hidden-xs">
-                    <span class="fa fa-envelope-o"></span> info@markups.com
+                    <span class="fa fa-envelope-o"></span> shubham20.yeole@gmail.com
                   </div>
                 </div>              
               </div>
               <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="aa-header-right">
-                  <a href="register.html" class="aa-register">Register</a>
-                  <a href="signin.html" class="aa-login">Login</a>
+                   <% if(users.fullname == 'Anonymous'){%>
+                    <div id="sessionsec">
+                      <a href="registerlogin" class="aa-register">Register</a>
+                      <a href="registerlogin" class="aa-login"> or Login</a> 
+                    </div>
+                  <%}else{%> 
+                     <div id="sessionsec">
+                        <img src="<%=users.photo%>" width="32" height="32"> 
+                        <a href="/" class="aa-login"><%= users.fullname %></a>
+                        | <a href="/logout" class="aa-login">LOGOUT</a>
+                      </div>
+                  <%}%>         
                 </div>
               </div>
             </div>
@@ -93,33 +105,42 @@
           </button>
           <!-- LOGO -->                                               
           <!-- Text based logo -->
-          <a class="navbar-brand aa-logo" href="index.html"> Home <span>Property</span></a>
+           <a class="navbar-brand aa-logo" href="/"> USA <span>Real Estate</span></a>
           <!-- Image based logo -->
           <!-- <a class="navbar-brand aa-logo-img" href="index.html"><img src="img/logo.png" alt="logo"></a> -->                     
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul id="top-menu" class="nav navbar-nav navbar-right aa-main-nav">
-            <li><a href="/">HOME</a></li>
+            <ul id="top-menu" class="nav navbar-nav navbar-right aa-main-nav">
+            <li class="active"><a href="/">HOME</a></li>
+             
              <li class="dropdown active">
               <a class="dropdown-toggle" data-toggle="dropdown" href="properties.html">PROPERTIES <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">                
-                <li><a href="allproperties">PROPERTIES</a></li>
-                <li><a href="postadd">Post Add</a></li>                                            
+                <li><a href="/properties/0">PROPERTIES</a></li>
+                <li><a href="/postadd">POST ADD</a></li> 
+                <li><a href="/gallery/0">VIEW GALLERY</a></li>                                
               </ul>
-            </li>
-            <li><a href="gallery.html">GALLERY</a></li>                                         
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="blog-archive.html">BLOG <span class="caret"></span></a>
+           </li>
+             <li class="dropdown active">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="properties.html">Properties by Maps <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">                
-                <li><a href="blog-archive.html">BLOG</a></li>
-                <li><a href="blog-single.html">BLOG DETAILS</a></li>                                            
+                <li><a href="/propertiesbymaps">Google Map</a></li>                            
               </ul>
-            </li>
-            <li><a href="contact.html">CONTACT</a></li>
-            <li><a href="404.html">404 PAGE</a></li>
-          </ul>                               
-        </div><!--/.nav-collapse -->       
+           </li>
+            <li class="active"><a href="/contact">Contact</a></li>           
+         </ul>                             
+          <% if(users.fullname == 'Anonymous'){%>
+            <a href="registerlogin" class="aa-register">Register</a>
+            <a href="registerlogin" class="aa-login">Login</a> 
+          <%}else{%> 
+            <div id="sessionsec">
+              <img src="<%=users.photo%>" width="32" height="32"> 
+              <a href="/" class="aa-login"><%= users.fullname %></a>
+              | <a href="/logout" class="aa-login">LOGOUT</a>
+            </div> 
+          <%}%>                          
+        </div>
+
       </div>          
     </nav> 
   </section>
-  <!-- End menu section -->

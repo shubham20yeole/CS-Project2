@@ -11,7 +11,14 @@ var mongodb = require('mongodb')
 var collections = ["users", "blog", "comments", "property", "images"]
 
 var db = mongojs('mongodb://shubham20.yeole:shubham20.yeole@ds163387.mlab.com:63387/paceteam3', collections)
- 
+var JSFtp = require("jsftp");
+
+var Ftp = new JSFtp({
+    host: 'ftp.byethost7.com',
+    port: 21,
+    user: 'b8_19205430',
+    password: 'Shubham4194'
+});
 var app = express();
 var ObjectId = mongojs.ObjectId;
 var passport = require("passport")
@@ -61,12 +68,12 @@ app.use(expressValidator({
 
 var fs = require('fs');
 var S3FS = require('s3fs');
-var s3fsImpl = new S3FS('shubhambucket123', {
-  accessKeyId:'AKIAJ654LHXUQ5QYDGCQ',
-  secretAccessKey:'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'
-});
+// var s3fsImpl = new S3FS('shubhambucket123', {
+//   accessKeyId:'AKIAJ654LHXUQ5QYDGCQ',
+//   secretAccessKey:'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'
+// });
 
-s3fsImpl.create();
+// s3fsImpl.create();
  
 var multiparty = require('connect-multiparty'),
   multipartyMiddleware = multiparty();
@@ -121,22 +128,46 @@ function requireLogin (req, res, next) {
 
 // .sort({datefield: -1},
 app.get('/', function(req, res){       
-  db.property.find({}).sort({timestamp: -1}).limit(9).toArray(function (err, docs) {
+  db.property.find({}).skip(0).sort({timestamp: -1}).limit(9).toArray(function (err, docs) {
     res.render("index.ejs",{property: docs});
   })
 });
-  // app.get('/', function(req, res){       
-  //        db.property.find({}).limit(1).toArray(function (err, docs) {
-  //        res.render("index.ejs",{property: docs});
-  //      })
-  //   });
-
-app.get('/gallery', function(req, res){      
-  db.property.find( function (err, docs) {
-    res.render("gallery.ejs",{property: docs});
-  })
+app.get('/contact', function(req, res){       
+    res.render("contact.ejs");
 });
 
+app.get('/properties/:id', function(req, res){  
+var pageno = Number(req.params.id);  
+  db.property.find({}).skip(pageno*6).sort({timestamp: -1}).limit(6).toArray(function (err, docs) {
+    db.property.count(function(err, count) {
+      var status = 'Showing '+(pageno*6+1)+' to '+(pageno*6+6)+' of '+count+' Properties';
+      console.log(status);  
+     db.property.find({}).skip(0).sort({timestamp: -1}).limit(5).toArray(function (err, latestproperty) {
+    res.render("properties.ejs",{property: docs, count: count, pageno: pageno+1, status: status, latestproperty: latestproperty});
+    })    
+    })
+  })
+});
+app.get('/gallery/:id', function(req, res){  
+var pageno = Number(req.params.id);  
+  db.property.find({}).skip(pageno*6).sort({timestamp: -1}).limit(6).toArray(function (err, docs) {
+    db.property.count(function(err, count) {
+      var status = 'Showing '+(pageno*6+1)+' to '+(pageno*6+6)+' of '+count+' Properties';
+      console.log(status);  
+      res.render("gallery.ejs",{property: docs, count: count, pageno: pageno+1, status: status});
+    })
+  })
+});
+app.get('/propertiesbymaps', function(req, res){  
+var pageno = Number(0);  
+  db.property.find({}).skip(pageno*6).sort({timestamp: -1}).limit(100).toArray(function (err, docs) {
+    db.property.count(function(err, count) {
+      var status = 'Showing '+(pageno*6+1)+' to '+(pageno*6+6)+' of '+count+' Properties';
+      console.log(status);  
+      res.render("propertiesbymaps.ejs",{property: docs, count: count, pageno: pageno+1, status: status});
+    })
+  })
+});
 app.get('/blank', function(req, res){
    res.render("blank.ejs");  
 });
@@ -168,12 +199,19 @@ app.post('/users/add', function(req, res){
               console.log("success");
               var file = req.files.file;
               console.log("File: "+file+", File Path: "+file.path+", originalFilename: "+file.originalFilename);
-              var stream = fs.createReadStream(file.path);
-              return s3fsImpl.writeFile(req.body.photoname, stream).then(function(){
-                fs.unlink(file.path, function(err){
-                  if(err) console.log(err);
-                })
-                
+              Ftp.auth('b8_19205430', 'Shubham4194', function(err, list) {
+                console.log("Hello World: "+err);
+                Ftp.put(file.path, 'htdocs/public_html/'+req.body.photoname, function(err2) {
+                    if (err) console.log("Put Method: "+err2);
+                  });
+              });
+              // var stream = fs.createReadStream(file.path);
+              // return s3fsImpl.writeFile(req.body.photoname, stream).then(function(){
+              //   fs.unlink(file.path, function(err){
+              //     if(err) console.log(err);
+              //   })
+              var photoUrl = 'http://shubhamyeole.byethost8.com/public_html/'+req.body.photoname;
+              console.log(photoUrl);
               var newUser = {
               fullname: req.body.firstname,
               email: req.body.email,
@@ -183,7 +221,7 @@ app.post('/users/add', function(req, res){
               password: req.body.password,
               fbid: req.body.email+"w$9jKp3e$!Zy_Ned",
               gender: req.body.gender,
-              photo: req.body.photo,
+              photo: photoUrl,
               type: 'user',
             }
         db.users.insert(newUser, function(err, result){
@@ -191,9 +229,9 @@ app.post('/users/add', function(req, res){
                 console.log(err);
               }
         req.session.users = newUser;
-        res.redirect('/postadd');
+        res.render("message.ejs",{property: "REGISTERED", status: 'registered', message: 'Congratulations. Your are successfully registered...', link: '<a href="/propertiesbymaps">Click me to view our properties by google map...</a>'});
         });
-  });
+ 
   
       
     } else {
@@ -205,7 +243,8 @@ app.post('/users/add', function(req, res){
             if (req.body.email+"w$9jKp3e$!Zy_Ned" === users.fbid) {
               // sets a cookie with the user's info
              req.session.users = users;
-              res.redirect('/postadd');
+              var url = req.body.preurl;
+              res.redirect(url);
             } else {
               errmsg = 'Password does not match';
               res.redirect('/');
@@ -396,52 +435,22 @@ app.use(session({
   secure: true,
   ephemeral: true
 }));
-var config = {
-    host: 'ftp.byethost7.com',
-    port: 21,
-    user: 'b8_19205430',
-    password: 'Shubham4194'
-}
-var ftpClient = require('ftp-client'),
-client = new ftpClient(config, 'all');
-var fs = require("fs");
-var multer  = require('multer');
-var upload = multer({ dest: 'uploads/' });
-var cln = require('ftp');
-var c = new cln();
-c.on('ready', function() {
-    c.list(function(err, list) {
-      if (err) throw err;
-      console.dir(list);
-      c.end();
+
+
+app.post('/file_upload', function(req, res){
+  var file = req.files.file;
+
+    console.log("File: "+file+", File Path: "+file.path+", originalFilename: "+file.originalFilename);
+  Ftp.auth('b8_19205430', 'Shubham4194', function(err, list) {
+  console.log("Hello World: "+err);
+  Ftp.put(file.path, 'htdocs/public_html/fileupload.jpg', function(err2) {
+      if (err) console.log("Put Method: "+err2);
     });
-  });
-  // c.connect(config);
+});
 
-// Process upload file
-app.post('/file_upload/', upload.single('filename'), function(request, response) {
 
-    var fileName = request.body.filename;
-    console.log(fileName);
+res.send("DONE");
 
-    var filePath = request.file.path;
-    console.log(filePath);
-
-    var file = __dirname + "/uploads/" +  fileName;
-    fs.readFile(filePath, function(err, data) {
-        fs.writeFile(file, data, function(err) {
-            if (err) {
-                console.log(err);
-            } else {
-                responseData = {
-                    'message' : 'File uploaded successfully',
-                    'fileName' : fileName
-                };
-            }
-
-        })
-    });
-     res.redirect('/blog');
 });
 
 
@@ -485,35 +494,117 @@ app.post('/search', function(req, res) {
    
 });
 
+app.post('/searchproperty', function(req, res) {
+  var timestamp = req.body.timestamp;
+  console.log(timestamp);
+   db.property.findOne({ timestamp: timestamp}, function (err, property) {
+    res.send(property);
+  });
+});
+
 
 app.get('/detailedproperty/:id', function(req, res){
     console.log("In get comment method: "+req.params.id);
  
   db.property.findOne({ timestamp: req.params.id}, function (err, property) {
-     db.images.findOne({ timestamp: req.params.id}, function (err, images) {
-    res.render("detailedproperty.ejs",{property: property, images: images});
-  });
+  db.property.find({}).skip(0).sort({timestamp: -1}).limit(5).toArray(function (err, latestproperty) {
+    res.render("detailedproperty.ejs",{property: property, latestproperty: latestproperty});
+    })      
   });
 });
 
+app.get('/message', function(req, res){
+  res.render("message.ejs",{status: 'addpost', message: 'Congratulations. Your add is posted successfully...', link: '<a href="/detailedproperty/">Click me to view your post</a>'});
+});
+app.get('/workinprogress', function(req, res){
+  res.render("message.ejs",{status: 'd', message: 'WORK IN PROGRESS. Sorry for any inconvenience caused', link: '<a href="/detailedproperty/">Click me to view your post</a>'});
+});
 app.post('/postproperty/', function(req, res){
+    var datetime = new Date();
+      var file = req.files.propertyfile;
+      var filename = req.body.filename;
+      var filelinks = req.body.filelinks;
+      var propertyphoto = "";
+      var allphoto = "";
+     Ftp.auth('b8_19205430', 'Shubham4194', function(err, list) {
+        console.log("Hello World: "+err);
+        Ftp.put(file.path, 'htdocs/public_html/property/'+filename, function(err2) {
+            if (err) console.log("Put Method: "+err2);
+          });
+      });
+      // Ftp.auth('b8_19205430', 'Shubham4194', function(err, list) {
+      //             console.log("Hello World: "+err);
+      // });
+      // for(i=0; i<=file.length; i++){
+      //   var filepath = file[i].path;
+      //   propertyphoto = filelinks[0];
+      //   allphoto = allphoto + filelinks[i]+" ";
+      //   console.log("filename[i]: "+filename[i]+","+filepath+"File: "+file[i]+", File Path: "+file[i].path+", originalFilename: "+file[i].originalFilename);
+      //       Ftp.put(''+filepath+'', 'htdocs/public_html/'+filename[i], function(err2) {
+      //           if (err) console.log("Put Method: "+err2);
+      //           });
+      // }
+      console.log("propertyphoto: "+propertyphoto+", allphoto: "+allphoto);
+      console.log(req.body.propertyfeatures);
+        var newProperty = {
+          title: req.body.title,
+          phone: req.body.phone,
+          email: req.body.email,
+          telephone: req.body.telephone,
+          staddress: req.body.staddress,
+          timestamp: req.body.timestamp,
+          city: req.body.city,
+          state: req.body.state,
+          zip: req.body.zip,
+          county: req.body.county,
+          country: req.body.country,
+          latitude: req.body.latitude,
+          longitude: req.body.longitude,
+          bedroom: req.body.bedroom,
+          kitchen: req.body.kitchen,
+          bathroom: req.body.bathroom,
+          addtype: req.body.addtype,
+          propertytype: req.body.propertytype,
+          features: req.body.propertyfeatures,
+          area: req.body.area,
+          cost: req.body.cost,
+          dateField: datetime,
+          discription: req.body.discription,
+          posted_date: req.body.blogdata,
+          image1: filelinks,
+          images: filelinks
+       }
+       
+        db.property.insert(newProperty, function(err, result){
+        
+          if(err){
+            console.log(err);
+          }else{
+            res.render("message.ejs",{status: 'addpost', message: 'Congratulations. Your add is posted successfully...', link: '<a href="/detailedproperty/'+result.timestamp+'">Click me to view your post</a>'});
+          }
+      });
+
+      
+
+});
+app.post('/postproperty22/', function(req, res){
     var datetime = new Date();
       var file = req.files.file;
       var filename = req.body.filename;
       var filelinks = req.body.filelinks;
       var propertyphoto = "";
       var allphoto = "";
-      for(i=0; i<file.length; i++){
-        propertyphoto = filelinks[0];
-        allphoto = allphoto + filelinks[i]+" ";
-        console.log("File: "+file[i]+", File Path: "+file[i].path+", originalFilename: "+file[i].originalFilename);
-        var stream = fs.createReadStream(file[i].path);
-        s3fsImpl.writeFile(filename[i], stream).then(function(){
-        fs.unlink(file[i].path, function(err){
-          if(err) console.log(err);
-        })
-      })
-      }
+      // for(i=0; i<file.length; i++){
+      //   propertyphoto = filelinks[0];
+      //   allphoto = allphoto + filelinks[i]+" ";
+      //   console.log("File: "+file[i]+", File Path: "+file[i].path+", originalFilename: "+file[i].originalFilename);
+      //   var stream = fs.createReadStream(file[i].path);
+      //   s3fsImpl.writeFile(filename[i], stream).then(function(){
+      //   fs.unlink(file[i].path, function(err){
+      //     if(err) console.log(err);
+      //   })
+      // })
+      // }
       console.log("propertyphoto: "+propertyphoto+", allphoto: "+allphoto);
       console.log(req.body.propertyfeatures);
         var newProperty = {
@@ -544,14 +635,17 @@ app.post('/postproperty/', function(req, res){
           image1: propertyphoto,
           images: allphoto
        }
+       
         db.property.insert(newProperty, function(err, result){
         
           if(err){
             console.log(err);
+          }else{
+            res.redirect('/detailedproperty/'+result.timestamp);
           }
       });
 
-      res.redirect('/postadd');
+      
 
 });
 app.post('/view/blog/comment', function(req, res){
@@ -585,16 +679,18 @@ app.get('/registerlogin', function(req, res){
 app.post('/login', function(req, res) {
   db.users.findOne({ email: req.body.email }, function(err, users) {
     if (!users) {
-      errmsg = 'Email not registered...'; 
-        res.redirect('/');
+      console.log(req.body.email);
+      errmsg = 'Email not registered... Please try again or Signup to use our services. Thank you.'; 
+         res.render("signupin.ejs", {errmsg: errmsg});
     } else {
       if (req.body.password === users.password) {
         // sets a cookie with the user's info
         req.session.users = users;
-        res.redirect('/postadd');
+        var url = req.body.preurl;
+        res.redirect(url);
       } else {
-        errmsg = 'Incorrect Password...';
-        res.redirect('/');
+        errmsg = 'Incorrect Password... RESET new Password or login with facebook to use our services';
+         res.render("signupin.ejs", {errmsg: errmsg});
       }
     }
   });
@@ -623,10 +719,10 @@ app.post('/detailedproperty/sendinterestinproperty', function(req, res){
 
   sendEmail(emailofposter, title, message, subject);
   sendEmail(email, title1, message1, subject1);
-  db.property.findOne({ timestamp: timestamp}, function (err, property) {
-      db.images.findOne({ timestamp: timestamp}, function (err, images) {
-      res.render("detailedproperty.ejs",{property: property, images: images});
-    });
+db.property.findOne({ timestamp: timestamp}, function (err, property) {
+  db.property.find({}).skip(0).sort({timestamp: -1}).limit(5).toArray(function (err, latestproperty) {
+    res.render("detailedproperty.ejs",{property: property, latestproperty: latestproperty});
+    })      
   });
 });
 app.get('/newpassword/:id', function(req, res){
@@ -749,24 +845,20 @@ app.listen(port, function() {
 
 app.post('/testUpload', function(req, res){
   var file = req.files.file;
-  var filename = req.body.filename;
-  var filelinks = req.body.filelinks;
-  var propertyphoto = "";
-  var allphoto = "";
-  for(i=0; i<file.length; i++){
-    propertyphoto = filelinks[0];
-    allphoto = allphoto + filelinks[i]+" ";
-    console.log("File: "+file[i]+", File Path: "+file[i].path+", originalFilename: "+file[i].originalFilename);
-    var stream = fs.createReadStream(file[i].path);
-    s3fsImpl.writeFile(filename[i], stream).then(function(){
-    fs.unlink(file[i].path, function(err){
-      if(err) console.log(err);
-    })
-  })
-}
-console.log("propertyphoto: "+propertyphoto+", allphoto: "+allphoto);
-res.send("DONE");
-})
+
+    console.log("File: "+file+", File Path: "+file.path+", originalFilename: "+file.originalFilename);
+    fs.readFile(file.path, function (err, data) {
+      // ...
+      var newPath = 'C:/Users/20188/Desktop/FolderTest';
+      fs.writeFile(newPath, data, function (err) {
+          if(err){
+            res.send("Error"+err);
+          }
+          else{
+            res.send("Done");
+          }
+      });
+})})
 
 app.get('/testAPI', function(req, res){
   res.json({SecretData: 'abc123'});

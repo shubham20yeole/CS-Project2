@@ -17,12 +17,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,400italic,300italic,600italic,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
-<!-- <form action="testUpload" method="post" enctype="multipart/form-data">
+<!--  <form action="file_upload" method="post" enctype="multipart/form-data">
 <input type="file" name="file">
 <input type="submit" value="Submit">
-</form>
-<img src="https://s3.amazonaws.com/shubhambucket123/logo.jpg" width="100" height="100">-->
-<!-- <img src="https://s3.amazonaws.com/shubhamyeolebucket/Capture-1480284562631.PNG" width="100" height="100">  -->
+</form> -->
+<!-- <img src="https://s3.amazonaws.com/shubhambucket123/logo.jpg" width="100" height="100">
+ --><!-- <img src="https://s3.amazonaws.com/shubhamyeolebucket/Capture-1480284562631.PNG" width="100" height="100">  -->
 <div id="fblogindivsec">
 <h1>Login with facebook</h1>
 <br><br><br>
@@ -37,6 +37,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 	<div class="col span_1_of_3">
 	<form method="POST" action="/users/add">
+      <input type="text" name="preurl" class="preurl"><br><br>
       <input type="text" class="fbinput" name="firstname" id="fb_fname" placeholder="First Name"><br><br>
       <input type="text" class="fbinput" name="lastname" id="fb_lname" placeholder="Last Name"><br><br>
       <input type="text" class="fbinput" name="email" id="fb_email" placeholder="Email address"><br><br>
@@ -66,17 +67,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<h3>Register</h3>
 				<div class="agile-info_w3ls_grid">
 					<form method="POST" action="/users/add" autocomplete="off" enctype="multipart/form-data">
-					    <img src="" id="image" width="40" height="40"><br><br>
-					    <input type="file" name="file" id="file" ><br><br>
+						<img src="images/defaultprofile.jpg" id="image" width="40" height="40"><br><br>
+					    <input type="file" name="file" id="file" required=""><br><br>
 					    <input type="hidden" name="photo" id="photolink">
 					    <input type="hidden" name="timestamp" id="timestamp">
 					    <input type="hidden" name="photoname" id="photoname">
 					    <input type="text" class="halflogintext" name="firstname" placeholder="Full Name"><br>
-					    <input type="email" class="halflogintext" name="email" placeholder="Email address">
-					    <input type="text" id="phone" class="halflogintext" name="phone" placeholder="Phone Number"><br><br>
+					    <input type="email" class="halflogintext" value="shubham20.yeole@gmail.com" name="email" placeholder="Email address">
+					    <input type="text" id="phone" value="2018875323" class="halflogintext" name="phone" placeholder="Phone Number"><br><br>
 					    <input type="text" class="logintext" name="website" value="Website" placeholder="Website"><br><br>
 					    <input type="hidden" name="gender" value="male" placeholder="Gender">
-					    <input type="password" class="logintext" name="password" placeholder="Password"><br>
+					    <input type="password" value="Shubham4194" class="logintext" name="password" placeholder="Password"><br>
 					    <input class="crhad" type="submit" value="submit">
 					</form>
  
@@ -86,7 +87,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<h3>Login</h3>
 				<div class="agile-info_w3ls_grid second">
   					<form method="POST" action="/login">
-      					<input type="email" placeholder="Enter Username" name="email" required>
+      				    <input type="hidden" name="preurl" class="preurl"><br><br>
+						<input type="email" placeholder="Enter Username" name="email" required>
       					<input type="password" placeholder="Enter Password" name="password" required>
 					
 					<div class="agile_remember">

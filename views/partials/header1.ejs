@@ -8,7 +8,7 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="../theme/img/favicon.ico" type="image/x-icon">
     
-   
+    
     <!-- Font awesome -->
     <link href="../theme/css/font-awesome.css" rel="stylesheet">
     <!-- Bootstrap -->
@@ -106,21 +106,30 @@
           <!-- <a class="navbar-brand aa-logo-img" href="index.html"><img src="img/logo.png" alt="logo"></a> -->                     
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul id="top-menu" class="nav navbar-nav navbar-right aa-main-nav">
-           <li><a href="/">HOME</a></li>
-             <li class="dropdown">
+            <ul id="top-menu" class="nav navbar-nav navbar-right aa-main-nav">
+            <li class="active"><a href="/">HOME</a></li>
+             
+             <li class="dropdown active">
               <a class="dropdown-toggle" data-toggle="dropdown" href="properties.html">PROPERTIES <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">                
-                <li><a href="allproperties" class="active">PROPERTIES</a></li>
-                <li><a href="/postadd">POST ADD</a></li>
-                <li><a href="/gallery">VIEW GALLERY</a></li>
+                <li><a href="/properties/0">PROPERTIES</a></li>
+                <li><a href="/postadd">POST ADD</a></li> 
+                <li><a href="/gallery/0">VIEW GALLERY</a></li>                                
               </ul>
-            </li>
-            
-          </ul>                               
+           </li>
+             <li class="dropdown active">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="properties.html">Properties by Maps <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">                
+                <li><a href="/propertiesbymaps">Google Map</a></li>                            
+              </ul>
+           </li>
+            <li class="active"><a href="/contact">Contact</a></li>           
+         </ul>                             
           <% if(users.fullname == 'Anonymous'){%>
-            <a href="registerlogin" class="aa-register">Register</a>
-            <a href="registerlogin" class="aa-login">Login</a> 
+            <div id="sessionsec">
+              <a href="registerlogin" class="aa-register">Register</a>
+              <a href="registerlogin" class="aa-login"> or Login</a> 
+            </div>
           <%}else{%> 
             <div id="sessionsec">
               <img src="<%=users.photo%>" width="32" height="32"> 

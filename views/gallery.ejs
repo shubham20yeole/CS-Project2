@@ -1,6 +1,8 @@
 <% include partials/header1.ejs %>
   <!-- End menu section -->
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="../theme/js/gallery.js"></script> 
+<link href="../theme/css/gallery.css" rel="stylesheet">   
   <!-- Start Proerty header  -->
 
   <section id="aa-property-header">
@@ -26,13 +28,14 @@
         <div class="col-md-12">
           <div class="aa-gallery-area">
             <div class="aa-title">
-              <h2>Gallery View</h2>
-              <span></span>
-               <p>Gall</p>
+              <h2>Gallery View Page no: <%= pageno %></h2>
+              <span class="fa fa-home"></span>
+               <p>View images and select property</p>
             </div>
-            <!-- Start gallery -->
-            <div class="aa-gallery-content">
-              
+                <div class="shubhampagination">
+                  <ul class="pagination1"></ul><span style="float: right; margin-top: -10px"><%= status %></span>
+                </div>
+                <div class="aa-gallery-content">
               <!-- Start gallery image -->
               <div class="aa-gallery-body">
                 <!-- start single gallery image -->
@@ -56,7 +59,13 @@
                 </div>
               <%}) %>
                 <!-- start single gallery image -->
-              
+               <div class="shubhampagination">
+                  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><ul class="pagination1"></ul>
+                </div>
+               
+                <input type="hidden" value="<%= pageno %>" id="pagenohidden">
+                <input type="hidden" id="count" value="<%= count %>">
+               
               </div>
             </div>
           </div>
@@ -72,16 +81,16 @@
 
   <!-- jQuery library -->
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
-  <script src="theme/js/jquery.min.js"></script>   
+  <script src="../theme/js/jquery.min.js"></script>   
   <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="theme/js/bootstrap.js"></script>   
+  <script src="../theme/js/bootstrap.js"></script>   
   <!-- slick slider -->
-  <script type="text/javascript" src="theme/js/slick.js"></script>
+  <script type="text/javascript" src="../theme/js/slick.js"></script>
   <!-- Price picker slider -->
-  <script type="text/javascript" src="theme/js/nouislider.js"></script>
+  <script type="text/javascript" src="../theme/js/nouislider.js"></script>
   
   <!-- Custom js -->
-  <script src="theme/js/custom.js"></script> 
+  <script src="../theme/js/custom.js"></script> 
   
   </body>
 </html>

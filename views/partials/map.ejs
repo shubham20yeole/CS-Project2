@@ -23,14 +23,14 @@
 
      function initMap(x, y) {
       if (x == null && y==null) {
-            x = 40.755368;
-            y = -73.978414;
+            x = 40.726425;
+            y = -74.06105509999998;
           }
         var myLatLng = {lat: x, lng: y};
 
 
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 18,
+          zoom: 15,
           center: myLatLng
         });
 
@@ -39,7 +39,18 @@
           map: map,
           title: 'Hello World!'
         });
+          google.maps.event.addListener(map, "click", function(event) {
+              var lat = event.latLng.lat();
+              var lng = event.latLng.lng();
+              $("#longlati").text("Latitude: "+lat+", Longitude: "+lng);
+              document.getElementById('latitude').value = lat;
+              document.getElementById('longitude').value = lng;
+              initMap(lat, lng);
+              // alert("Lat=" + lat + "; Lng=" + lng+', '+address);
+          });
+
       }
+
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMAWPMDGHGh-KUNMkjSIlMBD1JMtTfbxk&callback=initMap">

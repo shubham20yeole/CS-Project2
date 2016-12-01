@@ -1,0 +1,86 @@
+     <div class="col-md-4">
+          <aside class="aa-properties-sidebar">
+            <!-- Start Single properties sidebar -->
+            <div class="aa-properties-single-sidebar">
+              <h3>Properties Search</h3>
+                <div class="aa-single-advance-search">
+                  <input type="text" placeholder="Type Your Location">
+                </div>
+                <div class="aa-single-advance-search">
+                  <select id="" name="">
+                   <option selected="" value="0">Category</option>
+                    <option value="1">Flat</option>
+                    <option value="2">Land</option>
+                    <option value="3">Plot</option>
+                    <option value="4">Commercial</option>
+                  </select>
+                </div>
+                <div class="aa-single-advance-search">
+                  <select id="" name="">
+                    <option selected="" value="0">Type</option>
+                    <option value="1">Flat</option>
+                    <option value="2">Land</option>
+                    <option value="3">Plot</option>
+                    <option value="4">Commercial</option>
+                  </select>
+                </div>
+                <div class="aa-single-advance-search">
+                  <select id="" name="">
+                    <option selected="" value="0">Type</option>
+                    <option value="1">Flat</option>
+                    <option value="2">Land</option>
+                    <option value="3">Plot</option>
+                    <option value="4">Commercial</option>
+                  </select>
+                </div>
+                <div class="aa-single-filter-search">
+                  <span>AREA (SQ)</span>
+                  <span>FROM</span>
+                  <span id="skip-value-lower" class="example-val">30.00</span>
+                  <span>TO</span>
+                  <span id="skip-value-upper" class="example-val">100.00</span>
+                  <div id="aa-sqrfeet-range" class="noUi-target noUi-ltr noUi-horizontal noUi-background">
+                  </div>                  
+                </div>
+                <div class="aa-single-filter-search">
+                  <span>PRICE ($)</span>
+                  <span>FROM</span>
+                  <span id="skip-value-lower2" class="example-val">30.00</span>
+                  <span>TO</span>
+                  <span id="skip-value-upper2" class="example-val">100.00</span>
+                  <div id="aa-price-range" class="noUi-target noUi-ltr noUi-horizontal noUi-background">
+                  </div>      
+                </div>
+                <div class="aa-single-advance-search">
+                  <form action="/properties/0" method="get">
+                    <input class="aa-search-btn" type="submit" value="Search">
+                  </form>
+                </div>
+              
+            </div> 
+            <!-- Start Single properties sidebar -->
+            <div class="aa-properties-single-sidebar">
+              <h3>Latest Properties</h3>
+              <% latestproperty.forEach(function(latestproperty){%>
+                 <div class="media">
+                  <div class="media-left">
+                    <a href="../detailedproperty/<%= latestproperty.timestamp %>" target="_blank">
+                      <img class="media-object" src="<%= latestproperty.image1 %>" alt="img">
+                    </a>
+                  </div>
+                  <div class="media-body">
+                    <h4 class="media-heading"><a href="../detailedproperty/<%= latestproperty.timestamp %>" target="_blank"><%= latestproperty.title %></a></h4>
+                    <p><%= latestproperty.discription %></p>                
+                    <p class="address"><a type="button" id="mapb" href="#popup1" onclick="init_map(<%= latestproperty.latitude %>,<%= latestproperty.longitude %>,'<h3><%= property.title %></h3><h6> Property Location</h6>')"><img src="../images/mappin.jpg" width="22" height="32"></a>&nbsp&nbsp&nbsp<%= latestproperty.staddress %>, <%= latestproperty.city %>, 
+                    <%= latestproperty.state %>, <%= latestproperty.zip %>, <%= latestproperty.country %>
+                      
+                    </p>                
+                    <p class="cost">$<%= latestproperty.cost %></p>
+                    <p class="readmore"><a href="../detailedproperty/<%= latestproperty.timestamp %>" target="_blank">READ MORE
+                    </a></p>
+                  </div>              
+                </div>
+              <%}) %>
+              
+          </aside>
+        </div>

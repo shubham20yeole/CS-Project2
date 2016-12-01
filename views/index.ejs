@@ -9,23 +9,38 @@
     <div class="aa-slider-area"> 
       <!-- Top slider -->
       <div class="aa-top-slider">
-        <!-- Top slider single slide -->
-         <% property.forEach(function(property){%>
+      <div class="aa-top-slider-single">
+            <img src="images/home.jpg" alt="img">
+            <!-- Top slider content -->
+            <div class="aa-top-slider-content">
+              <h2 class="aa-top-slider-title">Welcome to USA REAL ESTATES</h2><br>
+              <span class="aa-top-slider-catg">We are gladd you are here...</span><br><br>
+               <p class="aa-top-slider-location"><i class="fa fa-home"></i>Head Quarter located at Jersey City</p>
+              <span class="aa-top-slider-off">Our organization is pledged to helping people find their perfect house</span><br>
+            <span class="aa-top-slider-off"><a href="/" target="_blank">HOME<span class="fa fa-angle-double-right"></a></span> | 
+            <span class="aa-top-slider-off"><a href="/gallery/0" target="_blank">GALLERY<span class="fa fa-angle-double-right"></a></span> | 
+            <span class="aa-top-slider-off"><a href="/propertiesbymaps" target="_blank">MAP<span class="fa fa-angle-double-right"></a></span> | 
+            <span class="aa-top-slider-off"><a href="/properties/0" target="_blank">PROPERTIES<span class="fa fa-angle-double-right"></a></span> | 
+            <span class="aa-top-slider-off"><a href="/postadd" target="_blank">POST ADD<span class="fa fa-angle-double-right"></a></span> | 
+            <span class="aa-top-slider-off"><a href="/contact" target="_blank">CONTACT<span class="fa fa-angle-double-right"></a></span>
 
-<div class="aa-top-slider-single">
-          <img src="<%= property.image1 %>" alt="img">
-          <!-- Top slider content -->
-          <div class="aa-top-slider-content">
-            <span class="aa-top-slider-catg"><%= property.propertytype %></span><br>
-            <h2 class="aa-top-slider-title"><%= property.area %> Square Feet</h2>
-            <p class="aa-top-slider-location"><i class="fa fa-map-marker"></i><%= property.staddress %><%= property.city %><%= property.state %> (<%= property.country %>)</p>
-            <span class="aa-top-slider-off">30% OFF</span>
-            <p class="aa-top-slider-price">$<%= property.cost %></p>
+            </div>
+        </div>         
+        <% property.forEach(function(property){%>
+          <div class="aa-top-slider-single">
+            <img src="<%= property.image1 %>?i=0" alt="img">
+            <!-- Top slider content -->
+            <div class="aa-top-slider-content">
+              <span class="aa-top-slider-catg"><%= property.propertytype %></span><br>
+              <h2 class="aa-top-slider-title"><%= property.area %> Square Feet</h2>
+              <p class="aa-top-slider-location"><i class="fa fa-map-marker"></i><%= property.staddress %><%= property.city %><%= property.state %> (<%= property.country %>)</p>
+              <span class="aa-top-slider-off">30% OFF</span>
+              <p class="aa-top-slider-price">$<%= property.cost %></p>
 
-            <a href="/detailedproperty/<%= property.timestamp %>" class="aa-top-slider-btn">Read More <span class="fa fa-angle-double-right"></span></a>
-          </div>
-  </div>
-  <%}) %>
+              <a href="/detailedproperty/<%= property.timestamp %>" class="aa-top-slider-btn">Read More <span class="fa fa-angle-double-right"></span></a>
+            </div>
+        </div>
+        <%}) %>
   
         <!-- / Top slider single slide -->
       </div>
@@ -84,7 +99,9 @@
               </div>
               <div class="col-md-2">
                 <div class="aa-single-advance-search">
-                  <input class="aa-search-btn" type="submit" value="Search">
+                  <form action="/properties/0" method="get">
+                    <input class="aa-search-btn" type="submit" value="Search">
+                  </form>
                 </div>
               </div>
             </div>
@@ -138,9 +155,9 @@
       </table>
       </div>
         <div class="aa-title">
-          <h2>Properties Listing</h2>
+          <h2>LATEST PROPERTIES</h2>
           <span></span>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum sit ea nobis quae vero voluptatibus.</p>         
+          <p>Our organization is pledged to helping people find their perfect house...</p>         
         </div>
         <div class="aa-latest-properties-content">
           <div class="row">
@@ -200,7 +217,7 @@
             <div class="row">
               <div class="col-md-5">
                 <div class="aa-about-us-left">
-                  <img src="images/technology/aboutus.jpg" width="432" height="334" alt="image">
+                  <br><br><br><br><img src="images/technology/aboutus.jpg" width="432" height="334" alt="image">
                 </div>
               </div>
               <div class="col-md-7">
@@ -209,14 +226,16 @@
                     <h2>About Us</h2>
                     <span></span>
                   </div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat ab dignissimos vitae maxime adipisci blanditiis rerum quae quos! Id at rerum maxime modi fugit vero corrupti, ad atque sit laborum ipsum sunt blanditiis suscipit odio, aut nostrum assumenda nobis rem a maiores temporibus non commodi laboriosam, doloremque expedita! Corporis, provident?</p>                  
+                  <p><h3>Connect with the right professionals to get your job done.</h3>
+                  USA REAL ESTATES vision is to be the home-screen icon for local services for 100 million US citizens every day.<br>We are computer science students developing this platform to enable have easy search for properties as per customer convineance.</p>                  
                   <ul>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, blanditiis.</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia.</li>                    
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, blanditiis.</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia.</li>
+                    <li>Vinay Seethamraju: </li>
+                    <li>Dharamjot Singh: </li>
+                    <li>Mukesh Phanse: </li>
+                    <li>Shubham Yeole: </li>
+                    <li>Samson Pallivathukkal: </li>
+                    <li>Pratik Modak: </li>
+                    <li>Ankit Mavande: </li>
                   </ul>
                 </div>
               </div>
@@ -235,7 +254,7 @@
             <div class="aa-title">
               <h2>Our Service</h2>
               <span></span>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum sit ea nobis quae vero voluptatibus.</p>
+              <p>We provide great services to post, list and search properties throughout US</p>
             </div>
             <!-- service content -->
             <div class="aa-service-content">
@@ -246,8 +265,8 @@
                       <span class="fa fa-home"></span>
                     </div>
                     <div class="aa-single-service-content">
-                      <h4><a href="#">Property Sale</a></h4>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto repellendus quasi asperiores itaque dolorem at.</p>
+                      <h4><a href="/gallery/0" target="_blank">Gallery</a></h4>
+                      <p>Find latest properties by viewing our gallery.</p>
                     </div>
                   </div>
                 </div>
@@ -257,8 +276,8 @@
                       <span class="fa fa-check"></span>
                     </div>
                     <div class="aa-single-service-content">
-                      <h4><a href="#">Property Rent</a></h4>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto repellendus quasi asperiores itaque dolorem at.</p>
+                      <h4><a href="/postadd" target="_blank">Property Post</a></h4>
+                      <p>Post properties to let people know about great things you have to offer this world</p>
                     </div>
                   </div>
                 </div>
@@ -268,8 +287,8 @@
                       <span class="fa fa-crosshairs"></span>
                     </div>
                     <div class="aa-single-service-content">
-                      <h4><a href="#">Property Development</a></h4>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto repellendus quasi asperiores itaque dolorem at.</p>
+                      <h4><a href="/propertiesbymaps" target="_blank"> MAP</a></h4>
+                      <p>Find properties by Map</p>
                     </div>
                   </div>
                 </div>
@@ -279,8 +298,8 @@
                       <span class="fa fa-bar-chart-o"></span>
                     </div>
                     <div class="aa-single-service-content">
-                      <h4><a href="#">Market Analysis</a></h4>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto repellendus quasi asperiores itaque dolorem at.</p>
+                      <h4><a href="/properties/0" target="_blank">Properties listing</a></h4>
+                      <p>Find properties</p>
                     </div>
                   </div>
                 </div>
@@ -300,8 +319,8 @@
         <div class="col-md-12">
           <div class="aa-promo-banner-area">
             <h3>Find Your Best Property</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, ex illum corporis quibusdam numquam quisquam optio explicabo. Officiis odit quia odio dignissimos eius repellat id!</p>
-            <a href="#" class="aa-view-btn">View Details</a>
+            <p>Find your best property today !</p><br>
+            <a href="/properties/0" class="aa-view-btn" target="_blank">Find now</a>
           </div>
         </div>
       </div>
@@ -316,7 +335,7 @@
         <div class="col-md-12">
           <div class="aa-agents-area">
             <div class="aa-title">
-              <h2>Our Agents</h2>
+              <h2>TEAM MEMBERS</h2>
               <span></span>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum sit ea nobis quae vero voluptatibus.</p>
             </div>
@@ -326,16 +345,16 @@
                 <li>
                   <div class="aa-single-agents">
                     <div class="aa-agents-img">
-                      <img src="theme/img/agents/agent-1.png" alt="agent member image">
+                      <img src="images/team/pratik.jpg" height="330" width="270" alt="agent member image">
                     </div>
                     <div class="aa-agetns-info">
-                      <h4><a href="#">Philip Smith</a></h4>
-                      <span>Top Agent</span>
+                      <h4><a href="#">PRATIK MODAK</a></h4>
+                      <span>Database Administrator</span>
                       <div class="aa-agent-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-github"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-stack-overflow"></i></a>
                       </div>
                     </div>
                   </div>
@@ -343,16 +362,16 @@
                 <li>
                   <div class="aa-single-agents">
                     <div class="aa-agents-img">
-                      <img src="theme/img/agents/agent-5.png" alt="agent member image">
+                      <img src="images/team/dharamjot.jpg" height="330" width="270" alt="agent member image">
                     </div>
                     <div class="aa-agetns-info">
-                      <h4><a href="#">Adam Barney</a></h4>
-                      <span>Expert Agent</span>
+                      <h4><a href="#">DHARAMJOT SINGH</a></h4>
+                      <span>Project Manager</span>
                       <div class="aa-agent-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-github"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-stack-overflow"></i></a>
                       </div>
                     </div>
                   </div>
@@ -360,16 +379,16 @@
                 <li>
                   <div class="aa-single-agents">
                     <div class="aa-agents-img">
-                      <img src="theme/img/agents/agent-3.png" alt="agent member image">
+                      <img src="images/team/shubham.jpg" height="330" width="270" alt="agent member image">
                     </div>
                     <div class="aa-agetns-info">
-                      <h4><a href="#">Paul Walker</a></h4>
-                      <span>Director</span>
+                      <h4><a href="#">SHUBHAM YEOLE</a></h4>
+                      <span>Lead Developer</span>
                       <div class="aa-agent-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                        <a href="https://www.facebook.com/sy06736n" target="_blank"><i class="fa fa-facebook"></i></a>
+                        <a href="https://github.com/shubham20yeole" target="_blank"><i class="fa fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/shubhamyeole" target="_blank"><i class="fa fa-linkedin"></i></a>
+                        <a href="http://stackoverflow.com/users/5451749/shubham-yeole" target="_blank"><i class="fa fa-stack-overflow"></i></a>
                       </div>
                     </div>
                   </div>
@@ -377,16 +396,16 @@
                 <li>
                   <div class="aa-single-agents">
                     <div class="aa-agents-img">
-                      <img src="theme/img/agents/agent-4.png" alt="agent member image">
+                      <img src="images/team/sam.jpg" height="330" width="270" alt="agent member image">
                     </div>
                     <div class="aa-agetns-info">
-                      <h4><a href="#">John Smith</a></h4>
-                      <span>Jr. Agent</span>
+                      <h4><a href="#">SAMSON PS</a></h4>
+                      <span>Lead Developer</span>
                       <div class="aa-agent-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-github"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-stack-overflow"></i></a>
                       </div>
                     </div>
                   </div>
@@ -394,16 +413,16 @@
                  <li>
                   <div class="aa-single-agents">
                     <div class="aa-agents-img">
-                      <img src="theme/img/agents/agent-1.png" alt="agent member image">
+                      <img src="images/team/mukesh.jpg" height="330" width="270" alt="agent member image">
                     </div>
                     <div class="aa-agetns-info">
-                      <h4><a href="#">Philip Smith</a></h4>
-                      <span>Top Agent</span>
+                      <h4><a href="#">MUKESH PHANSE</a></h4>
+                      <span>---</span>
                       <div class="aa-agent-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-github"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-stack-overflow"></i></a>
                       </div>
                     </div>
                   </div>
@@ -411,16 +430,16 @@
                 <li>
                   <div class="aa-single-agents">
                     <div class="aa-agents-img">
-                      <img src="theme/img/agents/agent-5.png" alt="agent member image">
+                      <img src="images/team/vinay.jpg" height="330" width="270" alt="agent member image">
                     </div>
                     <div class="aa-agetns-info">
-                      <h4><a href="#">Adam Barney</a></h4>
-                      <span>Expert Agent</span>
+                      <h4><a href="#">VINAY</a></h4>
+                      <span>Lead Developer</span>
                       <div class="aa-agent-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-github"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-stack-overflow"></i></a>
                       </div>
                     </div>
                   </div>
@@ -431,34 +450,18 @@
                       <img src="theme/img/agents/agent-3.png" alt="agent member image">
                     </div>
                     <div class="aa-agetns-info">
-                      <h4><a href="#">Paul Walker</a></h4>
-                      <span>Director</span>
+                      <h4><a href="#">ANKIT MAVANDE</a></h4>
+                      <span>Lead Developer</span>
                       <div class="aa-agent-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-github"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-stack-overflow"></i></a>
                       </div>
                     </div>
                   </div>
                 </li>
-                <li>
-                  <div class="aa-single-agents">
-                    <div class="aa-agents-img">
-                      <img src="theme/img/agents/agent-4.png" alt="agent member image">
-                    </div>
-                    <div class="aa-agetns-info">
-                      <h4><a href="#">John Smith</a></h4>
-                      <span>Jr. Agent</span>
-                      <div class="aa-agent-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                </li>
+                
               </ul>
             </div>
           </div>
@@ -475,9 +478,9 @@
         <div class="col-md-12">
           <div class="aa-client-testimonial-area">
             <div class="aa-title">
-              <h2>What Client Say</h2>
+              <h2>Testimonials...</h2>
               <span></span>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus eaque quas debitis animi ipsum, veritatis!</p>
+              <p>What our clients Say? add new?</p>
             </div>
             <!-- testimonial content -->
             <div class="aa-testimonial-content">
@@ -486,45 +489,34 @@
                 <li>
                   <div class="aa-testimonial-single">
                     <div class="aa-testimonial-img">
-                      <img src="theme/img/testimonial-1.png" alt="testimonial img">
+                      <img src="images/CommonMan.jpg" alt="testimonial img">
                     </div>
-                    <div class="aa-testimonial-info">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate consequuntur ducimus cumque iure modi nesciunt recusandae eligendi vitae voluptatibus, voluptatum tempore, ipsum nisi perspiciatis. Rerum nesciunt fuga ab natus, dolorem?</p>
-                    </div>
+                    <div class="aa-testicmonial-info">
+                      
                     <div class="aa-testimonial-bio">
-                      <p>David Muller</p>
-                      <span>Web Designer</span>
+                    <p style="color: white;">This platform seems very usefull for people find appropriate house for rent. The map locator whle posting an add veritable treasure for poster who can make sure if the location is not going wrong.</p>
+                    <br><br><p><br>Raunak Zaa<span>MBBS Doctor</span></p>
+                    </div>
+                      
+                      
                     </div>
                   </div>
                 </li>
-                 <li>
+                <li>
                   <div class="aa-testimonial-single">
                     <div class="aa-testimonial-img">
-                      <theme/img src="img/testimonial-3.png" alt="testimonial img">
+                      <img src="images/CommonMan.jpg" alt="testimonial img">
                     </div>
                     <div class="aa-testimonial-info">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate consequuntur ducimus cumque iure modi nesciunt recusandae eligendi vitae voluptatibus, voluptatum tempore, ipsum nisi perspiciatis. Rerum nesciunt fuga ab natus, dolorem?</p>
+                      <p>This platform seems very usefull for people find appropriate house for rent. The map locator whle posting an add veritable treasure for poster who can make sure if the location is not going wrong.</p>
                     </div>
                     <div class="aa-testimonial-bio">
-                      <p>David Muller</p>
-                      <span>Web Designer</span>
+                      <p>Raunak Zaa</p>
+                      <span>MBBS Doctor</span>
                     </div>
                   </div>
                 </li>
-                 <li>
-                  <div class="aa-testimonial-single">
-                    <div class="aa-testimonial-img">
-                      <img src="theme/img/testimonial-2.png" alt="testimonial img">
-                    </div>
-                    <div class="aa-testimonial-info">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate consequuntur ducimus cumque iure modi nesciunt recusandae eligendi vitae voluptatibus, voluptatum tempore, ipsum nisi perspiciatis. Rerum nesciunt fuga ab natus, dolorem?</p>
-                    </div>
-                    <div class="aa-testimonial-bio">
-                      <p>David Muller</p>
-                      <span>Web Designer</span>
-                    </div>
-                  </div>
-                </li>
+                 
               </ul>
             </div>
           </div>
@@ -606,9 +598,9 @@
         <div class="col-md-12">
           <div class="aa-latest-blog-area">
             <div class="aa-title">
-              <h2>Latest News</h2>
+              <h2>BUY SUBSCRIPTION</h2>
               <span></span>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe magni, est harum repellendus. Accusantium, nostrum!</p>
+              <p>The official Subscriptions speeds up marketing your advertisement by floating your add to top</p>
             </div>
             <div class="aa-latest-blog-content">
               <div class="row">
@@ -616,15 +608,19 @@
                 <div class="col-md-4">
                   <article class="aa-blog-single">
                     <figure class="aa-blog-img">
-                      <a href="#"><img src="theme/img/blog-img-1.jpg" alt="img"></a>
-                      <span class="aa-date-tag">15 April, 16</span>
+                      <a href="/workinprogress" target="_blank" ><img src="images/$5.jpg" width="360" height="240" alt="img"></a>
+                      <span class="aa-date-tag">$5 / Month</span>
                     </figure>
                     <div class="aa-blog-single-content">
-                      <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
-                      <div class="aa-blog-single-bottom">
-                        <a href="#" class="aa-blog-author"><i class="fa fa-user"></i> Admin</a>
-                        <a href="#" class="aa-blog-comments"><i class="fa fa-comment-o"></i>6</a>
+                      <h3><a href="#">Includes 100 Add pack and more.</p>
+                      <div class="aa-blog-single-bottom" style="font-weight: bold;">
+                        <br><br>
+                        <p>4 image per property</p>
+                        <p>FREE account</p>
+                        <p>Unlimited email updates</p>
+                        <br><br>
+                        <a href="/workinprogress" class="aa-blog-author" target="_blank"><i class="fa fa-usd"></i> BUY NOW</a>
+                        <a href="/workinprogress" target="_blank" class="aa-blog-comments"><i class="fa fa-money"></i>25% Discount</a>
                       </div>
                     </div>
                    
@@ -634,15 +630,19 @@
                 <div class="col-md-4">
                   <article class="aa-blog-single">
                     <figure class="aa-blog-img">
-                      <a href="#"><img src="theme/img/blog-img-2.jpg" alt="img"></a>
-                      <span class="aa-date-tag">15 April, 16</span>
+                      <a href="/workinprogress" target="_blank" ><img src="images/$15.jpg" width="360" height="240" alt="img"></a>
+                      <span class="aa-date-tag">$15 / Month</span>
                     </figure>
                     <div class="aa-blog-single-content">
-                      <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
-                      <div class="aa-blog-single-bottom">
-                        <a href="#" class="aa-blog-author"><i class="fa fa-user"></i> Admin</a>
-                        <a href="#" class="aa-blog-comments"><i class="fa fa-comment-o"></i>6</a>
+                      <h3><a href="#">Includes 200 Add pack and more.</p>
+                      <div class="aa-blog-single-bottom" style="font-weight: bold;">
+                        <br><br>
+                        <p>10 image per property</p>
+                        <p>FREE account</p>
+                        <p>Unlimited email updates</p>
+                        <br><br>                        
+                        <a href="/workinprogress" class="aa-blog-author" target="_blank"><i class="fa fa-usd"></i> BUY NOW</a>
+                        <a href="/workinprogress" target="_blank" class="aa-blog-comments"><i class="fa fa-money"></i>50% Discount</a>
                       </div>
                     </div>                   
                   </article>
@@ -651,15 +651,20 @@
                 <div class="col-md-4">
                   <article class="aa-blog-single">
                     <figure class="aa-blog-img">
-                      <a href="#"><img src="theme/img/blog-img-3.jpg" alt="img"></a>
-                      <span class="aa-date-tag">15 April, 16</span>
+                      <a href="/workinprogress" target="_blank" ><img src="images/$45.jpg" width="360" height="240" alt="img"></a>
+                      <span class="aa-date-tag">$45 / Month</span>
                     </figure>
                     <div class="aa-blog-single-content">
-                      <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
-                      <div class="aa-blog-single-bottom">
-                        <a href="#" class="aa-blog-author"><i class="fa fa-user"></i> Admin</a>
-                        <a href="#" class="aa-blog-comments"><i class="fa fa-comment-o"></i>6</a>
+                      <h3><a href="#">Includes 1200 Add pack and more.</p>
+                      
+                      <div class="aa-blog-single-bottom" style="font-weight: bold;">
+                      <br><br>
+                        <p>UNLIMITED image per property</p>
+                        <p>FREE account</p>
+                        <p>Unlimited email updates</p>
+                        <br><br>
+                        <a href="/workinprogress" class="aa-blog-author" target="_blank"><i class="fa fa-usd"></i> BUY NOW</a>
+                        <a href="/workinprogress" target="_blank" class="aa-blog-comments"><i class="fa fa-money"></i>60% Discount</a>
                       </div>
                     </div>                   
                   </article>

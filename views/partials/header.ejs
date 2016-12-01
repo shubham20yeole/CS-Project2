@@ -71,7 +71,7 @@
                     <a href="registerlogin" class="aa-register">Register</a>
                     <a href="registerlogin" class="aa-login">Login</a> 
                   <%}else{%> 
-                      <img src="<%=users.photo%>" width="32" height="32"> 
+                      <img src="<%=users.photo%>?i=2" width="32" height="32"> 
                       <a href="/logout" class="aa-login"><%= users.fullname %></a>
                       | <a href="/logout" class="aa-login">LOGOUT</a>
                   <%}%>         
@@ -106,18 +106,27 @@
           <ul id="top-menu" class="nav navbar-nav navbar-right aa-main-nav">
             <li class="active"><a href="/">HOME</a></li>
              
-             <li class="dropdown">
+             <li class="dropdown active">
               <a class="dropdown-toggle" data-toggle="dropdown" href="properties.html">PROPERTIES <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">                
-                <li><a href="allproperties">PROPERTIES</a></li>
-                <li><a href="postadd">POST ADD</a></li> 
-                <li><a href="gallery">VIEW GALLERY</a></li>                                   
+                <li><a href="/properties/0">PROPERTIES</a></li>
+                <li><a href="/postadd">POST ADD</a></li> 
+                <li><a href="/gallery/0">VIEW GALLERY</a></li>                                
               </ul>
-           
+           </li>
+             <li class="dropdown active">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="properties.html">Properties by Maps <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">                
+                <li><a href="/propertiesbymaps">Google Map</a></li>                            
+              </ul>
+           </li>
+            <li class="active"><a href="/contact">Contact</a></li>           
           </ul>  
           <% if(users.fullname == 'Anonymous'){%>
-            <a href="registerlogin" class="aa-register">Register</a>
-            <a href="registerlogin" class="aa-login">Login</a> 
+            <div id="sessionsec">
+              <a href="registerlogin" class="aa-register">Register</a>
+              <a href="registerlogin" class="aa-login"> or Login</a> 
+           </div>
           <%}else{%> 
             <div id="sessionsec">
               <img src="<%=users.photo%>" width="32" height="32"> 

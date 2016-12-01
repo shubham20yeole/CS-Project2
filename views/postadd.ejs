@@ -1,8 +1,6 @@
 <% include partials/header1.ejs %>
 <link href="theme/css/postadd.css" rel="stylesheet">    
-
   <!-- Start Proerty header  -->
-
   <section id="aa-property-header">
     <div class="container">
       <div class="row">
@@ -19,7 +17,7 @@
     </div>
   </section> 
   <!-- End Proerty header  -->
- 
+  
 
   <!-- Start Properties  -->
   <section id="aa-properties">
@@ -49,10 +47,11 @@
 
            <form method="post" action="postproperty" enctype="multipart/form-data">
                  <br><br><lable>1. PROPERTY IMAGES...</lable><br><br>
-                 <button class="add_field_button1">Add More Images</button><br><br>
-                 <div class="input_fields_wrap1">
+<!--                  <button class="add_field_button1">Add More Images</button><br><br>
+ -->                 
+                    <div class="input_fields_wrap1">
                     <div>
-                      <input type="file" name="file" id="f_1" class="f">
+                      <input type="file" name="propertyfile" id="f_1" class="f">
                       <input type="hidden" name="filename" id="n_1" class="n">
                       <input type="hidden" name="filelinks" id="l_1" class="l">
                       <img src="http://i.imgur.com/8LaeZcN.png" id="i_1" class="i" width="32" height="32">
@@ -67,10 +66,10 @@
                 <input type="hidden" id="image1" name="image1">
                 <lable>3. CONTACT INFORMATION...</lable><br><br>
                 <input type="text" name="phone" id="phone"  placeholder="Phone">
-                <input type="text" name="email" id="email"  placeholder="Email">
-                <input type="text" name="telephone" placeholder="Telephone"><hr>
-                <input type="hidden" name="latitude" id="latitude" placeholder="longitude" readonly="true">
-                <input type="hidden" name="longitude" id="longitude" placeholder="latitude" readonly="true">
+                <input type="text" name="email" id="email" placeholder="Email">
+                <input type="text" name="telephone"  placeholder="Telephone"><hr>
+                <input type="text" name="latitude" id="latitude" placeholder="latitude" readonly="true">
+                <input type="text" name="longitude" id="longitude" placeholder="longitude" readonly="true">
                 <% include partials/map.ejs %>
                 <div id="longlatidiv"><p id="longlati"></p></div>
                 <lable>4. PROPERTY LOCATION?</lable><br><br>
@@ -78,8 +77,8 @@
                 <input type="text" name="city"  id="city" placeholder=" city">
                 <input type="text" name="state"  id="state" placeholder=" state">
                 <input type="text" name="zip"  id="zip" placeholder=" zip">
-                <input type="text" name="county" placeholder=" county">
-                <input type="text" name="country" id="country" placeholder=" country"><hr>
+                <input type="text" name="county"  placeholder=" county">
+                <input type="text" name="country"  id="country" placeholder=" country"><hr>
                 <lable>5. PROPERTY TYPE...</lable><br><br>
                 <select id="categoryselect">
                   <option value="Other">Category</option>
@@ -103,15 +102,15 @@
                 </div><br><br>
 
                 <lable>7. ROOM / KITCHEN / WASHROOM...</lable><br><br>
-                <input type="text" name="bedroom" id="bedroom"  placeholder="Bedroom">
-                <input type="text" name="kitchen" id="kitchen"  placeholder="Kitchen">
-                <input type="text" name="bathroom" id="bathroom"  placeholder="Bathroom"><hr>
-                <input type="hidden" name="propertytype"  id="propertytype" placeholder="propertytype">
-                <input type="hidden" name="addtype"  id="addtype" placeholder="propertytype">
+                <input type="text" name="bedroom" id="bedroom" placeholder="Bedroom">
+                <input type="text" name="kitchen" id="kitchen" placeholder="Kitchen">
+                <input type="text" name="bathroom" id="bathroom" placeholder="Bathroom"><hr>
+                <input type="hidden" name="propertytype" id="propertytype" placeholder="propertytype">
+                <input type="hidden" name="addtype" id="addtype" placeholder="propertytype">
                 <lable>8. AREA / PRICE / DESCRIPTION...</lable><br><br>
                 <input type="text" name="area"  id="area" placeholder="Area in sq feets">
                 <input type="text" name="cost"  id="cost" placeholder="Price in USD">
-                <input type="text" name="discription" id="discription"  placeholder="Discription"><hr>
+                <input type="text" name="discription" id="discription"   placeholder="Discription"><hr>
                 </fieldset>
                 <input type="submit" style="display:none;" id="submitForm" value="Actual Post Add">
               </form>

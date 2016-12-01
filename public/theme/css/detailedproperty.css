@@ -1,3 +1,6 @@
+.cost{padding: 3%; font-weight: bold;}
+.readmore{padding: 3%; font-weight: bold; background-color: #eeebed;}
+.address{padding: 3%; font-weight: bold;}
 .box {
   width: 40%;
   margin: 0 auto;
