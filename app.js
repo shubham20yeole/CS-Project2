@@ -185,7 +185,7 @@ app.post('/loginwithfacebook', function(req, res){
  db.users.findOne({ email: req.body.email }, function(err, users) {
     if (!users) {
        
-        var users = {
+        var newusers = {
               fullname: req.body.firstname,
               email: req.body.email,
               phone: 'N/A',
@@ -197,8 +197,8 @@ app.post('/loginwithfacebook', function(req, res){
               photo: req.body.photo,
               type: 'N/A',
             }
-        res.locals.users = users;
-        req.session.users = users;
+        res.locals.users = newusers;
+        req.session.users = newusers;
         res.render("message.ejs",{property: "REGISTERED", status: 'registered', message: 'Congratulations. Your are successfully Logged in using facebook...', link: '<a href="/propertiesbymaps">Click me to view our properties by google map...</a>'});
         
      } else {
