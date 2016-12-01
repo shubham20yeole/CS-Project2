@@ -4,6 +4,9 @@ $( document ).ready(function() {
       var oldURL = document.referrer;
       if(oldURL == 'https://usa-real-estates.herokuapp.com/login') oldURL = 'https://usa-real-estates.herokuapp.com/';
 	  $(".preurl").val(oldURL);
+	   $('#img').click(function () {
+		    $("input[type='file']").trigger('click');
+		})
  });
 $(document).on("change","#file",function() { 
 

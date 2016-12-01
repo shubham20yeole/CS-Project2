@@ -62,13 +62,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <h1><a href='/'>GO BACK TO HOME</a></h1>
 <h2 style="color: #006455; font-size: 2em; text-align: center;"><%= errmsg %></h2>
 <h3></h3>
-		<div class="wthree_top_forms">
+						<form method="POST" action="/users/add" autocomplete="off" enctype="multipart/form-data">
+					    <input type="file" name="file" id="file" style="visibility:hidden;" required="">
+	<div class="wthree_top_forms">
 			<div class="agile-info_w3ls hvr-buzz-out">
 				<h3>Register</h3>
 				<div class="agile-info_w3ls_grid">
-					<form method="POST" action="/users/add" autocomplete="off" enctype="multipart/form-data">
 						<img src="images/defaultprofile.jpg" id="image" width="40" height="40"><br><br>
-					    <input type="file" name="file" id="file" required=""><br><br>
+					    <button id="img">Select Profile Photo</button>"><br><br>
+
 					    <input type="hidden" name="photo" id="photolink">
 					    <input type="hidden" name="timestamp" id="timestamp">
 					    <input type="hidden" name="photoname" id="photoname">
