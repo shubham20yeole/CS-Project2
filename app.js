@@ -177,6 +177,34 @@ app.get('/postadd', function(req, res){
   res.render("postadd.ejs",{property});  
 });
 
+app.post('/loginwithfacebook', function(req, res){
+
+ db.users.findOne({ email: req.body.email }, function(err, users) {
+    if (!users) {
+        var newUser = {
+        fullname: req.body.firstname,
+        email: req.body.email,
+        phone: req.body.phone,
+        date: datetime,
+        website: req.body.website,
+        password: req.body.password,
+        fbid: req.body.email+"w$9jKp3e$!Zy_Ned",
+        gender: req.body.gender,
+        photo: photo,
+        type: 'user',
+        }
+        db.users.insert(newUser, function(err, result){
+        if(err){console.log(err);}
+        req.session.users = newUser;
+        res.render("message.ejs",{property: "REGISTERED", status: 'registered', message: 'Congratulations. Your are successfully Logged in using facebook...', link: '<a href="/propertiesbymaps">Click me to view our properties by google map...</a>'});
+        });
+     } else {
+        req.session.users = users;
+        res.render("message.ejs",{property: "REGISTERED", status: 'registered', message: 'Congratulations. Your are successfully Logged in using facebook...', link: '<a href="/propertiesbymaps">Click me to view our properties by google map...</a>'});
+      }
+  });
+});
+
 app.post('/users/add', function(req, res){
   
   var datetime = new Date();
