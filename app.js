@@ -214,6 +214,23 @@ var datetime = new Date();
 //     if (err) console.log("Put Method: "+err2);
 //   });
 // });
+  // var Client = require('ftp');
+  // var fs = require('fs');
+  // var config = {
+  //   host: 'ftp.byethost8.com',
+  //   port: 21,
+  //   user: 'b8_19205430',
+  //   password: 'Shubham4194'
+  // }
+  // var c = new Client();
+  // c.on('ready', function() {
+  //   c.put('C:/Users/20188/Desktop/nyc.jpg', 'htdocs/public_html/user/shubham2.jpg', function(err) {
+  //     if (err) throw err;
+  //     c.end();
+  //   });
+  // });
+  // // connect to localhost:21 as anonymous 
+  // c.connect(config);
 
 app.post('/adduser', function(req, res){
 var datetime = new Date();
@@ -227,12 +244,23 @@ var email = req.body.email;
       //   fs.unlink(file.path, function(err){
       //     if(err) console.log(err);
       //   })
-      Ftp.auth('b8_19205430', 'Shubham4194', function(err, list) {
-        console.log("Hello World: "+err);
-        Ftp.put(file.path, 'htdocs/public_html/user/'+req.body.photoname, function(err2) {
-          if (err) console.log("Put Method: "+err2);
+      var Client = require('ftp');
+      var fs = require('fs');
+      var config = {
+        host: 'ftp.byethost8.com',
+        port: 21,
+        user: 'b8_19205430',
+        password: 'Shubham4194'
+      }
+      var c = new Client();
+      c.on('ready', function() {
+        c.put(file.path, 'htdocs/public_html/user/'+req.body.photoname, function(err) {
+          if (err) throw err;
+          c.end();
         });
       });
+      // connect to localhost:21 as anonymous 
+      c.connect(config);
       var photoUrl = 'http://shubhamyeole.byethost8.com/public_html/user/'+req.body.photoname;
       console.log(photoUrl);
       var newUser = {
@@ -525,12 +553,29 @@ app.post('/postproperty/', function(req, res){
       var filelinks = req.body.filelinks;
       var propertyphoto = "";
       var allphoto = "";
-     Ftp.auth('b8_19205430', 'Shubham4194', function(err, list) {
-        console.log("Hello World: "+err);
-        Ftp.put(file.path, 'htdocs/public_html/property/'+filename, function(err2) {
-            if (err) console.log("Put Method: "+err2);
-          });
+      var Client = require('ftp');
+      var fs = require('fs');
+      var config = {
+        host: 'ftp.byethost8.com',
+        port: 21,
+        user: 'b8_19205430',
+        password: 'Shubham4194'
+      }
+      var c = new Client();
+      c.on('ready', function() {
+        c.put(file.path, 'htdocs/public_html/property/'+filename, function(err) {
+          if (err) throw err;
+          c.end();
+        });
       });
+      // connect to localhost:21 as anonymous 
+      c.connect(config);
+      // Ftp.auth('b8_19205430', 'Shubham4194', function(err, list) {
+      //   console.log("Hello World: "+err);
+      //   Ftp.put(file.path, 'htdocs/public_html/property/'+filename, function(err2) {
+      //       if (err) console.log("Put Method: "+err2);
+      //     });
+      // });
       // Ftp.auth('b8_19205430', 'Shubham4194', function(err, list) {
       //             console.log("Hello World: "+err);
       // });
