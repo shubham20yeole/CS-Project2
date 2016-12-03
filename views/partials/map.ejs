@@ -19,6 +19,7 @@
   </head>
   <body>
    <div id="map"></div>
+   
     <script>
 
      function initMap(x, y) {
@@ -30,7 +31,7 @@
 
 
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 15,
+          zoom: 4,
           center: myLatLng
         });
 
@@ -45,10 +46,45 @@
               $("#longlati").text("Latitude: "+lat+", Longitude: "+lng);
               document.getElementById('latitude').value = lat;
               document.getElementById('longitude').value = lng;
+              document.getElementById('latlng').value = lat+','+lng;
               initMap(lat, lng);
-              // alert("Lat=" + lat + "; Lng=" + lng+', '+address);
+              geocodeLatLng(geocoder, map, infowindow);
           });
+          var geocoder = new google.maps.Geocoder;
+          var infowindow = new google.maps.InfoWindow;
 
+        document.getElementById('submit').addEventListener('click', function() {
+          geocodeLatLng(geocoder, map, infowindow);
+        });
+
+      }
+      function geocodeLatLng(geocoder, map, infowindow) {
+        var input = document.getElementById('latlng').value;
+        var latlngStr = input.split(',', 2);
+        var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
+        geocoder.geocode({'location': latlng}, function(results, status) {
+          if (status === 'OK') {
+            if (results[1]) {
+              map.setZoom(11);
+              var marker = new google.maps.Marker({
+                position: latlng,
+                map: map
+              });
+              $("#staddress").val(results[1].formatted_address);
+              $("#city").val(" ");
+              $("#state").val(" ");
+              $("#zip").val(" ");
+              $("#county").val(" ");
+              $("#country").val(" ");
+              infowindow.setContent(results[1].formatted_address);
+              infowindow.open(map, marker);
+            } else {
+              window.alert('No results found');
+            }
+          } else {
+            window.alert('Geocoder failed due to: ' + status);
+          }
+        });
       }
 
     </script>

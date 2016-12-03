@@ -7,7 +7,7 @@
               src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1tbIAqN0XqcgTR1-FxYoVTVq6Is6lD98&sensor=false">
             </script>
             <script type="text/javascript">
- 
+            var map;
             var locations = [
               ['loan 1', 33.890542, 151.274856, 'address 1'],
               ['loan 2', 33.923036, 151.259052, 'address 2'],
@@ -17,20 +17,42 @@
               ];
 
               function initialize() {
-
                 var myOptions = {
-                  center: new google.maps.LatLng(40.726425, -74.06105509999998),
-                  zoom: 14,
-                  mapTypeId: google.maps.MapTypeId.ROADMAP
-
+                  center: new google.maps.LatLng(34.968330, -103.521123),
+                  zoom: 5,
+                  mapTypeId: google.maps.MapTypeId.ROADMAP,
                 };
-                var map = new google.maps.Map(document.getElementById("default"),
-                    myOptions);
+                map = new google.maps.Map(document.getElementById("default"),
+                    myOptions);map.data.setStyle(function(feature) {
+                  var magnitude = feature.getProperty('mag');
+                  return {
+                    icon: getCircle(magnitude)
+                  };
+                });
+                var script = document.createElement('script');
+                script.src = 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_month.geojsonp';
+                document.getElementsByTagName('head')[0].appendChild(script);
+               
+
+                
 
                 setMarkers(map,locations)
 
           }
+function getCircle(magnitude) {
+        return {
+          path: google.maps.SymbolPath.CIRCLE,
+          fillColor: 'red',
+          fillOpacity: .5,
+          scale: Math.pow(2, magnitude) / 2,
+          strokeColor: 'green',
+          strokeWeight: .5
+        };
+      }
 
+      function eqfeed_callback(results) {
+        map.data.addGeoJson(results);
+      }
     function setMarkers(map,locations){
      
       var marker, i
@@ -51,7 +73,7 @@
              var dd = cords[11];
              var yy = cords[12];
 
-             var cent = new google.maps.LatLng(40.726425, -74.06105509999998);
+             var cent = new google.maps.LatLng(34.968330, -103.521123);
 
              latlngset = new google.maps.LatLng(lat, long);
               var marker = new google.maps.Marker({  
