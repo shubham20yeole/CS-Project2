@@ -705,11 +705,7 @@ app.post('/detailedproperty/sendinterestinproperty', function(req, res){
 
   sendEmail(emailofposter, title, message, subject);
   sendEmail(email, title1, message1, subject1);
-db.property.findOne({ timestamp: timestamp}, function (err, property) {
-  db.property.find({}).skip(0).sort({timestamp: -1}).limit(5).toArray(function (err, latestproperty) {
-    res.render("detailedproperty.ejs",{property: property, latestproperty: latestproperty});
-    })      
-  });
+  res.render("message.ejs",{property: "REGISTERED", status: 'registered', message: 'Your email is successfully sent to the owner of the property....', link: '<a href="/propertiesbymaps">Click me to view our properties by google map...</a>'});
 });
 app.get('/newpassword/:id', function(req, res){
     console.log("In get comment method: "+req.params.id);
