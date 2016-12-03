@@ -13,6 +13,7 @@
 #title:focus {
     width: 700px;
 }
+.addWidth{width: 100%}
 .loginButton{background-color: black; color: white; padding: 3%; cursor: pointer;}
 .loginButton:hover{background-color: #f4f4f4; color: black;}
 #fbloginmsg{ font-size: 2em; font-weight: bold }

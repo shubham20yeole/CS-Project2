@@ -71,11 +71,13 @@
                 map: map
               });
               $("#staddress").val(results[1].formatted_address);
-              $("#city").val(" ");
-              $("#state").val(" ");
-              $("#zip").val(" ");
-              $("#county").val(" ");
-              $("#country").val(" ");
+              $("#staddress").css('width','100%');
+              $("#staddress").css('background-color','#FC0');
+              $("#city").val(" ").hide();
+              $("#state").val(" ").hide();
+              $("#zip").val(" ").hide();
+              $("#county").val(" ").hide();
+              $("#country").val(" ").hide();
               infowindow.setContent(results[1].formatted_address);
               infowindow.open(map, marker);
             } else {
