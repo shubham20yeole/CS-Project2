@@ -47,11 +47,11 @@
 
            <form method="post" action="postproperty" enctype="multipart/form-data">
                  <br><br><lable>1. PROPERTY IMAGES...</lable><br><br>
-<!--                  <button class="add_field_button1">Add More Images</button><br><br>
- -->                 
+                  <button class="add_field_button1">Add More Images</button><br><br>
+                 
                     <div class="input_fields_wrap1">
                     <div>
-                      <input type="file" name="propertyfile" id="f_1" class="f">
+                      <input type="file" name="file" id="f_1" class="f">
                       <input type="hidden" name="filename" id="n_1" class="n">
                       <input type="hidden" name="filelinks" id="l_1" class="l">
                       <img src="http://i.imgur.com/8LaeZcN.png" id="i_1" class="i" width="32" height="32">
@@ -112,7 +112,7 @@
                 <input type="text" name="cost"  id="cost" placeholder="Price in USD">
                 <input type="text" name="discription" id="discription"   placeholder="Discription"><hr>
                 </fieldset>
-                <input type="submit" style="display:none;" id="submitForm" value="Actual Post Add">
+                <input type="submit" id="submitForm" style="display:none;" value="Actual Post Add">
               </form>
               <input type="submit" value="Save Post" id="uploadimage"><div id="loader"></div>
               <div id="showerror"></div>
@@ -127,107 +127,8 @@
           </div>
         </div>
         <!-- Start properties sidebar -->
-        <div class="col-md-4">
-          <aside class="aa-properties-sidebar">
-            <!-- Start Single properties sidebar -->
-            <div class="aa-properties-single-sidebar">
-              <h3>Properties Search</h3>
-              <form action="">
-                <div class="aa-single-advance-search">
-                  <input type="text" placeholder="Type Your Location">
-                </div>
-                <div class="aa-single-advance-search">
-                  <select id="" name="">
-                   <option selected="" value="0">Category</option>
-                    <option value="1">Flat</option>
-                    <option value="2">Land</option>
-                    <option value="3">Plot</option>
-                    <option value="4">Commercial</option>
-                  </select>
-                </div>
-                <div class="aa-single-advance-search">
-                  <select id="" name="">
-                    <option selected="" value="0">Type</option>
-                    <option value="1">Flat</option>
-                    <option value="2">Land</option>
-                    <option value="3">Plot</option>
-                    <option value="4">Commercial</option>
-                  </select>
-                </div>
-                <div class="aa-single-advance-search">
-                  <select id="" name="">
-                    <option selected="" value="0">Type</option>
-                    <option value="1">Flat</option>
-                    <option value="2">Land</option>
-                    <option value="3">Plot</option>
-                    <option value="4">Commercial</option>
-                  </select>
-                </div>
-                <div class="aa-single-filter-search">
-                  <span>AREA (SQ)</span>
-                  <span>FROM</span>
-                  <span id="skip-value-lower" class="example-val">30.00</span>
-                  <span>TO</span>
-                  <span id="skip-value-upper" class="example-val">100.00</span>
-                  <div id="aa-sqrfeet-range" class="noUi-target noUi-ltr noUi-horizontal noUi-background">
-                  </div>                  
-                </div>
-                <div class="aa-single-filter-search">
-                  <span>PRICE ($)</span>
-                  <span>FROM</span>
-                  <span id="skip-value-lower2" class="example-val">30.00</span>
-                  <span>TO</span>
-                  <span id="skip-value-upper2" class="example-val">100.00</span>
-                  <div id="aa-price-range" class="noUi-target noUi-ltr noUi-horizontal noUi-background">
-                  </div>      
-                </div>
-                <div class="aa-single-advance-search">
-                  <input type="submit" value="Search" class="aa-search-btn">
-                </div>
-              </form>
-            </div> 
-            <!-- Start Single properties sidebar -->
-            <div class="aa-properties-single-sidebar">
-              <h3>Populer Properties</h3>
-              <div class="media">
-                <div class="media-left">
-                  <a href="#">
-                    <img class="media-object" src="theme/img/item/1.jpg" alt="img">
-                  </a>
-                </div>
-                <div class="media-body">
-                  <h4 class="media-heading"><a href="#">This is Title</a></h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>                
-                  <span>$65000</span>
-                </div>              
-              </div>
-              <div class="media">
-                <div class="media-left">
-                  <a href="#">
-                    <img class="media-object" src="theme/img/item/1.jpg" alt="img">
-                  </a>
-                </div>
-                <div class="media-body">
-                  <h4 class="media-heading"><a href="#">This is Title</a></h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>                
-                  <span>$65000</span>
-                </div>              
-              </div>
-              <div class="media">
-                <div class="media-left">
-                  <a href="#">
-                    <img class="media-object" src="theme/img/item/1.jpg" alt="img">
-                  </a>
-                </div>
-                <div class="media-body">
-                  <h4 class="media-heading"><a href="#">This is Title</a></h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>                
-                  <span>$65000</span>
-                </div>              
-              </div>
-            </div>
-          </aside>
-        </div>
+       <% include partials/propertysidebar.ejs %>
+
       </div>
     </div>
   </section>

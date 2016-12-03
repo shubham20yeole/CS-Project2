@@ -1,7 +1,5 @@
 <% include partials/header1.ejs %>
-<link href="../theme/css/properties.css" rel="stylesheet">    
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="../theme/js/properties.js"></script>
 
  
   <!-- Start Proerty header  -->
@@ -36,9 +34,10 @@
                         
             <script type="text/javascript" src="theme/js/propertiesbymaps.js"></script>
             <link href="/theme/css/propertiesbymaps.css" rel="stylesheet">    
+            <link href="/theme/css/animation.css" rel="stylesheet">    
 
  <% include partials/loc_map.ejs %>
-
+  
               
               </ul>
             </div>
@@ -53,15 +52,22 @@
               <h3>Property View</h3>
               <form action="">
                 <div class="aa-single-advance-search">
-                  <input type="text" placeholder="Type Your Location">
+                  <p id="lodardiv"></p>
                 </div>
                 <div class="aa-single-advance-search">
-                  <img id="viewimage" src="" width="100%" height="100px">
-                  <p id="title"></p>
-                  <p id="cost"></p>
-                  <p id="address"></p>
-                  <p id="description"></p>
-                  <p id="features"></p>
+                  <p id="title">Title</p>
+                  <img id="viewimage" src="/images/defaultimage.jpg" width="100%" height="100px">
+                  <br><br><label style="font-size: 1.5em;">Address:</label>
+                  <p id="address">Address</p>
+                  <br><label style="font-size: 1.5em;">Cost:</label>
+                  <p id="cost">USD</p>
+                  <br><label style="font-size: 1.5em;">Area/Room:</label><br>
+                  <div id="roomsdis"></div>
+                  <br><label style="font-size: 1.5em;">Description:</label>
+                  <p id="description">Description</p>
+                  <br><label style="font-size: 1.5em;">Features:</label>
+                  <div id="features">Features</div><br>
+                  <button id="readmorelink">----</button>
                 </div>
                 
                 </div>

@@ -174,7 +174,9 @@ app.get('/blank', function(req, res){
 
 app.get('/postadd', function(req, res){
   var property = "";
-  res.render("postadd.ejs",{property});  
+    db.property.find({}).skip(0).sort({timestamp: -1}).limit(5).toArray(function (err, latestproperty) {
+      res.render("postadd.ejs",{property, latestproperty: latestproperty});  
+    });
 });
 
 app.post('/loginwithfacebook', function(req, res){
@@ -274,6 +276,7 @@ var email = req.body.email;
       photo: photoUrl,
       type: 'user',
     }
+    sendEmail(req.body.email, "REGISTERED SUCCESSFULLY", "Thank you for choosing our services... We appreciate your bussiness and time to register to our website...", "REGISTERED SUCCESSFULLY to USA REAL ESTATES");
     db.users.insert(newUser, function(err, result){
       if(err){console.log(err);}
       req.session.users = newUser;
@@ -531,12 +534,14 @@ app.post('/searchproperty', function(req, res) {
 
 
 app.get('/detailedproperty/:id', function(req, res){
-    console.log("In get comment method: "+req.params.id);
+    // console.log("In get comment method: "+req.params.id);
  
   db.property.findOne({ timestamp: req.params.id}, function (err, property) {
-  db.property.find({}).skip(0).sort({timestamp: -1}).limit(5).toArray(function (err, latestproperty) {
-    res.render("detailedproperty.ejs",{property: property, latestproperty: latestproperty});
-    })      
+      db.property.find({}).skip(0).sort({timestamp: -1}).limit(5).toArray(function (err, latestproperty) {
+         db.images.find({ timestamp: req.params.id}, function (err, images) {
+          res.render("detailedproperty.ejs",{property: property, latestproperty: latestproperty, images: images});
+        }) 
+     })      
   });
 });
 
@@ -548,7 +553,7 @@ app.get('/workinprogress', function(req, res){
 });
 app.post('/postproperty/', function(req, res){
     var datetime = new Date();
-      var file = req.files.propertyfile;
+      var file = req.files.file;
       var filename = req.body.filename;
       var filelinks = req.body.filelinks;
       var propertyphoto = "";
@@ -562,32 +567,31 @@ app.post('/postproperty/', function(req, res){
         password: 'Shubham4194'
       }
       var c = new Client();
+      // console.log(file.length);
       c.on('ready', function() {
-        c.put(file.path, 'htdocs/public_html/property/'+filename, function(err) {
-          if (err) throw err;
-          c.end();
-        });
+         for(i=0; i<file.length; i++){
+          var imageToDB = 'http://shubhamyeole.byethost8.com/public_html/property/'+filename[i];
+          // console.log('imageToDB: '+imageToDB);
+          // console.log("Filee path: "+file[i].path);
+            c.put(file[i].path, 'htdocs/public_html/property/'+filename[i], function(err) {
+                if (err) throw err;
+                else{ }
+            });
+          }
+        c.end();
       });
       // connect to localhost:21 as anonymous 
       c.connect(config);
-      // Ftp.auth('b8_19205430', 'Shubham4194', function(err, list) {
-      //   console.log("Hello World: "+err);
-      //   Ftp.put(file.path, 'htdocs/public_html/property/'+filename, function(err2) {
-      //       if (err) console.log("Put Method: "+err2);
-      //     });
-      // });
-      // Ftp.auth('b8_19205430', 'Shubham4194', function(err, list) {
-      //             console.log("Hello World: "+err);
-      // });
-      // for(i=0; i<=file.length; i++){
-      //   var filepath = file[i].path;
-      //   propertyphoto = filelinks[0];
-      //   allphoto = allphoto + filelinks[i]+" ";
-      //   console.log("filename[i]: "+filename[i]+","+filepath+"File: "+file[i]+", File Path: "+file[i].path+", originalFilename: "+file[i].originalFilename);
-      //       Ftp.put(''+filepath+'', 'htdocs/public_html/'+filename[i], function(err2) {
-      //           if (err) console.log("Put Method: "+err2);
-      //           });
-      // }
+      for(i=0; i<filename.length; i++){
+        var imageToDB = 'http://shubhamyeole.byethost8.com/public_html/property/'+filename[i];
+        console.log('imageToDB: '+imageToDB);
+        allphoto = allphoto + " "+imageToDB;
+        var newImage = { timestamp: req.body.timestamp, image: imageToDB };
+        db.images.insert(newImage, function(err, imageResult){
+          if(err){console.log(err);
+          }else{console.log("Actuallink: "+imageToDB+", SavedLink: "+imageResult.image);}
+        });
+      }
       console.log("propertyphoto: "+propertyphoto+", allphoto: "+allphoto);
       console.log(req.body.propertyfeatures);
         var newProperty = {
@@ -615,10 +619,11 @@ app.post('/postproperty/', function(req, res){
           dateField: datetime,
           discription: req.body.discription,
           posted_date: req.body.blogdata,
-          image1: filelinks,
-          images: filelinks
+          image1: 'http://shubhamyeole.byethost8.com/public_html/property/'+filename[0],
+          allphoto: allphoto
        }
-       
+      // console.log("propertyphoto: "+newProperty+", allphoto: "+allphoto);
+
         db.property.insert(newProperty, function(err, result){
         
           if(err){
@@ -627,71 +632,8 @@ app.post('/postproperty/', function(req, res){
             res.render("message.ejs",{status: 'addpost', message: 'Congratulations. Your add is posted successfully...', link: '<a href="/detailedproperty/'+result.timestamp+'">Click me to view your post</a>'});
           }
       });
-
-      
-
 });
-app.post('/postproperty22/', function(req, res){
-    var datetime = new Date();
-      var file = req.files.file;
-      var filename = req.body.filename;
-      var filelinks = req.body.filelinks;
-      var propertyphoto = "";
-      var allphoto = "";
-      // for(i=0; i<file.length; i++){
-      //   propertyphoto = filelinks[0];
-      //   allphoto = allphoto + filelinks[i]+" ";
-      //   console.log("File: "+file[i]+", File Path: "+file[i].path+", originalFilename: "+file[i].originalFilename);
-      //   var stream = fs.createReadStream(file[i].path);
-      //   s3fsImpl.writeFile(filename[i], stream).then(function(){
-      //   fs.unlink(file[i].path, function(err){
-      //     if(err) console.log(err);
-      //   })
-      // })
-      // }
-      console.log("propertyphoto: "+propertyphoto+", allphoto: "+allphoto);
-      console.log(req.body.propertyfeatures);
-        var newProperty = {
-          title: req.body.title,
-          phone: req.body.phone,
-          email: req.body.email,
-          telephone: req.body.telephone,
-          staddress: req.body.staddress,
-          timestamp: req.body.timestamp,
-          city: req.body.city,
-          state: req.body.state,
-          zip: req.body.zip,
-          county: req.body.county,
-          country: req.body.country,
-          latitude: req.body.latitude,
-          longitude: req.body.longitude,
-          bedroom: req.body.bedroom,
-          kitchen: req.body.kitchen,
-          bathroom: req.body.bathroom,
-          addtype: req.body.addtype,
-          propertytype: req.body.propertytype,
-          features: req.body.propertyfeatures,
-          area: req.body.area,
-          cost: req.body.cost,
-          dateField: datetime,
-          discription: req.body.discription,
-          posted_date: req.body.blogdata,
-          image1: propertyphoto,
-          images: allphoto
-       }
-       
-        db.property.insert(newProperty, function(err, result){
-        
-          if(err){
-            console.log(err);
-          }else{
-            res.redirect('/detailedproperty/'+result.timestamp);
-          }
-      });
 
-      
-
-});
 app.post('/view/blog/comment', function(req, res){
 
     var newComment = {

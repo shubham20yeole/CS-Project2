@@ -8,15 +8,31 @@ $( document ).ready(function() {
 		    $("input[type='file']").trigger('click');
 		})
 	    $('.fakesubmit').click(function () {
+		    var count = 0;
+		    var errmsg = "";
+		    var fullname = $("#fullname").val();
+		    var propertyfile = $("#file").val();
+		    var remail = $("#remail").val();
+		    var rphone = $("#rphone").val();
 		    var psd = $("#psd").val();
 		    var cpsd = $("#cpsd").val();
-		    var propertyfile = $("#file").val();
+		    var atpos = remail.indexOf("@");
+		    var dotpos = remail.lastIndexOf(".");
+		    
+		    if(propertyfile == ""){errmsg = errmsg + "Image Required <br> "; count++}
+		    if(fullname == ""){errmsg = errmsg + "Name required <br> "; count++}
+			if (atpos<1 || dotpos<atpos+2 || dotpos+2>=remail.length) { errmsg = errmsg+ "E-mail Invalid <br> "; count++; }		    
+			if(rphone.length!= 10){errmsg = errmsg + "Phone Invalid <br> Phone should be of 10 char <br>"; count++}
+		    if(cpsd!= psd || psd.length == 0){errmsg = errmsg + "Password mismatch or password null <br> "; count++}
+
+
 		    if(propertyfile == ""){ $("#photoerrmsg").text("Image file is required"); }
-		    else{$("#photoerrmsg").text("Sab thik he bhai"); }
-		    if(psd === cpsd && psd!=""){
+		    else{$("#photoerrmsg").text("Thank you for selecting your profile image..."); }
+		    if(count==0){
+		      $("#errmsg").html("EVERYTHING LOOKS GOOD");
 		      $("#regsubmit").trigger('click');
 		    }else{
-		    	alert("Password does not match or empty password.");
+		      $("#errmsg").html(errmsg);
 		    }
 		})
  });

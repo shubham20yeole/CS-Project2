@@ -55,8 +55,8 @@
   transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
 }
 
-
-input[type="submit"] {
+.fakesubmit{width: 75%}
+.fakesubmit, input[type="submit"] {
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
@@ -73,15 +73,15 @@ input[type="submit"] {
     color: black;
     border: 2px solid #3B2F63;
 }
+.fakesubmit:hover, input[type="submit"]:hover {
+    background-color: #3B2F63;
+    color: white;
+}
 img.avatar {
     width: 80%;
     border-radius: 50%;
 }
 img.fbgifavtar{ width: 100%; border-radius: 50%;}
-input[type="submit"]:hover {
-    background-color: #3B2F63;
-    color: white;
-}
 #fblogindivsec{
 	background-color: #3b5998;
 	text-align: center;

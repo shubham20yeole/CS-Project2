@@ -60,7 +60,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="main"> 
 <h1>REGISTER / LOGIN / RESET PASSWORD</h1>
 <h1><a href='/'>GO BACK TO HOME</a></h1>
-<h2 style="color: #006455; font-size: 2em; text-align: center;"><%= errmsg %></h2>
+<h2 id="errmsg" style="color: #006455; font-size: 2em; text-align: center;"><%= errmsg %></h2>
 <h3></h3>
 						<form method="POST" action="adduser" autocomplete="off" enctype="multipart/form-data">
 					    <input type="file" name="file" id="file" style="visibility:hidden;" required="">
@@ -74,16 +74,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					    <input type="hidden" name="photo" id="photolink">
 					    <input type="hidden" name="timestamp" id="timestamp">
 					    <input type="hidden" name="photoname" id="photoname">
-					    <input type="text" class="halflogintext" name="firstname" value="" placeholder="Full Name"><br>
-					    <input type="email" class="halflogintext" value="" name="email" placeholder="Email address">
-					    <input type="text" id="phone" value="" class="halflogintext" name="phone" placeholder="Phone Number"><br><br>
+					    <input type="text" id="fullname" name="firstname" value="" placeholder="Full Name"><br>
+					    <input type="email" id="remail" name="email" placeholder="Email address">
+					    <input type="text" id="rphone" value="" class="halflogintext" name="phone" placeholder="Phone Number"><br><br>
 					    <input type="hidden" class="logintext" name="website" value="" placeholder="Website">
 					    <input type="hidden" name="gender" value="male" placeholder="Gender">
 					    <input type="password" id="psd" name="password" placeholder="Password"><br><br>
 					    <input type="password" id="cpsd" name="confirmpassword" placeholder="Confirm Password">
 					    <input class="crhad" id="regsubmit" style="display:none;" type="submit" value="submit">
 					</form>
- 					  <input class="fakesubmit" type="submit" value="submit">
+					<br><br>
+ 					  <p class="fakesubmit">Submit</p>
 
 				</div>
 			</div>
