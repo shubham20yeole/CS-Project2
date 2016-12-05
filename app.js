@@ -701,7 +701,6 @@ app.post('/login', function(req, res) {
       // res.send(req.params.id+" Test");
   // });
 app.post('/detailedproperty/sendinterestinproperty', function(req, res){
-  console.log("In newpasswordupdate method: "+req.body.email);
   var name = req.body.name;
   var emailofposter = req.body.emailofposter;
   var email = req.body.email;
@@ -733,9 +732,11 @@ app.get('/newpassword/:id', function(req, res){
 });
 app.post('/newpasswordupdate', function(req, res){
     console.log("In newpasswordupdate method: "+req.body.email);
+    var email = req.body.email;
   db.users.update({ email: req.body.email}, {$set:{password: req.body.passcode}}, function (err, result) {
-      sendEmail(req.body.email, "Password Reset", "We received a request to reset the password for your account. If you requested a reset for "+email+", click the button below. <br><br><a href='https://usa-real-estates.herokuapp.com/newpassword/"+users._id+"' target='_blank'>SET NEW PASSWORD</a><br><br>","Password reset on USA REAL ESTATES");
-      res.redirect("/");
+      sendEmail(req.body.email, "Password Reset", "Your password is successfully resetted at USA REAL ESTATES. If you have not done this action please let us know at shubham20.yeole@gmail.com. Click the button below to visit our platform. <br><br><a href='https://usa-real-estates.herokuapp.com/' target='_blank'>HOME</a><br><br>","SUCCESSFULLY PASSWORD RESETTED ON USA REAL ESTATES");
+  res.render("message.ejs",{property: "REGISTERED", status: 'registered', message: 'Password reset successful.', link: '<a href="/propertiesbymaps">Click me to view our properties by google map...</a>'});
+  
     });
 });
 
