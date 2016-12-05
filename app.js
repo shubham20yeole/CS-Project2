@@ -132,6 +132,23 @@ app.get('/', function(req, res){
     res.render("index.ejs",{property: docs});
   })
 });
+app.get('/admin', function(req, res){
+  var user = req.session.users;
+ if(user==null){
+  res.render("message.ejs",{status: 'a', message: 'Sorry... Login required.', link: ''});
+  }else{
+    if(user.type=='user'){
+      res.render("message.ejs",{status: 'a', message: 'Sorry... You are not a admin...', link: ''});
+    }else{
+      db.users.find({type: 'user'}).skip(0).sort({}).limit(9).toArray(function (err, user) {
+        db.users.find({type: 'admin'}).skip(0).sort({}).limit(9).toArray(function (err, admin) {
+        console.log(user.length)
+        res.render("admin.ejs",{user: user, admin: admin});
+        })
+      })
+    }
+  }
+});
 app.get('/contact', function(req, res){       
     res.render("contact.ejs");
 });
@@ -309,6 +326,8 @@ app.get('/users/blog/delete/:id', function(req, res){
       res.send(req.params.id+" Test");
   });
 });
+
+
 
 app.get('/users/like/:id', function(req, res){
   // console.log(req.params.id);
@@ -501,9 +520,8 @@ app.post('/uploadimages', function(req, res) {
   res.send('Ok'); 
 });
 
-app.post('/uploadimages2', function(req, res) {
-  console.log("In upload image 2");
-  db.images.update({timestamp: req.body.timestamp},{$set : {"imege2": req.body.image2}},{upsert:true,multi:true}) 
+app.post('/admintouser', function(req, res) {
+  console.log("In admintouser: "+req.body.id);
   res.send('Ok'); 
 });
 
