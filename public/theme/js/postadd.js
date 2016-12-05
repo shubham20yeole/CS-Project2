@@ -105,7 +105,6 @@ var count = 0;
        var imgsrc2 = '/images/defaultimage.jpg';
        var imgsrc3 = '/images/defaultimage.jpg';
        var imgsrc4 = '/images/defaultimage.jpg';
-        window.scrollTo(0,document.body.scrollHeight);
             $("#div1").delay(2000).fadeIn().append(' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="'+imgsrc1+'" width="42" height="42">').addClass("animated tada").hide();
             $("#div2").delay(3000).fadeIn().append(' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="'+imgsrc2+'" width="42" height="42">').addClass("animated tada").hide();
             $("#div3").delay(400).fadeIn().append(' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="'+imgsrc3+'" width="42" height="42">').addClass("animated tada").hide();

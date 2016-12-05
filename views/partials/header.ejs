@@ -107,20 +107,26 @@
             <li class="active"><a href="/">HOME</a></li>
              
              <li class="dropdown active">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="properties.html">PROPERTIES <span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="properties.html">RENT <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">                
-                <li><a href="/properties/0">PROPERTIES</a></li>
-                <li><a href="/postadd">POST ADD</a></li> 
-                <li><a href="/gallery/0">VIEW GALLERY</a></li>                                
+                <li><a href="/properties/0">ALL RENTAL LISTINGS</a></li>
+                <li><a href="/gallery/0">ALL RENTAL IMAGES</a></li>                                
               </ul>
            </li>
              <li class="dropdown active">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="properties.html">Properties by Maps <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">                
-                <li><a href="/propertiesbymaps">Google Map</a></li>                            
+              <a class="dropdown-toggle" data-toggle="dropdown" href="properties.html">SELL<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/postadd">PROPERTY RENT</a></li>                
               </ul>
            </li>
-            <li class="active"><a href="/contact">Contact</a></li>           
+           <li class="dropdown active">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="properties.html">MAP<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                 <li><a href="/propertiesbymaps">ALL RENTAL ON MAP</a></li>                     
+                 <li><a href="/propertiesbymaps2">ALL RENTAL ON MAP2</a></li>                     
+              </ul>
+           </li>
+            <li class="active"><a href="/contact">CONTACT</a></li>           
           </ul>  
           <% if(users.fullname == 'Anonymous'){%>
             <div id="sessionsec">

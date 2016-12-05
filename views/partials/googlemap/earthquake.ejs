@@ -42,10 +42,10 @@
 function getCircle(magnitude) {
         return {
           path: google.maps.SymbolPath.CIRCLE,
-          fillColor: 'green',
-          fillOpacity: .1,
+          fillColor: 'red',
+          fillOpacity: .5,
           scale: Math.pow(2, magnitude) / 2,
-          strokeColor: 'green',
+          strokeColor: 'brown',
           strokeWeight: .5
         };
       }
@@ -83,7 +83,7 @@ function getCircle(magnitude) {
               map.setCenter(cent)
 
 
-              var content = '<img src="'+image+'" width="350px" >'+
+              var content = '<img src="'+image+'" width="250px" >'+
                             '<p class="cost"><img src="images/dollar.jpg" width="22"  height="22">&nbsp;&nbsp;'+cost+'</p>'+
                             '<p class="room"><img src="images/br.jpg" width="22" height="22"> '+bedroom+' | <img src="images/wr.jpg" width="22" height="22"> '+bathroom+' | <img src="images/area.jpg" width="22" height="22"> '+area+' SqFt</p>'+
                             '<p class="date"><img src="images/date.jpg" width="22" height="22">&nbsp;&nbsp; '+d+' '+m+' '+dd+' '+yy+' '+'</p>'+

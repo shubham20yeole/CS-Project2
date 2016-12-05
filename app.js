@@ -168,6 +168,16 @@ var pageno = Number(0);
     })
   })
 });
+app.get('/propertiesbymaps2', function(req, res){  
+var pageno = Number(0);  
+  db.property.find({}).skip(pageno*6).sort({timestamp: -1}).limit(100).toArray(function (err, docs) {
+    db.property.count(function(err, count) {
+      var status = 'Showing '+(pageno*6+1)+' to '+(pageno*6+6)+' of '+count+' Properties';
+      console.log(status);  
+      res.render("propertiesbymaps2.ejs",{property: docs, count: count, pageno: pageno+1, status: status});
+    })
+  })
+});
 app.get('/blank', function(req, res){
    res.render("blank.ejs");  
 });
@@ -629,6 +639,7 @@ app.post('/postproperty/', function(req, res){
           if(err){
             console.log(err);
           }else{
+            sendEmail(req.body.email, "YOUR PROPERTY POSTED AT USA REAL ESTATES", "Your property advertisement has been posted successfully to our website. Follow the link below to view your addvertisement...<br><br><a style='padding: 1%; background-color: #6a67ce; color: #e1e0f5;' href='https://usa-real-estates.herokuapp.com/detailedproperty/"+result.timestamp+"' target='_blank'>Review your add</a><br><br>", "SUCCESSFULLY POSTED  PROPERTY TO USA REAL ESTATES");
             res.render("message.ejs",{status: 'addpost', message: 'Congratulations. Your add is posted successfully...', link: '<a href="/detailedproperty/'+result.timestamp+'">Click me to view your post</a>'});
           }
       });
@@ -673,6 +684,11 @@ app.post('/login', function(req, res) {
         // sets a cookie with the user's info
         req.session.users = users;
         var url = req.body.preurl;
+        console.log("Old URL: "+url);
+        if(url == 'https://usa-real-estates.herokuapp.com/registerlogin') url = 'https://usa-real-estates.herokuapp.com/';
+        if(url == 'https://usa-real-estates.herokuapp.com/resetpassword') url = 'https://usa-real-estates.herokuapp.com/';
+        if(url.includes('newpassword')) url = 'https://usa-real-estates.herokuapp.com/';
+        console.log("New URL: "+url);
         res.redirect(url);
       } else {
         errmsg = 'Incorrect Password... RESET new Password or login with facebook to use our services';
@@ -710,16 +726,16 @@ app.post('/detailedproperty/sendinterestinproperty', function(req, res){
 app.get('/newpassword/:id', function(req, res){
     console.log("In get comment method: "+req.params.id);
   db.users.findOne({_id: ObjectId(req.params.id)}, function (err, users) {
- console.log(users);
+    console.log(users);
     res.render("setnewpassword.ejs",{users: users});
-      }); 
+  }); 
 
 });
 app.post('/newpasswordupdate', function(req, res){
     console.log("In newpasswordupdate method: "+req.body.email);
   db.users.update({ email: req.body.email}, {$set:{password: req.body.passcode}}, function (err, result) {
-      // sendEmail(req.body.email, "Password Reset", "We received a request to reset the password for your account. If you requested a reset for "+email+", click the button below. <br><br><a href='https://usa-real-estates.herokuapp.com/newpassword/"+users._id+"' target='_blank'>SET NEW PASSWORD</a><br><br>e this email.Please click on Use temporary password as temppassword","Password reset on USA REAL ESTATES");
-      res.render("signupin.ejs", {errmsg: "Password successfully Reset."});
+      sendEmail(req.body.email, "Password Reset", "We received a request to reset the password for your account. If you requested a reset for "+email+", click the button below. <br><br><a href='https://usa-real-estates.herokuapp.com/newpassword/"+users._id+"' target='_blank'>SET NEW PASSWORD</a><br><br>","Password reset on USA REAL ESTATES");
+      res.redirect("/");
     });
 });
 
@@ -753,7 +769,7 @@ var smtpTransport = nodemailer.createTransport(smtpTransport({
 function sendEmail(email, title, message, subject){
 var emailBody = '<div style="padding: 2%; text-align: center; background-color: #efefef"><div style="padding: 2%; text-align: center; background-color: #fcfcfc"><h1 style="color: #606060">WELCOME TO USA REAL ESTATES</h1><img src="http://shubhamyeole.byethost8.com/public_html/logo.jpg" width="150" height="150"><h2>[TITLE]</h2><h5>[MESSAGE]</h5><h6>[SIGNATURE]</h6><hr><h6 style="color: #808080">You are getting this email because you have signed up for emails update.</h6><h6 style="color: #808080">For more information visit our website at <a style="color: #808080" href="https://usa-real-estates.herokuapp.com/">USA REAL ESTATES</a></h6></div></div>';
 emailBody = emailBody.replace("[TITLE]", title);
-emailBody = emailBody.replace("[MESSAGE]", "Hello "+email+"<br><br>"+message);
+emailBody = emailBody.replace("[MESSAGE]", "<h2>Hello "+email+"<br><br>"+message+"</h2>");
 emailBody = emailBody.replace("[SIGNATURE]", 'By Shubham Yeole');
 
  var mailOptions={
@@ -768,6 +784,19 @@ emailBody = emailBody.replace("[SIGNATURE]", 'By Shubham Yeole');
        
     });
 }
+
+app.post('/contactme', function(req, res){
+  var name = req.body.name;
+  var email = req.body.email;
+  var subject = req.body.subject;
+  var comment = req.body.comment;
+    console.log("In newpasswordupdate method: "+req.body.email);
+    sendEmail('shubham20.yeole@gmail.com', name+" contacted you through your Rental application", "<h1>"+name+" | "+email+" message...<br><br>"+comment+"</h1>",""+name+" contacted you via USA REAL ESTATES");
+    sendEmail(email, "THANK YOU FOR CONTACTING USA REAL ESTATES","We successfully received your message. We will be back soon as soon as possible", "CONTACT ME");
+    res.render("message.ejs",{status: 'addpost', message: 'Congratulations. Your email was sent to Owner of USA REAL ESTATES. We will get back to you as soon as possible. Thank you for your time and using our services.', link: '<a href="/contact">Go Back</a>'});
+});
+
+
 app.get('/send',function(req,res){
   var message = "hello shubham";
   var email = "shubham20.yeole@gmail.com";

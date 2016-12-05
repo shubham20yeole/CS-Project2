@@ -1,4 +1,4 @@
-            <style type="text/css">
+           <style type="text/css">
               html { height: 100% }
               body { height: 100%; margin: 0; padding: 0 }
               #map_canvas { height: 100% }
@@ -7,7 +7,7 @@
               src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1tbIAqN0XqcgTR1-FxYoVTVq6Is6lD98&sensor=false">
             </script>
             <script type="text/javascript">
-            var map;
+ 
             var locations = [
               ['loan 1', 33.890542, 151.274856, 'address 1'],
               ['loan 2', 33.923036, 151.259052, 'address 2'],
@@ -17,42 +17,20 @@
               ];
 
               function initialize() {
+
                 var myOptions = {
                   center: new google.maps.LatLng(22.503160, -100.269164),
-                  zoom: 4,
-                  mapTypeId: google.maps.MapTypeId.ROADMAP,
-                };
-                map = new google.maps.Map(document.getElementById("default"),
-                    myOptions);map.data.setStyle(function(feature) {
-                  var magnitude = feature.getProperty('mag');
-                  return {
-                    icon: getCircle(magnitude)
-                  };
-                });
-                var script = document.createElement('script');
-                script.src = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_month.geojsonp';
-                document.getElementsByTagName('head')[0].appendChild(script);
-               
+                  zoom: 5,
+                  mapTypeId: google.maps.MapTypeId.ROADMAP
 
-                
+                };
+                var map = new google.maps.Map(document.getElementById("default"),
+                    myOptions);
 
                 setMarkers(map,locations)
 
           }
-function getCircle(magnitude) {
-        return {
-          path: google.maps.SymbolPath.CIRCLE,
-          fillColor: 'green',
-          fillOpacity: .1,
-          scale: Math.pow(2, magnitude) / 2,
-          strokeColor: 'green',
-          strokeWeight: .5
-        };
-      }
 
-      function eqfeed_callback(results) {
-        map.data.addGeoJson(results);
-      }
     function setMarkers(map,locations){
      
       var marker, i
@@ -84,7 +62,7 @@ function getCircle(magnitude) {
 
 
               var content = '<img src="'+image+'" width="350px" >'+
-                            '<p class="cost"><img src="images/dollar.jpg" width="22"  height="22">&nbsp;&nbsp;'+cost+'</p>'+
+                            '<p class="cost"><img src="images/dollar.jpg" width="22" height="22">&nbsp;&nbsp;'+cost+'</p>'+
                             '<p class="room"><img src="images/br.jpg" width="22" height="22"> '+bedroom+' | <img src="images/wr.jpg" width="22" height="22"> '+bathroom+' | <img src="images/area.jpg" width="22" height="22"> '+area+' SqFt</p>'+
                             '<p class="date"><img src="images/date.jpg" width="22" height="22">&nbsp;&nbsp; '+d+' '+m+' '+dd+' '+yy+' '+'</p>'+
                             '<p class="link" id="'+timestamp+'">Read more</p>';     
