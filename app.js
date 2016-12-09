@@ -82,11 +82,10 @@ app.use(function(req, res, next) {
           res.locals.users = users;
           req.session.notifications = notifications;  //refresh the session value
           res.locals.notifications = notifications;
-          
+          next();
 
         });
       }
-      next();
       // finishing processing the middleware and run the route
     });
   } else {
