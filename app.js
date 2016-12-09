@@ -305,9 +305,7 @@ app.post('/login', function(req, res) {
         req.session.users = users;
         var url = req.body.preurl;
         console.log("Old URL: "+url);
-        if(url == 'https://usa-real-estates.herokuapp.com/registerlogin') url = 'https://usa-real-estates.herokuapp.com/';
-        if(url == 'https://usa-real-estates.herokuapp.com/resetpassword') url = 'https://usa-real-estates.herokuapp.com/';
-        if(url.includes('newpassword')) url = 'https://usa-real-estates.herokuapp.com/';
+      
         console.log("New URL: "+url);
         res.redirect(url);
       } else {
