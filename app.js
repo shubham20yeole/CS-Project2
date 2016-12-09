@@ -765,7 +765,7 @@ app.get('/detailedproperty/:id', function(req, res){
   db.property.findOne({ timestamp: req.params.id}, function (err, property) {
       db.property.find({}).skip(0).sort({timestamp: -1}).limit(5).toArray(function (err, latestproperty) {
          db.images.find({ timestamp: req.params.id}, function (err, images) {
-          res.render("detailedproperty.ejs",{property: property, latestproperty: latestproperty, images: images});
+          res.render("detailedproperty.ejs",{property: property, latestproperty: latestproperty, images: images, notifications: notifications});
         }) 
      })      
   });
