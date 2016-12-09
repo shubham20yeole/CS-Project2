@@ -303,11 +303,7 @@ app.post('/login', function(req, res) {
       if (req.body.password === users.password) {
         // sets a cookie with the user's info
         req.session.users = users;
-        var url = req.body.preurl;
-        console.log("Old URL: "+url);
-      
-        console.log("New URL: "+url);
-        res.redirect(url);
+        res.redirect('/');
       } else {
         errmsg = 'Incorrect Password... RESET new Password or login with facebook to use our services';
          res.render("signupin.ejs", {errmsg: errmsg});
