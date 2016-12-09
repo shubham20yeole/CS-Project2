@@ -62,3 +62,51 @@ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);}
   max-height: 60%;
   overflow: auto;
 }
+.section {
+  clear: both;
+  padding: 0px;
+  margin: 0px;
+}
+
+/*  COLUMN SETUP  */
+.col {
+  display: block;
+  float:left;
+  margin: 1% 0 1% 1.6%;
+}
+.col:first-child { margin-left: 0; }
+
+/*  GROUPING  */
+.group:before,
+.group:after { content:""; display:table; }
+.group:after { clear:both;}
+.group { zoom:1; /* For IE 6/7 */ }
+/*  GRID OF THREE  */
+.span_3_of_3 { width: 100%; }
+.span_2_of_3 { width: 66.13%; }
+.span_1_of_3 { width: 32.26%; }
+
+/*  GO FULL WIDTH BELOW 480 PIXELS */
+@media only screen and (max-width: 480px) {
+  .col {  margin: 1% 0 1% 0%; }
+  .span_3_of_3, .span_2_of_3, .span_1_of_3 { width: 100%; }
+}
+#edittitle{padding: 2%; width: 100%}
+#editcost{padding: 2%; width: 100%;}
+#editfulladdress{padding: 2%; width: 100%;}float: right;
+#editdisc{padding: 2%; width: 100%; height: 200px;}
+#editfeatures{padding: 2%; width: 100%;}
+#cancelbutton{padding: 1% 2% 1% 2%; background-color: red; color: white}
+#cancelbutton{}
+#savebutton{padding: 1% 2% 1% 2%; background-color: #76FF03; color: black}
+#savebutton{}
+#editbutton{padding: 1% 2% 1% 2%; background-color: #0cde3d; color: black} 
+#editbutton{}
+#updatediv{margin-top: 34cm}
+#bookmarknotsavedtext{color: #FF5722;font-size: 1em; }
+#bookmarksavedtext{ color: #64DD17; font-size: 1em; }
+#bookmark{font-size: 2em; color: #b2b2b2; float: right; margin-top: 0.5cm;}
+#bookmark:hover{color: yellow; cursor: pointer;}
+#bo-lodardiv{margin-top: 0.5cm; float: right;}
+#editproperty input[type="text"]{color: #6a6a7b; width: 100%; padding: 3% 2% 3% 2%}
+#facebook{margin-top: -0.4cm;}

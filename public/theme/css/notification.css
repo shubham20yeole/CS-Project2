@@ -1,0 +1,69 @@
+#notification_li
+{
+}
+#notificationContainer 
+{
+background-color: #fff;
+border: 4px solid rgba(100, 100, 100, .4);
+-webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+overflow: visible;
+position: absolute;
+top: 60px;
+margin-left: -210px;
+width: 400px;
+z-index: -1;
+display: none; // Enable this after jquery implementation 
+}
+/*// Popup Arrow
+*/#notificationContainer:before {
+content: '';
+display: block;
+position: absolute;
+width: 20px;
+height: 20px;
+color: black;
+border: 10px solid black;
+border-color: transparent transparent white;
+margin-top: -20px;
+margin-left: 350px;
+}
+#notificationTitle
+{
+font-weight: bold;
+padding: 8px;
+font-size: 13px;
+background-color: #ffffff;
+position: fixed;
+z-index: 1000;
+width: 384px;
+border-bottom: 1px solid #dddddd;
+}
+#notificationsBody
+{
+padding: 33px 0px 0px 0px !important;
+min-height:300px;
+}
+#notificationFooter
+{
+background-color: #e9eaed;
+text-align: center;
+font-weight: bold;
+padding: 8px;
+font-size: 12px;
+border-top: 1px solid #dddddd;
+}
+#notification_count 
+{
+padding: 7px 7px 7px 7px;
+background: #cc0000;
+color: #ffffff;
+font-weight: bold;
+border-radius: 50%;
+width: 170px;
+-moz-border-radius: 9px; 
+-webkit-border-radius: 9px;
+position: absolute;
+margin-top: -11px;
+}
+.clicleimg{border-radius: 50%;}
+a:hover{cursor: pointer;}

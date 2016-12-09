@@ -5,7 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">    
     <title>Home Property | Home</title>
-    
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- NOTIFICATION -->
+    <link href="theme/css/notification.css" rel="stylesheet">    
+    <script src="theme/js/notification.js"></script> 
+
     <!-- Favicon -->
     <link rel="shortcut icon" href="theme/img/favicon.ico" type="image/x-icon">
 
@@ -23,13 +28,13 @@
     <!-- Main style sheet -->
     <link href="theme/css/style.css" rel="stylesheet">    
     <link href="theme/css/header.css" rel="stylesheet">    
+    
 
    
     <!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>    
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     
-
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -74,6 +79,7 @@
                       <img src="<%=users.photo%>?i=2" width="32" height="32"> 
                       <a href="/logout" class="aa-login"><%= users.fullname %></a>
                       | <a href="/logout" class="aa-login">LOGOUT</a>
+                      | <a href="/profile/0" class="aa-login">PROFILE</a>
                   <%}%>
                    <% if(users.type == 'admin'){%>
                     <a href="../admin" class="aa-register"> | ADMIN</a>
@@ -110,41 +116,59 @@
             <li class="active"><a href="/">HOME</a></li>
              
              <li class="dropdown active">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="properties.html">RENT <span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown">RENT <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">                
                 <li><a href="/properties/0">ALL RENTAL LISTINGS</a></li>
                 <li><a href="/gallery/0">ALL RENTAL IMAGES</a></li>                                
               </ul>
            </li>
              <li class="dropdown active">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="properties.html">SELL<span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown">SELL<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="/postadd">PROPERTY RENT</a></li>                
               </ul>
            </li>
            <li class="dropdown active">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="properties.html">MAP<span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown">MAP<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                  <li><a href="/propertiesbymaps">ALL RENTAL ON MAP</a></li>                     
                  <li><a href="/propertiesbymaps2">ALL RENTAL ON MAP2</a></li>                     
               </ul>
            </li>
-            <li class="active"><a href="/contact">CONTACT</a></li>           
-          </ul>  
+          <li class="active"><a href="/contact">CONTACT</a></li>
           <% if(users.fullname == 'Anonymous'){%>
-            <div id="sessionsec">
-              <a href="registerlogin" class="aa-register">Register</a>
-              <a href="registerlogin" class="aa-login"> or Login</a> 
-           </div>
+            <li class="active"><a href="registerlogin" class="aa-register">SIGN UP</a></li>
+             <li class="active"><a href="registerlogin" class="aa-login">SIGN IN</a></li>
           <%}else{%> 
-            <div id="sessionsec">
-              <img src="<%=users.photo%>" width="32" height="32"> 
-              <a href="/" class="aa-login"><%= users.fullname %></a>
-              | <a href="/logout" class="aa-login">LOGOUT</a>
-            </div> 
-          <%}%>                          
+           <li class="dropdown active">
+              <a class="dropdown-toggle" data-toggle="dropdown">PROFILE<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                 <li><a href="/profile/0" class="aa-login" target="_blank">PROFILE</a></li>
+                   <% if(users.type == 'admin'){%>
+                  <li><a href="../admin" class="aa-register" target="_blank">ADMIN</a></li>
+                  <%}%>                     
+                 <li><a href="/logout" class="aa-login">LOGOUT</a></li>
+              </ul>
+           </li>
+           <li id="notification_li">
+              <a href="#" id="notificationLink"><span id="notification_count"><img src="<%=users.photo%>" class="clicleimg" width="32" height="32"> 3 Notifications</span></a>
+              <div id="notificationContainer">
+              <div id="notificationTitle">Notifications</div>
+              <div id="notificationsBody" class="notifications">
+
+                <% notifications.forEach(function(notifications){%>
+                  <%= notifications.action %><%= notifications.dateField %><%= notifications.message %>
+                  <img src="<%= notifications.noteimage %>" width="70" height="70">
+                <%}) %>
+              </div>
+              <div id="notificationFooter"><a href="#">See All</a></div>
+              </div>
+            </li>
+          <%}%>          
+          </ul>                         
         </div>
 
       </div>          
     </nav> 
   </section>
+       

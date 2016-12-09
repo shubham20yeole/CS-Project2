@@ -1,4 +1,4 @@
-            <style type="text/css">
+        <style type="text/css">
               html { height: 100% }
               body { height: 100%; margin: 0; padding: 0 }
               #map_canvas { height: 100% }
@@ -15,7 +15,6 @@
               ['loan 4', 33.80010128657071, 151.28747820854187, 'address 4'],
               ['loan 5', 33.950198, 151.259302, 'address 5']
               ];
-
               function initialize() {
                 var myOptions = {
                   center: new google.maps.LatLng(22.503160, -100.269164),
@@ -33,11 +32,8 @@
                 script.src = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_month.geojsonp';
                 document.getElementsByTagName('head')[0].appendChild(script);
                
-
                 
-
                 setMarkers(map,locations)
-
           }
 function getCircle(magnitude) {
         return {
@@ -49,7 +45,6 @@ function getCircle(magnitude) {
           strokeWeight: .5
         };
       }
-
       function eqfeed_callback(results) {
         map.data.addGeoJson(results);
       }
@@ -72,25 +67,19 @@ function getCircle(magnitude) {
              var m = cords[10];
              var dd = cords[11];
              var yy = cords[12];
-
              var cent = new google.maps.LatLng(34.968330, -103.521123);
-
              latlngset = new google.maps.LatLng(lat, long);
               var marker = new google.maps.Marker({  
                 icon: 'https://chart.googleapis.com/chart?chst=d_bubble_icon_text_small&chld=dollar|bb|$+'+cost+'|00C853|E8F5E9',
                       map: map, title: long , position: latlngset  
               });
               map.setCenter(cent)
-
-
               var content = '<img src="'+image+'" width="250px" >'+
                             '<p class="cost"><img src="images/dollar.jpg" width="22"  height="22">&nbsp;&nbsp;'+cost+'</p>'+
                             '<p class="room"><img src="images/br.jpg" width="22" height="22"> '+bedroom+' | <img src="images/wr.jpg" width="22" height="22"> '+bathroom+' | <img src="images/area.jpg" width="22" height="22"> '+area+' SqFt</p>'+
                             '<p class="date"><img src="images/date.jpg" width="22" height="22">&nbsp;&nbsp; '+d+' '+m+' '+dd+' '+yy+' '+'</p>'+
                             '<p class="link" id="'+timestamp+'">Read more</p>';     
-
               var infowindow = new google.maps.InfoWindow()
-
               google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ 
                   return function() {
                      infowindow.setContent(content);
@@ -99,7 +88,6 @@ function getCircle(magnitude) {
               })(marker,content,infowindow)); 
             });
           }
-
         </script>
        </head>
       <body onload="initialize()">
@@ -107,7 +95,6 @@ function getCircle(magnitude) {
   </body>
 </html>
  <% property.forEach(function(property){%>
-
   <div style="display:none;"><input type="text" class="lat" style="width: 100%;" value="<%= property.latitude %> <%= property.longitude %> <%= property.cost %> <%= property.image1 %> <%= property.bedroom %> <%= property.kitchen %> <%= property.bathroom %> <%= property.area %> <%= property.timestamp %> <%= property.dateField %>">
   </div>
             

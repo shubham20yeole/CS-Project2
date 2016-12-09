@@ -1,15 +1,14 @@
 $( document ).ready(function() {
     $(".aa-single-advance-search").hide();
 	$(".link").click(function() {
-		alert();
 	});
  }); 
 $(document).on("click",".link",function() { 
-	var id = $(this).attr('id');
+    var id = $(this).attr('id');
     $.post( "searchproperty", { timestamp: id})
-    .done(function( property ) {	
+    .done(function( property ) {    
         $( "#lodardiv" ).html('<img src="images/load.gif" width=70" height="70">');
-    	 setTimeout(function(){
+         setTimeout(function(){
          $(".aa-single-advance-search").show();
            $( "#lodardiv" ).html('<p class="faa-bounce animated"><i class="fa fa-thumbs-o-up "></i> Searched successful </p>');
             var staddress = property.staddress+", "+property.city+", "+property.state+", "+property.zip+", "+property.country;         
@@ -28,3 +27,4 @@ $(document).on("click",".link",function() {
 
     });
 });
+

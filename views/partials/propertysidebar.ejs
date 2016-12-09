@@ -76,8 +76,7 @@
                     <a type="button" id="mapb" href="#popup1" onclick="init_map(<%= latestproperty.latitude %>,<%= latestproperty.longitude %>,'<h3><%= latestproperty.title %></h3><h6> Property Location</h6>')"><img src="../images/mappin.jpg" width="22" height="32"></a>
 
 
-                    &nbsp&nbsp&nbsp<%= latestproperty.staddress %>, <%= latestproperty.city %>, 
-                    <%= latestproperty.state %>, <%= latestproperty.zip %>, <%= latestproperty.country %>
+                    &nbsp&nbsp&nbsp<%= latestproperty.fulladdress %>
                       
                     </p>                
                     <p class="cost">$<%= latestproperty.cost %></p>

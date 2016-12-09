@@ -1,25 +1,32 @@
 $( document ).ready(function() {
-	$('#searchtable').hide();
+  $('#searchtable').hide();
+
 });
-$(document).on("keyup change","#searchloccation, #searchcategory, #searchtype, #searchbedroom",function() {
-	var loc = $('#searchloccation').val();
-	var cat = $('#searchcategory').val();
-	var type = $('#searchtype').val();
-	var bed = $('#searchbedroom').val();
-	var price = $('#').val();
-	var area = $('#').val();
+$("#searchloccation").on("keyup change",function() {
+  var loc = $('#searchloccation').val();
+  var cat = $('#searchcategory').val();
+  var type = $('#searchtype').val();
+  var bed = $('#searchbedroom').val();
+  var price = $('#').val();
+  var area = $('#').val();
   $.post( "/search/", { location: loc, category: cat, type: type, bedroom: bed})
     .done(function( data ) 
-    	{				
-    		$('#searchtable').show();
+      {       
+        $('#searchtable').show();
 
-    		$("#searchlength").text(data.length);
-    		$("#searchcity").text(loc);
-    		$("#displaysearch").text("");
-    		var xL = data.length;
-			for(i=0; i<xL; i++){
-				$('#displaysearch').append('<tr><td> '+data[i].city+': '+data[i].staddress+'</td><td> Price:'+data[i].cost+'</td><td>'+data[i].area+' SQ Feet</td><td>'+data[i].bedroom+'</td><td><a class="link" href="detailedproperty/'+data[i].timestamp+'">View More</a></td></tr>'); // do what
-			}
-    	});
+        $("#searchlength").text(data.length);
+        $("#searchcity").text(loc);
+        var xL = data.length;
+        var html = "";
+      for(i=0; i<xL; i++){
+        html = html + '<tr class="trtags"><td> '+data[i].fulladdress+'</td><td> '+data[i].cost+'</td><td>'+data[i].area+' SQ Feet</td><td>'+data[i].bedroom+'</td><td><a class="link" href="detailedproperty/'+data[i].timestamp+'">View More</a></td></tr>';
+        }
+        $("#displaysearch").empty();
+        var temp = '<table width="100%" id="example1"><thead><tr><th>Address</th><th>Price</th><th>Area</th><th>Bedroom</th><th>View more</th></tr></thead><tbody id="displaysearch">'+html+'</tbody></table>';
+        $('#showsearch').html(temp);
+              $('#example1').dataTable({"sPaginationType": "full_numbers", "bDestroy": true, "iDisplayLength": 10});
+              $(".dataTables_length select").addClass("selectEntry").attr("placeholder", "Type here to search").append('<br><br><br><br>');
+     $(".dataTables_filter input").addClass("searchInput").attr("placeholder", "Type here to search");;
+      });
+
 });
-

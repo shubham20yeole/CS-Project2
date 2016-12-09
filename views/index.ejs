@@ -1,6 +1,5 @@
 <% include partials/header.ejs %>
 <link rel="stylesheet" type="text/css" href="theme/css/index.css"> 
-  <script src="theme/js/index.js"></script> 
 
   <!-- End menu section -->
 
@@ -54,85 +53,15 @@
       <div class="aa-advance-search-area">
         <div class="form">
          <div class="aa-advance-search-top">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="aa-single-advance-search">
-                  <input type="text" id="searchloccation" placeholder="Type Your Location">
-                </div>
-              </div>
-              <div class="col-md-2">
-                <div class="aa-single-advance-search">
-                  <select id="searchcategory">
-                   <option value="0" selected>Category</option>
-                    <option value="Other">Category</option>
-                    <option value="Houses">Houses</option>
-                    <option value="Appartments">Appartment</option>
-                    <option value="Shop">Shop</option>
-                    <option value="Paying Guest">Paying Guest</option>
-                    <option value="Town Home">Town Home</option>
-                    <option value="Farm House">Farm House</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-2">
-                 <div class="aa-single-advance-search">
-                  <select id="searchtype">
-                    <option value="0">Type</option>
-                    <option value="Sale">For Sale</option>
-                    <option value="Rent">For Rent</option>
-                  </select>
-              </div>
-              </div>
-              <div class="col-md-2">
-                 <div class="aa-single-advance-search">
-                  <select id="searchbedroom">
-                    <option value="0" selected>Bedroom</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                  </select>
-              </div>
-              </div>
-              <div class="col-md-2">
-                <div class="aa-single-advance-search">
-                  <form action="/properties/0" method="get">
-                    <input class="aa-search-btn" type="submit" value="Search">
-                  </form>
-                </div>
-              </div>
+            <div class="row" style="text-align: center;">
+                  <input type="text"  id="searchloccation" placeholder="STREET ADDRESS / ZIP / COUNTY">
+              
             </div>
           </div>
-         <div class="aa-advance-search-bottom">
-           <div class="row">
-            <div class="col-md-6">
-              <div class="aa-single-filter-search">
-                <span>AREA (SQ)</span>
-                <span>FROM</span>
-                <span id="skip-value-lower" class="example-val">30.00</span>
-                <span>TO</span>
-                <span id="skip-value-upper" class="example-val">100.00</span>
-                <div id="aa-sqrfeet-range" class="noUi-target noUi-ltr noUi-horizontal noUi-background">
-                </div>                  
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="aa-single-filter-search">
-                <span>PRICE ($)</span>
-                <span>FROM</span>
-                <span id="skip-value-lower2" class="example-val">30.00</span>
-                <span>TO</span>
-                <span id="skip-value-upper2" class="example-val">100.00</span>
-                <div id="aa-price-range" class="noUi-target noUi-ltr noUi-horizontal noUi-background">
-                </div>      
-              </div>
-            </div>
-          </div>  
-         </div>
-        </div>
+          <br><br>
+          <div id="searchtable">
+      <p id="searchmsg">We have: <span id="searchlength"></span> results for <span id='searchcity'></span> like city. Find below.</p>
+        </div><div id="showsearch"></div>
       </div>
     </div>
   </section>
@@ -146,13 +75,15 @@
   <section id="aa-latest-property">
     <div class="container">
       <div class="aa-latest-property-area">
-      <div id="searchtable">
-      <p id="searchmsg">We have: <span id="searchlength"></span> results for <span id='searchcity'></span> like city. Find below.</p>
+      
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+       <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.js"></script>
 
-      <table width="100%">
-        <th>Address</th><th>Price</th><th>Area</th><th>Bedroom</th><th>View more</th>
-        <tbody id="displaysearch"></tbody>
-      </table>
+        <script type="text/javascript">
+
+</script>
       </div>
         <div class="aa-title">
           <h2>LATEST PROPERTIES</h2>
@@ -686,7 +617,6 @@
   
   <!-- jQuery library -->
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
-  <script src="theme/js/jquery.min.js"></script>   
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="theme/js/bootstrap.js"></script>   
   <!-- slick slider -->
