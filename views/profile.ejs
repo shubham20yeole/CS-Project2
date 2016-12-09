@@ -27,8 +27,8 @@
 <html>
 <title>W3.CSS Template</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel="stylesheet" href="../theme/css/w3.css">
+<link rel="stylesheet" href="../theme/css/w3color.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
@@ -90,7 +90,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
       <!-- Accordion -->
       <div class="w3-card-2 w3-round">
         <div class="w3-accordion w3-white">
-          <button onclick="myFunction('Demo1')" style="background-color: #FBE9E7; color: #FF5722;" class="w3-btn-block w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i>SUBSCRIPTION PLANS</button>
+          <button onclick="myFunction('Demo1')" class="w3-btn-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i>SUBSCRIPTION PLANS</button>
           <div id="Demo1" class="w3-accordion-content w3-container">
             <p><br></p>
             <p>Your subscription plan: $<%=users.subscription%>/year</p>
@@ -99,7 +99,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
             <p>Posting status: <%=users.poststatus%></p>
             <p><br></p>
           </div>
-          <button onclick="myFunction('Demo2')" style="background-color: #FBE9E7; color: #FF5722;" class="w3-btn-block w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i>BOOKMARKS</button>
+          <button onclick="myFunction('Demo2')" class="w3-btn-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i>BOOKMARKS</button>
           <div id="Demo2" class="w3-accordion-content w3-container">
           <p class="refresh" style="text-align: center;"></p>
             <% bookmark_a.forEach(function(bookmark_a){%>
@@ -114,7 +114,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
             </table>
             <%}) %>
           </div>
-          <button onclick="myFunction('Demo3')" style="background-color: #FBE9E7; color: #FF5722;" class="w3-btn-block w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i>PREVIOUS POSTS</button>
+          <button onclick="myFunction('Demo3')" class="w3-btn-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i>PREVIOUS POSTS</button>
           <div id="Demo3" class="w3-accordion-content w3-container">
          <div class="w3-row-padding">
           <p class="refresh1" style="text-align: center;"></p>
@@ -170,7 +170,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
             <div class="w3-container w3-padding">
               <h6 class="w3-opacity">Leave a message for an ADMIN</h6>
               <p contenteditable="true" id="comment" class="w3-border w3-padding">Hello Admin, </p>
-              <button type="button" id="emailtoadmin" class=""><i class="fa fa-pencil"></i> SEND MESSAGE TO ADMIN</button> <p id="lodargif"></p><p id="lodargif2"></p>
+              <button type="button" id="emailtoadmin" class="w3-btn w3-theme"><i class="fa fa-pencil"></i> SEND MESSAGE TO ADMIN</button> <p id="lodargif"></p><p id="lodargif2"></p>
             </div>
           </div>
         </div>
