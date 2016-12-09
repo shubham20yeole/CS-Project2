@@ -70,18 +70,20 @@ app.use(session({
   activeDuration: 5 * 60 * 1000,
 }));
 //Global vars
+var notifications = null;
 app.use(function(req, res, next) {
   if (req.session && req.session.users) {
     db.users.findOne({ email: req.session.users.email }, function(err, users) {
       if (users) {
-        db.notification.find({ useremail: req.session.users.email }, function(err, notifications) {
+        db.notification.find({ useremail: req.session.users.email }, function(err, notifications1) {
           req.users = users;
           req.notifications = notifications;
           delete req.users.password; // delete the password from the session
           req.session.users = users;  //refresh the session value
           res.locals.users = users;
-          req.session.notifications = notifications;  //refresh the session value
-          res.locals.notifications = notifications;
+          console.log(", notifications: notifications: "+notifications1);
+          notifications = notifications1;  //refresh the session value
+          notifications = notifications1;
           next();
 
         });
@@ -192,7 +194,7 @@ var currentdate = dd.getMonth()+" / "+dd.getDate()+" / "+dd.getFullYear()+" at "
 
 app.get('/', function(req, res){       
   db.property.find({}).skip(0).sort({timestamp: -1}).limit(9).toArray(function (err, docs) {
-    res.render("index.ejs",{property: docs});
+    res.render("index.ejs",{property: docs, notifications: notifications});
   })
 });
 app.get('/registerlogin', function(req, res){
@@ -380,7 +382,7 @@ app.post('/admintouser', function(req, res) {
 app.get('/contact', function(req, res){  
 var pageno = Number(0);  
   db.property.find({}).skip(pageno*6).sort({timestamp: -1}).limit(100).toArray(function (err, docs) {
-      res.render("contact.ejs",{property: docs});
+      res.render("contact.ejs",{property: docs, notifications: notifications});
 
   })
 });
@@ -402,7 +404,7 @@ var pageno = Number(req.params.id);
       var status = 'Showing '+(pageno*6+1)+' to '+(pageno*6+6)+' of '+count+' Properties';
       console.log(status);  
      db.property.find({}).skip(0).sort({timestamp: -1}).limit(5).toArray(function (err, latestproperty) {
-    res.render("properties.ejs",{property: docs, count: count, pageno: pageno+1, status: status, latestproperty: latestproperty});
+    res.render("properties.ejs",{property: docs, count: count, pageno: pageno+1, status: status, latestproperty: latestproperty, notifications: notifications});
     })    
     })
   })
@@ -413,7 +415,7 @@ var pageno = Number(req.params.id);
     db.property.count(function(err, count) {
       var status = 'Showing '+(pageno*6+1)+' to '+(pageno*6+6)+' of '+count+' Properties';
       console.log(status);  
-      res.render("gallery.ejs",{property: docs, count: count, pageno: pageno+1, status: status});
+      res.render("gallery.ejs",{property: docs, count: count, pageno: pageno+1, status: status, notifications: notifications});
     })
   })
 });
@@ -423,7 +425,7 @@ var pageno = Number(0);
     db.property.count(function(err, count) {
       var status = 'Showing '+(pageno*6+1)+' to '+(pageno*6+6)+' of '+count+' Properties';
       console.log(status);  
-      res.render("propertiesbymaps.ejs",{property: docs, count: count, pageno: pageno+1, status: status});
+      res.render("propertiesbymaps.ejs",{property: docs, count: count, pageno: pageno+1, status: status, notifications: notifications});
     })
   })
 });
@@ -433,7 +435,7 @@ var pageno = Number(0);
     db.property.count(function(err, count) {
       var status = 'Showing '+(pageno*6+1)+' to '+(pageno*6+6)+' of '+count+' Properties';
       console.log(status);  
-      res.render("propertiesbymaps2.ejs",{property: docs, count: count, pageno: pageno+1, status: status});
+      res.render("propertiesbymaps2.ejs",{property: docs, count: count, pageno: pageno+1, status: status, notifications: notifications});
     })
   })
 });
@@ -460,7 +462,7 @@ if(user==null){
           db.property.find({useremail: req.session.users.email}).skip(0).sort({timestamp: -1}).limit(100).toArray(function (err, pastproperty) {
             db.messages.find({to: req.session.users.email}).skip(0).sort({_id: -1}).limit(100).toArray(function (err, messages) {
             var status = 'Showing '+(pageno*1+5)+' to '+(pageno*1+5)+' of '+count+' Properties';
-            res.render("profile.ejs", {property: '', timeline:timeline, bookmark_a: bookmark_a, pastproperty: pastproperty, messages: messages});
+            res.render("profile.ejs", {property: '', timeline:timeline, bookmark_a: bookmark_a, pastproperty: pastproperty, messages: messages, notifications: notifications});
             })
           })
         })     
@@ -540,15 +542,12 @@ app.post('/sendemailtoadmin', function(req, res) {
 
 
 
-
-
+console.log(notifications)
 
 app.get('/postadd', function(req, res){
   var property = "";
     db.property.find({}).skip(0).sort({timestamp: -1}).limit(5).toArray(function (err, latestproperty) {
-      db.notification.find({ useremail: req.session.users.email }, function(err, notifications) {
-      res.render("postadd.ejs",{property: "latestproperty", latestproperty: latestproperty, users: req.session.users, notifications: req.session.notifications});  
-    });
+      res.render("postadd.ejs",{property: "latestproperty", latestproperty: latestproperty, notifications: notifications});  
   });
 });
 app.post('/postproperty/', function(req, res){
