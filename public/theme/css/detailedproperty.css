@@ -103,8 +103,8 @@ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);}
 #editbutton{padding: 1% 2% 1% 2%; background-color: #0cde3d; color: black} 
 #editbutton{}
 #updatediv{margin-top: 34cm}
-#bookmarknotsavedtext{color: #FF5722;font-size: 1em; }
-#bookmarksavedtext{ color: #64DD17; font-size: 1em; }
+#bookmarknotsavedtext a{color: #FF5722;font-size: 1em; font-weight: bold; }
+#bookmarksavedtext a{ color: #64DD17; font-size: 1em; font-weight: bold;}
 #bookmark{font-size: 2em; color: #b2b2b2; float: right; margin-top: 0.5cm;}
 #bookmark:hover{color: yellow; cursor: pointer;}
 #bo-lodardiv{margin-top: 0.5cm; float: right;}

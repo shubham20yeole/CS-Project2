@@ -99,10 +99,10 @@ $(document).on("click","#bookmark",function() {
     	setTimeout(function(){
     		var mesage = "";
     		if(result=="notsave") {
-    			$( "#bo-lodardiv" ).html('<br><p class="animated tada" id="bookmarknotsavedtext"><i class="fa fa-thumbs-o-up "></i> Already Bookmarked</p>');
+    			$( "#bo-lodardiv" ).html('<br><p class="animated tada" id="bookmarknotsavedtext"><a href="../profile/0" target="_blank"><i class="fa fa-thumbs-o-up "></i> Already Bookmarked</a></p>');
     		}
     		else{
-    			$( "#bo-lodardiv" ).html('<br><p class="animated tada" id="bookmarksavedtext"><i class="fa fa-thumbs-o-up "></i> Bookmark Saved</p>');
+    			$( "#bo-lodardiv" ).html('<br><p class="animated tada" id="bookmarksavedtext"><a href="../profile/0" target="_blank"><i class="fa fa-thumbs-o-up "></i> Bookmark Saved</a></p>');
     		}
     	
           },2000);
