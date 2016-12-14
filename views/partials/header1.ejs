@@ -119,36 +119,36 @@
              <li class="dropdown active">
               <a class="dropdown-toggle" data-toggle="dropdown">RENT <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">                
-                <li><a href="/properties/0">ALL RENTAL LISTINGS</a></li>
-                <li><a href="/gallery/0">ALL RENTAL IMAGES</a></li>                                
+                <li><a href="../properties/0">ALL RENTAL LISTINGS</a></li>
+                <li><a href="../gallery/0">ALL RENTAL IMAGES</a></li>                                
               </ul>
            </li>
              <li class="dropdown active">
               <a class="dropdown-toggle" data-toggle="dropdown">SELL<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="/postadd">PROPERTY RENT</a></li>                
+                <li><a href="../postadd">PROPERTY RENT</a></li>                
               </ul>
            </li>
            <li class="dropdown active">
               <a class="dropdown-toggle" data-toggle="dropdown">MAP<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                 <li><a href="/propertiesbymaps">ALL RENTAL ON MAP</a></li>                     
-                 <li><a href="/propertiesbymaps2">ALL RENTAL ON MAP2</a></li>                     
+                 <li><a href="../propertiesbymaps">ALL RENTAL ON MAP</a></li>                     
+                 <li><a href="../propertiesbymaps2">ALL RENTAL ON MAP2</a></li>                     
               </ul>
            </li>
           <li class="active"><a href="/contact">CONTACT</a></li>
           <% if(users.fullname == 'Anonymous'){%>
-            <li class="active"><a href="registerlogin" class="aa-register">SIGN UP</a></li>
-             <li class="active"><a href="registerlogin" class="aa-login">SIGN IN</a></li>
+            <li class="active"><a href="../registerlogin" class="aa-register">SIGN UP</a></li>
+             <li class="active"><a href="../registerlogin" class="aa-login">SIGN IN</a></li>
      <%}else{%> 
            <li class="dropdown active">
               <a class="dropdown-toggle" data-toggle="dropdown"><img src="<%=users.photo%>" class="clicleimg" width="16" height="16"> &nbsp;&nbsp;Profile<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                 <li><a href="/profile/0" class="aa-login" target="_blank">PROFILE</a></li>
+                 <li><a href="../profile/0" class="aa-login" target="_blank">PROFILE</a></li>
                    <% if(users.type == 'admin'){%>
                   <li><a href="../admin" class="aa-register" target="_blank">ADMIN</a></li>
                   <%}%>                     
-                 <li><a href="/logout" class="aa-login">LOGOUT</a></li>
+                 <li><a href="../logout" class="aa-login">LOGOUT</a></li>
               </ul>
            </li>
                 <li id="notification_li">

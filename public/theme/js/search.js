@@ -19,7 +19,7 @@ $("#searchloccation").on("keyup change",function() {
         var xL = data.length;
         var html = "";
       for(i=0; i<xL; i++){
-        html = html + '<tr class="trtags"><td> '+data[i].fulladdress+'</td><td> '+data[i].cost+'</td><td>'+data[i].area+' SQ Feet</td><td>'+data[i].bedroom+'</td><td><a class="link" href="detailedproperty/'+data[i].timestamp+'">View More</a></td></tr>';
+        html = html + '<tr class="trtags"><td> '+data[i].fulladdress+'</td><td> '+data[i].cost+' USD</td><td>'+data[i].area+' SQ Feet</td><td>'+data[i].bedroom+' rooms</td><td><a class="link" href="detailedproperty/'+data[i].timestamp+'">View More</a></td></tr>';
         }
         $("#displaysearch").empty();
         var temp = '<table width="100%" id="example1"><thead><tr><th>Address</th><th>Price</th><th>Area</th><th>Bedroom</th><th>View more</th></tr></thead><tbody id="displaysearch">'+html+'</tbody></table>';

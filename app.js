@@ -315,6 +315,15 @@ app.post('/login', function(req, res) {
   });
 });
 
+app.get('/newpassword/:id', function(req, res){
+    console.log("In get comment method: "+req.params.id);
+  db.users.findOne({_id: ObjectId(req.params.id)}, function (err, users) {
+    console.log(users);
+    res.render("setnewpassword.ejs",{users: users});
+  }); 
+
+});
+
 app.post('/newpasswordupdate', function(req, res){
     console.log("In newpasswordupdate method: "+req.body.email);
     var email = req.body.email;
@@ -798,14 +807,7 @@ app.post('/detailedproperty/sendinterestinproperty', function(req, res){
   sendEmail(email, title1, message1, subject1);
   res.render("message.ejs",{property: "REGISTERED", status: 'registered', message: 'Your email is successfully sent to the owner of the property....', link: '<a href="/propertiesbymaps">Click me to view our properties by google map...</a>'});
 });
-app.get('/newpassword/:id', function(req, res){
-    console.log("In get comment method: "+req.params.id);
-  db.users.findOne({_id: ObjectId(req.params.id)}, function (err, users) {
-    console.log(users);
-    res.render("setnewpassword.ejs",{users: users});
-  }); 
 
-});
 // ************************************* MESSAGE *************************************************
 
 
