@@ -76,7 +76,7 @@ app.use(function(req, res, next) {
   if (req.session && req.session.users) {
     db.users.findOne({ email: req.session.users.email }, function(err, users) {
       if (users) {
-        db.notification.find({ useremail: req.session.users.email }, function(err, notifications1) {
+    db.notification.find({useremail: req.session.users.email}).skip(0).sort({_id: -1}).limit(100).toArray(function (err, notifications1) {
           req.users = users;
           req.notifications = notifications;
           delete req.users.password; // delete the password from the session
