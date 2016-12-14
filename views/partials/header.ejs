@@ -141,7 +141,7 @@
              <li class="active"><a href="registerlogin" class="aa-login">SIGN IN</a></li>
           <%}else{%> 
            <li class="dropdown active">
-              <a class="dropdown-toggle" data-toggle="dropdown">PROFILE<span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown"><img src="<%=users.photo%>" class="clicleimg" width="16" height="16"> &nbsp;&nbsp;Profile<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                  <li><a href="/profile/0" class="aa-login" target="_blank">PROFILE</a></li>
                    <% if(users.type == 'admin'){%>
@@ -151,17 +151,27 @@
               </ul>
            </li>
            <li id="notification_li">
-              <a href="#" id="notificationLink"><span id="notification_count"><img src="<%=users.photo%>" class="clicleimg" width="32" height="32"> 3 Notifications</span></a>
+              <a href="#" id="notificationLink"><span id="notification_count"><%= notifications.length %></span></a>
               <div id="notificationContainer">
               <div id="notificationTitle">Notifications</div>
-              <div id="notificationsBody" class="notifications">
-
-                <% notifications.forEach(function(notifications){%>
-                  <%= notifications.action %><%= notifications.dateField %><%= notifications.message %>
-                  <img src="<%= notifications.noteimage %>" width="70" height="70">
+              <div id="notificationsBody" class="notifications" style="overflow:scroll; height:400px;">
+              <table width="100%" class="notificationstable">
+              <% notifications.forEach(function(notifications){%>
+                <tr>
+                  <td><img src="<%= notifications.noteimage %>" width="70" height="70"></td>
+                  <td>
+                    <span class="heading"><%= notifications.action %></span><br>
+                    <%= notifications.dateField %><br><%= notifications.message %></td>
+                  </tr>
+                <tr>
+                  <td><hr></td>
+                  <td>
+                    <hr></td>
+                </tr>
                 <%}) %>
+              </table>   
               </div>
-              <div id="notificationFooter"><a href="#">See All</a></div>
+              <div id="notificationFooter"><a href="/profile/0" target="_blank">See All</a></div>
               </div>
             </li>
           <%}%>          

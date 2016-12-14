@@ -10,7 +10,7 @@ $(document).on("click",".admintype",function() {
                                     '<td><p id="u-name-'+userid+'">'+name+'</p></td>'+
                                     '<td><p id="u-phone-'+userid+'">'+phone+'</p></td>'+
                                     '<td><p id="u-email-'+userid+'">'+email+'</p></td>'+
-                                    '<td><a class="usertype" id="'+userid+'">user</td>'+
+                                    '<td><a class="usertype" id="'+userid+'"> user</td>'+
                                 '</tr>');
 	  });
 });
@@ -26,7 +26,7 @@ $(document).on("click",".usertype",function() {
                                     '<td><p id="a-name-'+userid+'">'+name+'</p></td>'+
                                     '<td><p id="a-phone-'+userid+'">'+phone+'</p></td>'+
                                     '<td><p id="a-email-'+userid+'">'+email+'</p></td>'+
-                                    '<td><a class="admintype" id="'+userid+'">admin</td>'+
+                                    '<td> <a class="admintype" id="'+userid+'"> admin </td>'+
                                 '</tr>');
 	  });
 });

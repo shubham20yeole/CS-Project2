@@ -9,7 +9,7 @@ return false;
 //Document Click hiding the popup 
 $(document).click(function()
 {
-// $("#notificationContainer").hide();
+$("#notificationContainer").hide();
 });
 
 //Popup on click

@@ -27,12 +27,12 @@ var session = require('client-sessions');
 var nodemailer = require("nodemailer");
 var smtpTransport = require("nodemailer-smtp-transport")
 var smtpTransport = nodemailer.createTransport(smtpTransport({
-    host : "smtp.sendgrid.net",
+    host : "Smtp.gmail.com",
     secureConnection : false,
     port: 587,
     auth : {
         user : "shubham20.yeole@gmail.com",
-        pass : "Shubham4194"
+        pass : "shubhamyeole20"
     }
 }));
 function sendEmail(email, title, message, subject){
@@ -71,6 +71,7 @@ app.use(session({
 }));
 //Global vars
 var notifications = null;
+
 app.use(function(req, res, next) {
   if (req.session && req.session.users) {
     db.users.findOne({ email: req.session.users.email }, function(err, users) {
@@ -359,12 +360,16 @@ app.get('/admin', function(req, res){
     }else{
       db.users.find({type: 'user'}).skip(0).sort({}).limit(9).toArray(function (err, user) {
         db.users.find({type: 'admin'}).skip(0).sort({}).limit(9).toArray(function (err, admin) {
-        console.log(user.length)
-        res.render("admin.ejs",{user: user, admin: admin});
-        })
+        db.property.find({}).skip(0).sort({}).limit(100).toArray(function (err, property) {
+          db.messages.find({to: "admin"}).skip(0).sort({}).limit(100).toArray(function (err, messages) {
+            console.log(user.length)
+            res.render("admin.ejs",{user: user, admin: admin,property:property, messages:messages});
+          })
+        })  
       })
-    }
+    })
   }
+ }
 });
 app.post('/admintouser', function(req, res) {
   console.log("In admintouser: "+req.body.id);
