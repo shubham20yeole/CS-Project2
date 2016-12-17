@@ -8,7 +8,7 @@ var expressValidator = require('express-validator');
 var mongojs = require('mongojs')
 var mongodb = require('mongodb')
 // var db = mongojs('mongodb://ds143717.mlab.com:43717/shubham', ['users']);
-var collections = ["users", "blog", "comments", "property", "images", "notification", "bookmark", "messages"]
+var collections = ["users", "blog", "comments", "property", "images", "notification", "bookmark", "messages","timetable", "timetablecategory", "timetablequestion"]
 
 var db = mongojs('mongodb://shubham20.yeole:shubham20.yeole@ds163387.mlab.com:63387/paceteam3', collections)
 var JSFtp = require("jsftp");
@@ -819,6 +819,7 @@ app.post('/detailedproperty/sendinterestinproperty', function(req, res){
 app.get('/message', function(req, res){
   res.render("message.ejs",{status: 'addpost', message: 'Congratulations. Your add is posted successfully...', link: '<a href="/detailedproperty/">Click me to view your post</a>'});
 });
+
 app.get('/workinprogress', function(req, res){
   res.render("message.ejs",{status: 'd', message: 'WORK IN PROGRESS. Sorry for any inconvenience caused', link: '<a href="/detailedproperty/">Click me to view your post</a>'});
 });
@@ -875,7 +876,252 @@ app.listen(port, function() {
 // db.property.update({},{$set : {"flagno": 0}},{upsert:true,multi:true});
 // db.property.update({},{$set : {"fulladdress": "2nd Floor, 70 Liberty St, New York, NY 10005, USA"}},{upsert:true,multi:true});
 
+app.get('/timetable', function(req, res){
+  res.render("timetableNew.ejs");
+});
 
+
+app.post('/submitnewtimetable', function(req, res){
+  var timetablename = req.body.timetablename;
+  var category = req.body.category;
+  var from = req.body.from;
+  var to = req.body.to;
+  var timestamp = new Date().valueOf();
+  var newTimetable = {
+    timestamp: timestamp,
+    timetablename: timetablename,
+    status: "no",
+    percent: 0,
+    totalquestions: 0,
+    solvedquestions: 0,
+    totalcategories: category.length,
+  }
+  console.log(category);
+    if(category.length == 0){
+      console.log(splitDate(from));
+    }else{
+      db.timetable.insert(newTimetable, function(err, result){
+       if(err){console.log(err);}
+       else{ 
+        console.log("Category Saved successfully"); 
+        for(i=0; i<category.length;i++){
+        console.log(splitDate(from[i]));
+        var timetableid = ""+result._id+"";
+        var newCategoty = {
+            timetableid: timetableid,
+            timestamp: timestamp,
+            uniqueid: timestamp+"-cat-"+i,
+            category: category[i],
+            totalquestions: 0,
+            timetablename: timetablename,
+            solvedquestions: 0,
+            totalcategories: category.length,
+            from: splitDate(from[i]),
+            to: splitDate(to[i]),
+            status: "no",
+            percent: 0,
+          }
+            db.timetablecategory.insert(newCategoty, function(error, result2){
+                if(error){console.log(error);}
+                else{ 
+                  console.log("Category Saved successfully"); 
+                }
+            });
+          }
+        }
+      }); 
+    }
+  res.redirect('/timetable');
+});
+
+
+
+app.get('/timetableall', function(req, res){
+  db.timetable.find(function (err, timetable) {
+    res.render("timetableall.ejs", {timetable:timetable});
+  });
+});
+
+
+app.get('/managecategories/:id', function(req, res){
+  db.timetablecategory.find({timestamp: Number(req.params.id)}).skip(0).sort({}).limit(100).toArray(function (err, timetable) {
+    db.timetable.findOne({timestamp: Number(req.params.id)}, function (err, timetablename) {
+      res.render("timetablemanagecategories.ejs", {timetable:timetable, timetablename:timetablename});
+    });
+  });
+});
+
+app.post('/addnewcategory', function(req, res){
+  var newcategory = {
+          timetableid: req.body.timetableid,
+          timestamp: Number(req.body.timestamp),
+          uniqueid: req.body.uniqueid,
+          category: req.body.category,
+          totalquestions: Number(req.body.totalquestions),
+          timetablename:req.body.timetablename,
+          solvedquestions: Number(req.body.solvedquestions),
+          totalcategories:Number(req.body.totalcategories),
+          category: req.body.category,
+          from: req.body.from,
+          to: req.body.to,
+          status: req.body.status,
+          percent: Number(req.body.percent)
+        }
+  console.log(newcategory);
+  // db.timetablecategory.update({uniqueid: catuniqueid},{$set : {totalquestions: questionnumber}},{upsert:true,multi:false});
+  db.timetable.update({timestamp: Number(req.body.timestamp)},{$inc : {'totalcategories': 1}},{upsert:false,multi:false});
+  db.timetablecategory.update({timestamp: Number(req.body.timestamp)},{$inc : {'totalcategories': 1}},{upsert:false,multi:true});
+  db.timetablecategory.insert(newcategory, function(error, result2){
+    if(error){console.log(error);}
+    else{res.send("ok");}
+  });
+// UPDATE TOTAL CATEGORIES OF TIMETABLE COLLECTION
+// UPDATE TOTAL CATEGORIES OF TIMETABLE CATEGORY COLLECTION
+
+});
+
+app.post('/addquestion', function(req, res){
+
+  var catuniqueid = req.body.catuniqueid ;
+  var queuniqueid = req.body.queuniqueid ;
+  var cattimestamp = req.body.timestamp ;
+  var quetimestamp = new Date().valueOf();
+  var question = req.body.question ;
+  var timetableid = req.body.timetableid ;
+  var categoryname = req.body.categoryname ;
+  var totalquestions = req.body.totalquestions ;
+  db.timetablecategory.findOne({ uniqueid: catuniqueid }, function(err, category) {
+  var questionnumber = Number(category.totalquestions)+1;
+  db.timetablecategory.update({uniqueid: catuniqueid},{$set : {totalquestions: questionnumber}},{upsert:true,multi:false});
+
+  var newQuestion = {
+    timetableid: timetableid,
+    categoryname: categoryname,
+    question: question,
+    cattimestamp: cattimestamp,
+    catuniqueid: catuniqueid,
+    quetimestamp: quetimestamp,
+    queuniqueid: queuniqueid+"-"+questionnumber,
+    questionnumber: questionnumber,
+    answer: 'NO SOLUTION HAS BEEN PROVIDED',
+    status: 'no'
+  }
+    db.timetablequestion.insert(newQuestion, function(err, result){
+      setTimeout(function(){
+
+     if(err){console.log(err);}
+      db.timetablequestion.find({catuniqueid: catuniqueid}, function (err, catego) {
+        var total = 0;
+        for(i=0;i<catego.length;i++){
+          if(catego[i].status == 'yes') {
+            total = total + 1;
+          }
+        }
+      var percent = Math.round((total/catego.length) * 100);
+        db.timetablecategory.update({uniqueid: catuniqueid},{$set : {percent: percent}},{upsert:true,multi:false});
+        db.timetable.update({timestamp: Number(req.body.timestamp)},{$inc : {'totalquestions': 1}},{upsert:true,multi:true});
+        db.timetable.findOne({timestamp: Number(req.body.timestamp)},function (err, elem) {
+          var percentcalculation = Math.round((elem.solvedquestions/elem.totalquestions)*100);
+          db.timetable.update({timestamp: Number(req.body.timestamp)},{$set: {percent: percentcalculation}});
+        });
+        console.log(cattimestamp);
+        res.send('ok');
+        });
+     });
+     },1000); 
+  });
+});
+
+app.post('/getquestion', function(req, res){
+  var uniqueid = req.body.uniqueid ;
+  db.timetablequestion.find({catuniqueid: uniqueid}).skip(0).sort({quetimestamp: -1}).limit(40).toArray(function (err, questions) {
+    res.send(questions);
+  });
+});
+
+
+app.post('/updatequeanswer', function(req, res){
+  console.log();
+  var queuniqueid = req.body.queuniqueid ;
+  var answer = req.body.answer ;
+  var question = req.body.question ;
+
+    db.timetablequestion.update({queuniqueid: queuniqueid},{$set : {question: question}},{upsert:true,multi:false});
+    db.timetablequestion.update({queuniqueid: queuniqueid},{$set : {answer: answer}},{upsert:true,multi:false});
+    res.send('okay');
+});
+
+app.post('/postanswer', function(req, res){
+  var queuniqueid = req.body.queuniqueid ;
+  var answer = req.body.answer ;
+  var catuniqueid = req.body.catuniqueid ;
+    db.timetablequestion.update({queuniqueid: queuniqueid},{$set : {status: 'yes'}},{upsert:true,multi:false});
+    db.timetablequestion.update({queuniqueid: queuniqueid},{$set : {answer: answer}},{upsert:true,multi:false});
+    setTimeout(function(){
+       db.timetablequestion.find({catuniqueid: catuniqueid}, function (err, catego) {
+        var total = 0;
+        for(i=0;i<catego.length;i++){
+          if(catego[i].status == 'yes') {
+            total = total + 1;
+          }
+        }
+      var percent = Math.round((total/catego.length) * 100);
+      console.log("PERCENT: "+catuniqueid+"%");
+      var resee = catuniqueid.split("-");
+    db.timetable.update({timestamp: Number(resee[0])},{$inc : {'solvedquestions': 1}},{upsert:true,multi:true});
+    db.timetablecategory.update({uniqueid: catuniqueid},{$set : {percent: percent}},{upsert:true,multi:false});
+    setTimeout(function(){
+      db.timetable.findOne({timestamp: Number(resee[0])},function (err, elem) {
+        var reseew = catuniqueid.split("-");
+        var percentcalculation = Math.round((elem.solvedquestions/elem.totalquestions)*100);
+        db.timetable.update({timestamp: Number(reseew[0])},{$set: {percent: percentcalculation}});
+      });
+      },1000); 
+    res.send('ok');
+    });
+    },1000);   
+});
+
+
+app.get('/managequestions/:id', function(req, res){
+  db.timetablecategory.find({timestamp: req.params.id}).skip(0).sort({timestamp: -1}).limit(10).toArray(function (err, timetable) {
+    res.render("timetablemanagequestions.ejs", {timetable:timetable});
+  });
+});
+
+app.get('/readonly/:id', function(req, res){
+  db.timetablecategory.find({timestamp: req.params.id}).skip(0).sort({timestamp: -1}).limit(10).toArray(function (err, timetable) {
+    res.render("timetablereadonly.ejs", {timetable:timetable});
+  });
+});
+
+app.get('/updatetimetable', function(req, res){
+  res.render("timetableUpdate.ejs");
+});
+
+
+
+function splitDate(str) {
+    var res = str.split("-");
+    var tdate = new Date();
+    var month = "";
+    if(res[1] == 1) month = "Jan";
+    if(res[1] == 2) month = "Feb";
+    if(res[1] == 3) month = "Mar";
+    if(res[1] == 4) month = "Apr";
+    if(res[1] == 5) month = "May";
+    if(res[1] == 6) month = "June";
+    if(res[1] == 7) month = "July";
+    if(res[1] == 8) month = "Aug";
+    if(res[1] == 9) month = "Sept";
+    if(res[1] == 10) month = "Oct";
+    if(res[1] == 11) month = "Nov";
+    if(res[1] == 12) month = "Dec";
+
+    // var saveDate = res[2]+" / "+month+" / "+res[0];
+    var saveDate = res[2]+" / "+month;
+    return saveDate;
+}
 
 
 
