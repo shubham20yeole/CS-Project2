@@ -931,7 +931,7 @@ app.post('/submitnewtimetable', function(req, res){
         }
       }); 
     }
-  res.redirect('/timetable');
+  res.redirect('/timetableall');
 });
 
 
