@@ -68,8 +68,8 @@ $(document).ready(function() {
 	    				answer = '<a id="'+questions[i].queuniqueid+'" data-id="'+questions[i].catuniqueid+'" href="#popup1" class="viewanswer">View Answer</a>'+
 	    						'<textarea id="answer-'+questions[i].queuniqueid+'" style="display: none;">'+questions[i].answer+'"</textarea>'
 	    			}
-	    			appendque = appendque + alert + " Q : "+questions[i].questionnumber+": "+questions[i].question+
-	    			"<br>"+answer+"<br>"+questiontext+"<br>";	          
+	    			appendque = alert + " Q : "+questions[i].questionnumber+": "+questions[i].question+
+	    			"<br>"+answer+"<br>"+questiontext+"<br>"+appendque;	          
 	    		}
 	    		if(questions.length==0) appendque = "NO QUESTIONS YET..."
 
