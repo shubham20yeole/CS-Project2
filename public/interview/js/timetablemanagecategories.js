@@ -44,10 +44,14 @@ $(document).ready(function() {
     });
 
         $(document).on("click",".viewquestion", function(){
+        
 	   	var uniqueid = $(this).attr('id');
+        $(this).text('Hide Questions');
+        $(this).attr('class', 'hidequestions');
 	   	$( "#lodardiv-"+uniqueid ).html('<img src="../images/hload.gif" width="100" height="20">');
 		$.post( "/getquestion", { uniqueid: uniqueid})
-	    .done(function( questions ) {	
+	    .done(function( questions ) {
+
 	    	setTimeout(function(){ 
 	    	$( "#lodardiv-"+uniqueid ).html('<br><img src="../images/done.jpg" width="20" height="20"> See below...');
 	    		var appendque = "";
@@ -70,10 +74,17 @@ $(document).ready(function() {
 	    		if(questions.length==0) appendque = "NO QUESTIONS YET..."
 
 	    		$(".appendQuestion-"+uniqueid).html(appendque);
+            
 	    	},2000);
 	    });
 
     });
+    $(document).on("click",".hidequestions", function(e){
+        var uniqueid = $(this).attr('id');
+        $(".appendQuestion-"+uniqueid).html('');
+        $(this).text('View Questions');
+        $(this).attr('class', 'viewquestion');
+     });
 
      $(document).on("click",".viewanswer", function(e){
      	$("#popup1").show();
@@ -83,10 +94,8 @@ $(document).ready(function() {
         var question = $("#question-"+id).val();
         var answer = $("#answer-"+id).val();
         $("#timetable").text();
-        $("#question").before("Question: ");
-        $("#question").text(question);
-        $("#inputform").before("Answer: ");
-		$("#inputform").html("<br><pre><code>"+answer+"</code></pre>");
+        $("#question").html("Question:"+question);
+		$("#inputform").html("Answer:<br><pre><code>"+answer+"</code></pre>");
         $("#updateform").html("<input type='submit' id='updatequeans' value='UPDATE POST'>");
         $("#questionuniquedata").html(catuniqueid);
      });
@@ -126,15 +135,17 @@ $(document).ready(function() {
      });
 
      $(document).on("click",".add-cat", function(e){
-     	$("#popup1").show();
-     	$("#question").html("<h1>Catagory name: <h1><input type='text' id='add-categoryname' placeholder='Enter Category Name'>");
+        $("#popup1").show();
+        $("#question").html("<h1>Catagory name: <h1><input type='text' id='add-categoryname' placeholder='Enter Category Name'>");
         $("#inputform").html("<h2>Begins from: </h2><input type='date' id='add-from'>"+
-        	"<h2>Deadline: </h2><input type='date' id='add-to'>"+
-        	"<br><br><input type='submit' id='add-submit'>");
-       	$("#updateform").html("");
+            "<h2>Deadline: </h2><input type='date' id='add-to'>"+
+            "<br><br><input type='submit' id='add-submit'>");
+        $("#updateform").html("");
 
      });
 
+
+     
 	$(document).on("click","#add-submit", function(e){
      	$("#popup1").show();
         var categorycount = Number($("#update-cat-no").val());
@@ -210,7 +221,7 @@ function splitDate(str) {
         $("#question").text("Question: "+question);
         var textarea = "<textarea id='answertoque' placeholder='Paste your solution'></textarea>";
         $("#updateform").html(catuniqueid);
-        $("#inputform").html("Answer: "+"<br><input type='hidden' id='questionid' value='"+id+"'>"+
+        $("#inputform").html("<span id='answercss'>Answer:</span> "+"<br><input type='hidden' id='questionid' value='"+id+"'>"+
         	textarea+"<br><br><button class='savesolution' id='"+id2+"' data-id='"+id+"'>Save Solution</button>"+
         	"<div id='anslodardiv'></div>"+catuniqueid);
 	    		$(this).hide();

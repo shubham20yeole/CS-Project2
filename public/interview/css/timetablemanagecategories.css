@@ -1,5 +1,7 @@
 a{cursor: pointer;}
-#errmsg{color: red;}
+#errmsg, .hidequestions{color: red;}
+#question, #inputform{color:  #2196F3;}
+#answercss{color:  #2196F3; font-weight: 1.9em;}
 #add-categoryname, #update-question{ width: 95%; height: 70px; font-size: 1em !important; }
 #add-from{ width: 48%; height: 50px;}
 #add-to{ width: 48%; height: 50px;}
