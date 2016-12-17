@@ -931,7 +931,9 @@ app.post('/submitnewtimetable', function(req, res){
         }
       }); 
     }
-              res.redirect('/managecategories/'+timestamp);
+    setTimeout(function(){ 
+     res.redirect('/managecategories/'+timestamp);
+    },550);
 });
 
 
