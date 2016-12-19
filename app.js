@@ -27,12 +27,12 @@ var session = require('client-sessions');
 var nodemailer = require("nodemailer");
 var smtpTransport = require("nodemailer-smtp-transport")
 var smtpTransport = nodemailer.createTransport(smtpTransport({
-    host : "Smtp.gmail.com",
+    host : "smtp.sendgrid.net",
     secureConnection : false,
     port: 587,
     auth : {
         user : "shubham20.yeole@gmail.com",
-        pass : "shubhamyeole20"
+        pass : "Shubham4194"
     }
 }));
 
