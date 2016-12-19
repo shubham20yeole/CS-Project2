@@ -811,7 +811,7 @@ app.post('/detailedproperty/sendinterestinproperty', function(req, res){
 
   sendEmail(emailofposter, subject, title, message);
   sendEmail(email, subject1, title1, message1);
-  res.render("message.ejs",{property: "REGISTERED", status: 'registered', message: 'Your email is successfully sent to the owner of the property....', link: '<a href="/propertiesbymaps">Click me to view our properties by google map...</a>'});
+     res.redirect('/');
 });
 
 // ************************************* MESSAGE *************************************************
