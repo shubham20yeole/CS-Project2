@@ -24,9 +24,13 @@ $("#searchloccation").on("keyup change",function() {
         $("#displaysearch").empty();
         var temp = '<table width="100%" id="example1"><thead><tr><th>Address</th><th>Price</th><th>Area</th><th>Bedroom</th><th>View more</th></tr></thead><tbody id="displaysearch">'+html+'</tbody></table>';
         $('#showsearch').html(temp);
-              $('#example1').dataTable({"sPaginationType": "full_numbers", "bDestroy": true, "iDisplayLength": 10});
-              $(".dataTables_length select").addClass("selectEntry").attr("placeholder", "Type here to search").append('<br><br><br><br>');
-     $(".dataTables_filter input").addClass("searchInput").attr("placeholder", "Type here to search");;
+              $('#example1').dataTable({"sPaginationType": "full_numbers", "oLanguage": {
+
+"sSearch": "FILTER:"
+
+},"bDestroy": true, "iDisplayLength": 10});
+              $(".dataTables_length select").addClass("selectEntry").attr("placeholder", "Filter search").append('<br><br><br><br>');
+     $(".dataTables_filter input").addClass("searchInput").attr("placeholder", "Filter search");;
       });
 
 });

@@ -35,10 +35,13 @@ var smtpTransport = nodemailer.createTransport(smtpTransport({
         pass : "shubhamyeole20"
     }
 }));
-function sendEmail(email, title, message, subject){
-var emailBody = '<div style="padding: 2%; text-align: center; background-color: #efefef"><div style="padding: 2%; text-align: center; background-color: #fcfcfc"><h1 style="color: #606060">WELCOME TO USA REAL ESTATES</h1><img src="http://shubhamyeole.byethost8.com/public_html/logo.jpg" width="150" height="150"><h2>[TITLE]</h2><h5>[MESSAGE]</h5><h6>[SIGNATURE]</h6><hr><h6 style="color: #808080">You are getting this email because you have signed up for emails update.</h6><h6 style="color: #808080">For more information visit our website at <a style="color: #808080" href="https://usa-real-estates.herokuapp.com/">USA REAL ESTATES</a></h6></div></div>';
+
+// sendEmail('shubham20.yeole@gmail.com', 'Successfully registered at UsaRealEstates', 'Welcome mr Shubham Yeole', 'Successfully registered at UsaRealEstates');
+
+function sendEmail(email, subject, title, message){
+var emailBody = '<html><body style="padding:40px; background-color: #E3F2FD"><header style="background-color: #2196F3; padding: 10px !important; margin:0px !important;"><h1 style="color: #E3F2FD; text-align:center">USA REAL ESTATES</h1></header><div style="background-color:#E3F2FD; "><h2 style="color:#E3F2FD; float: left; padding:5px;margin:0px !important; "><img src="https://cdn2.iconfinder.com/data/icons/New-Social-Media-Icon-Set-V11/512/email.png" width="22" height="22">usarealestates@gmail.com</h2><h2 style="color:#E3F2FD; float: right; margin-top: -100cm; padding:5px; margin:0px !important; "><img src="http://icons.iconarchive.com/icons/graphicloads/100-flat/256/phone-icon.png" width="22" height="22"> +1 (201) 887-5323</h2></div><div style="background-image: url(http://www.ironfish.com.au/wp-content/uploads/2014/12/house-architecture-photography-hd-wallpaper-1920x1200-9237-1024x640.jpg); background-size: 100% 700px; height:auto; width:100%; overflow:hidden; background-repeat: no-repeat;"><div style=" background-color: #E3F2FD; width:300px;  text-align:center; margin:15% 30%; padding:1%; border-radius:15px; opacity: 0.7;"><h2 style="color: #052f3b; text-align:center;">[TITLE]</h2></div></div><div style=" background-color: #E3F2FD; padding: 3%;"><br><br><br>[MESSAGE]<br><br><br>Best, The UsaRealEstates Accounts team <br><br> *You are receiving this email because you signed up for alerts from UsaRealEstates  10 Front Street, Jersey City, NY 07302 <br><br></div><footer style="background-color: #2196F3; padding: 3px !important; margin:0px !important;color: #E3F2FD; text-align: center; padding: 2%;">&#169; 2016 UsaRealEstates. All Rights Reserved.</footer></body></html>';
 emailBody = emailBody.replace("[TITLE]", title);
-emailBody = emailBody.replace("[MESSAGE]", "<h2>Hello "+email+"<br><br>"+message+"</h2>");
+emailBody = emailBody.replace("[MESSAGE]", "Hello "+email+"<br><br>"+message+"");
 emailBody = emailBody.replace("[SIGNATURE]", 'By Shubham Yeole');
 
  var mailOptions={
@@ -48,7 +51,7 @@ emailBody = emailBody.replace("[SIGNATURE]", 'By Shubham Yeole');
         text : "Your Text",
         html : emailBody,
     }
-    console.log(mailOptions);
+    // console.log(mailOptions);
     smtpTransport.sendMail(mailOptions, function(error, response){
        
     });
@@ -82,7 +85,7 @@ app.use(function(req, res, next) {
           delete req.users.password; // delete the password from the session
           req.session.users = users;  //refresh the session value
           res.locals.users = users;
-          console.log(", notifications: notifications: "+notifications1);
+          // console.log(", notifications: notifications: "+notifications1);
           notifications = notifications1;  //refresh the session value
           notifications = notifications1;
           next();
@@ -131,7 +134,7 @@ app.use(expressValidator({
     };
   }
 }));
- var errmsg = "Computer Science Project";
+var errmsg = "Computer Science Project";
 
 var fs = require('fs');
 var S3FS = require('s3fs');
@@ -141,7 +144,7 @@ var S3FS = require('s3fs');
 // });
 
 // s3fsImpl.create();
- 
+
 var multiparty = require('connect-multiparty'),
   multipartyMiddleware = multiparty();
 app.use(multipartyMiddleware);
@@ -205,7 +208,7 @@ app.get('/registerlogin', function(req, res){
 });
 
 app.get('/logout/', function(req, res) {
-  console.log("I am here");
+  // console.log("I am here");
 
   req.session.reset();
   res.redirect('/');
@@ -246,7 +249,7 @@ var email = req.body.email;
  db.users.findOne({ email: req.body.email }, function(err, users) {
     if (!users) {
       var file = req.files.file;
-      console.log("File: "+file+", File Path: "+file.path+", originalFilename: "+file.originalFilename);
+      // console.log("File: "+file+", File Path: "+file.path+", originalFilename: "+file.originalFilename);
       // var stream = fs.createReadStream(file.path);
       // return s3fsImpl.writeFile(req.body.photoname, stream).then(function(){
       //   fs.unlink(file.path, function(err){
@@ -270,7 +273,7 @@ var email = req.body.email;
       // connect to localhost:21 as anonymous 
       c.connect(config);
       var photoUrl = 'http://shubhamyeole.byethost8.com/public_html/user/'+req.body.photoname;
-      console.log(photoUrl);
+      // console.log(photoUrl);
       var newUser = {
       fullname: req.body.firstname,
       email: req.body.email,
@@ -286,7 +289,7 @@ var email = req.body.email;
       poststatus: 'true',
       type: 'user',
     }
-    sendEmail(req.body.email, "REGISTERED SUCCESSFULLY", "Thank you for choosing our services... We appreciate your bussiness and time to register to our website...", "REGISTERED SUCCESSFULLY to USA REAL ESTATES");
+    sendEmail(req.body.email, "REGISTERED SUCCESSFULLY to USA REAL ESTATES", "REGISTERED SUCCESSFULLY", "Thank you for choosing our services... We appreciate your bussiness and time to register to our website...");
     db.users.insert(newUser, function(err, result){
       if(err){console.log(err);}
       req.session.users = newUser;
@@ -299,7 +302,7 @@ var email = req.body.email;
 app.post('/login', function(req, res) {
   db.users.findOne({ email: req.body.email }, function(err, users) {
     if (!users) {
-      console.log(req.body.email);
+      // console.log(req.body.email);
       errmsg = 'Email not registered... Please try again or Signup to use our services. Thank you.'; 
          res.render("signupin.ejs", {errmsg: errmsg});
     } else {
@@ -316,19 +319,19 @@ app.post('/login', function(req, res) {
 });
 
 app.get('/newpassword/:id', function(req, res){
-    console.log("In get comment method: "+req.params.id);
+    // console.log("In get comment method: "+req.params.id);
   db.users.findOne({_id: ObjectId(req.params.id)}, function (err, users) {
-    console.log(users);
+    // console.log(users);
     res.render("setnewpassword.ejs",{users: users});
   }); 
 
 });
 
 app.post('/newpasswordupdate', function(req, res){
-    console.log("In newpasswordupdate method: "+req.body.email);
+    // console.log("In newpasswordupdate method: "+req.body.email);
     var email = req.body.email;
   db.users.update({ email: req.body.email}, {$set:{password: req.body.passcode}}, function (err, result) {
-      sendEmail(req.body.email, "Password Reset", "Your password is successfully resetted at USA REAL ESTATES. If you have not done this action please let us know at shubham20.yeole@gmail.com. Click the button below to visit our platform. <br><br><a href='https://usa-real-estates.herokuapp.com/' target='_blank'>HOME</a><br><br>","SUCCESSFULLY PASSWORD RESETTED ON USA REAL ESTATES");
+      sendEmail(req.body.email, "Password Reset", "SUCCESSFULLY PASSWORD RESETTED ON USA REAL ESTATES", "Your password is successfully resetted at USA REAL ESTATES. If you have not done this action please let us know at shubham20.yeole@gmail.com. Click the button below to visit our platform. <br><br><a href='https://usa-real-estates.herokuapp.com/' target='_blank'>HOME</a><br><br>");
   res.render("message.ejs",{property: "REGISTERED", status: 'registered', message: 'Password reset successful.', link: '<a href="/propertiesbymaps">Click me to view our properties by google map...</a>'});
   
     });
@@ -342,7 +345,7 @@ app.post('/resetpassword', function(req, res) {
       res.render("signupin.ejs", {errmsg: errmsg});
     } else {
       db.users.update({ email: req.body.email}, {$set:{password: "temppassword"}}, function (err, result) {
-      sendEmail(email, "Password Reset", "<br>We received a request to reset the password for your account.<br> If you requested a reset for "+email+", <br>click the button below. <br><br><a style='padding: 1%; background-color: #6a67ce; color: #e1e0f5;' href='https://usa-real-estates.herokuapp.com/newpassword/"+users._id+"' target='_blank'>SET NEW PASSWORD</a><br><br>e this email.Please click on Use temporary password as temppassword","Password reset on USA REAL ESTATES");
+      sendEmail(email, "Password reset on USA REAL ESTATES", "Password Reset", "<br>We received a request to reset the password for your account.<br> If you requested a reset for "+email+", <br>click the button below. <br><br><a style='padding: 1%; background-color: #6a67ce; color: #e1e0f5;' href='https://usa-real-estates.herokuapp.com/newpassword/"+users._id+"' target='_blank'>SET NEW PASSWORD</a><br><br>e this email.Please click on Use temporary password as temppassword");
       res.render("signupin.ejs", {errmsg: "Temporary password has been sent to "+email+". Please check your email to reset new password."});
     });
     }
@@ -361,6 +364,7 @@ app.post('/resetpassword', function(req, res) {
 
 app.get('/admin', function(req, res){
   var user = req.session.users;
+
  if(user==null){
   res.render("message.ejs",{status: 'a', message: 'Sorry... Login required.', link: ''});
   }else{
@@ -371,8 +375,8 @@ app.get('/admin', function(req, res){
         db.users.find({type: 'admin'}).skip(0).sort({}).limit(9).toArray(function (err, admin) {
         db.property.find({}).skip(0).sort({}).limit(100).toArray(function (err, property) {
           db.messages.find({to: "admin"}).skip(0).sort({}).limit(100).toArray(function (err, messages) {
-            console.log(user.length)
-            res.render("admin.ejs",{user: user, admin: admin,property:property, messages:messages});
+            // console.log(user.length)
+            res.render("admin.ejs",{user: user, admin: admin, property: property, messages:messages});
           })
         })  
       })
@@ -381,7 +385,7 @@ app.get('/admin', function(req, res){
  }
 });
 app.post('/admintouser', function(req, res) {
-  console.log("In admintouser: "+req.body.id);
+  // console.log("In admintouser: "+req.body.id);
   res.send('Ok'); 
 });
 
@@ -416,7 +420,7 @@ var pageno = Number(req.params.id);
   db.property.find({}).skip(pageno*6).sort({timestamp: -1}).limit(6).toArray(function (err, docs) {
     db.property.count(function(err, count) {
       var status = 'Showing '+(pageno*6+1)+' to '+(pageno*6+6)+' of '+count+' Properties';
-      console.log(status);  
+      // console.log(status);  
      db.property.find({}).skip(0).sort({timestamp: -1}).limit(5).toArray(function (err, latestproperty) {
     res.render("properties.ejs",{property: docs, count: count, pageno: pageno+1, status: status, latestproperty: latestproperty, notifications: notifications});
     })    
@@ -428,7 +432,7 @@ var pageno = Number(req.params.id);
   db.property.find({}).skip(pageno*6).sort({timestamp: -1}).limit(6).toArray(function (err, docs) {
     db.property.count(function(err, count) {
       var status = 'Showing '+(pageno*6+1)+' to '+(pageno*6+6)+' of '+count+' Properties';
-      console.log(status);  
+      // console.log(status);  
       res.render("gallery.ejs",{property: docs, count: count, pageno: pageno+1, status: status, notifications: notifications});
     })
   })
@@ -438,7 +442,7 @@ var pageno = Number(0);
   db.property.find({}).skip(pageno*6).sort({timestamp: -1}).limit(100).toArray(function (err, docs) {
     db.property.count(function(err, count) {
       var status = 'Showing '+(pageno*6+1)+' to '+(pageno*6+6)+' of '+count+' Properties';
-      console.log(status);  
+      // console.log(status);  
       res.render("propertiesbymaps.ejs",{property: docs, count: count, pageno: pageno+1, status: status, notifications: notifications});
     })
   })
@@ -448,7 +452,7 @@ var pageno = Number(0);
   db.property.find({}).skip(pageno*6).sort({timestamp: -1}).limit(100).toArray(function (err, docs) {
     db.property.count(function(err, count) {
       var status = 'Showing '+(pageno*6+1)+' to '+(pageno*6+6)+' of '+count+' Properties';
-      console.log(status);  
+      // console.log(status);  
       res.render("propertiesbymaps2.ejs",{property: docs, count: count, pageno: pageno+1, status: status, notifications: notifications});
     })
   })
@@ -487,31 +491,31 @@ if(user==null){
 
 app.post('/removebookmark', function(req, res) {
   var timestamp = req.body.timestamp;
-  console.log("Removebookmark id: "+timestamp);
+  // console.log("Removebookmark id: "+timestamp);
   db.bookmark.remove({timestamp: timestamp, email: req.session.users.email}, function(err, result) {
     if (err) {
       console.log("Error Occured: "+err);
     }
-    console.log(result);
+    // console.log(result);
     res.send("ok");
   });
 });
 
 app.post('/removeproperty', function(req, res) {
   var timestamp = req.body.timestamp;
-  console.log("Removebookmark id: "+timestamp);
+  // console.log("Removebookmark id: "+timestamp);
   db.property.remove({timestamp: timestamp}, function(err, result) {
     if (err) {
       console.log("Error Occured: "+err);
     }
-    console.log(result);
+    // console.log(result);
     res.send("ok");
   });
 });
 
 app.post('/sendemailtoadmin', function(req, res) {
   var comment = req.body.comment;
-  console.log("Removebookmark id: "+comment);
+  // console.log("Removebookmark id: "+comment);
   var date = new Date();
   var datetime = date.getMonth()+" / "+date.getDate()+" / "+date.getFullYear()+" at "+date.getHours()+":"+date.getMinutes();
         
@@ -527,8 +531,8 @@ app.post('/sendemailtoadmin', function(req, res) {
     if(err){
       console.log(err);
     }else{
-      sendEmail("shubham20.yeole@gmail.com", "CUSTOMER ASSISTANCE", "Below is the message from "+req.session.users.fullname+"<br><br>"+comment+"<br><br>", "You have one message from Customer");
-      sendEmail(req.session.users.email, "EMAIL CONFIRMATION", "We sent your message to admin. Below is your message<br><br>"+comment+"<br><br>", "SUCCESSFULLY SENT EMAIL TO ADMIN");
+      sendEmail("shubham20.yeole@gmail.com", "You have one message from Customer", "CUSTOMER ASSISTANCE", "Below is the message from "+req.session.users.fullname+"<br><br>"+comment+"<br><br>");
+      sendEmail(req.session.users.email, "SUCCESSFULLY SENT EMAIL TO ADMIN", "SUCCESSFULLY SENT EMAIL TO ADMIN",  "We sent your message to admin. Below is your message<br><br>"+comment+"<br><br>");
       res.send("ok");
    }
   });
@@ -556,7 +560,7 @@ app.post('/sendemailtoadmin', function(req, res) {
 
 
 
-console.log(notifications)
+// console.log(notifications)
 
 app.get('/postadd', function(req, res){
   var property = "";
@@ -581,7 +585,7 @@ app.post('/postproperty/', function(req, res){
         password: 'Shubham4194'
       }
       var c = new Client();
-      console.log(file.length);
+      // console.log(file.length);
       c.on('ready', function() {
          for(i=0; i<file.length; i++){
           var imageToDB = 'http://shubhamyeole.byethost8.com/public_html/property/'+filename[i];
@@ -603,7 +607,9 @@ app.post('/postproperty/', function(req, res){
         var newImage = { timestamp: req.body.timestamp, image: imageToDB };
         db.images.insert(newImage, function(err, imageResult){
           if(err){console.log(err);
-          }else{console.log("Actuallink: "+imageToDB+", SavedLink: "+imageResult.image);}
+          }else{
+            // console.log("Actuallink: "+imageToDB+", SavedLink: "+imageResult.image);
+          }
         });
       }
       var address
@@ -613,8 +619,8 @@ app.post('/postproperty/', function(req, res){
         address = req.body.staddress+", "+req.body.city+", "+req.body.state+", "+req.body.zip+", "+req.body.county+", "+req.body.country;
       }
       
-      console.log("propertyphoto: "+propertyphoto+", allphoto: "+allphoto);
-      console.log(req.body.propertyfeatures);
+      // console.log("propertyphoto: "+propertyphoto+", allphoto: "+allphoto);
+      // console.log(req.body.propertyfeatures);
         var newProperty = {
           user: req.session.users._id,
           username: req.session.users.fullname,
@@ -663,7 +669,7 @@ app.post('/postproperty/', function(req, res){
          db.users.findOne({ email: req.session.users.email }, function(err, users) {
             var addposted = users.addposted+1;
             var addallowed = users.addallowed;
-            console.log('addposted: '+addposted +", addallowed: "+addallowed);
+            // console.log('addposted: '+addposted +", addallowed: "+addallowed);
             db.users.update({_id: req.session.users._id},{$set : {"addposted": addposted}},{upsert:true,multi:false});
             if(addposted>=addallowed){
             db.users.update({_id: req.session.users._id},{$set : {"poststatus": 'false'}},{upsert:true,multi:false});
@@ -673,7 +679,7 @@ app.post('/postproperty/', function(req, res){
           if(err){
             console.log(err);
           }else{
-            sendEmail(req.body.email, "YOUR PROPERTY POSTED AT USA REAL ESTATES", "Your property advertisement has been posted successfully to our website. Follow the link below to view your addvertisement...<br><br><a style='padding: 1%; background-color: #6a67ce; color: #e1e0f5;' href='https://usa-real-estates.herokuapp.com/detailedproperty/"+result.timestamp+"' target='_blank'>Review your add</a><br><br>", "SUCCESSFULLY POSTED  PROPERTY TO USA REAL ESTATES");
+            sendEmail(req.body.email, "SUCCESSFULLY POSTED  PROPERTY TO USA REAL ESTATES", "YOUR PROPERTY POSTED AT USA REAL ESTATES", "Your property advertisement has been posted successfully to our website. Follow the link below to view your addvertisement...<br><br><a style='padding: 1%; background-color: #6a67ce; color: #e1e0f5;' href='https://usa-real-estates.herokuapp.com/detailedproperty/"+result.timestamp+"' target='_blank'>Review your add</a><br><br>");
             res.render("message.ejs",{status: 'addpost', message: 'Congratulations. Your add is posted successfully...', link: '<a href="/detailedproperty/'+result.timestamp+'">Click me to view your post</a>', users: req.session.users});
           }
       });
@@ -697,7 +703,7 @@ app.post('/updateproperty', function(req, res) {
   var addtype = req.body.atype; 
   var propertytype = req.body.ptype; 
   var area = req.body.area;
-  console.log(id+", "+title+", "+features);
+  // console.log(id+", "+title+", "+features);
   db.property.update({timestamp: id},{$set : {title: title, cost: cost, fulladdress: add, addToSearch: add.toLowerCase(), discription:disc, features: features, latitude: lat, longitude: long, email:email, phone:phone, bedroom:bedroom, kitchen:kitchen, bathroom:bathroom, addtype:addtype, propertytype:propertytype,area:area }},{upsert:true,multi:false});
   
   var newNotification = {
@@ -730,8 +736,8 @@ app.post('/bookmark', function(req, res) {
  db.bookmark.findOne({timestamp: timestamp, email: email}, function(err, check){
     if(!check){ 
       db.bookmark.insert(newBookmark, function(err, result){
-        if(err){ console.log("ERROR OCCURED: "+err);}
-          else{ console.log("BOOKMARK SAVED: ");}
+        // if(err){ console.log("ERROR OCCURED: "+err);}
+        //   else{ console.log("BOOKMARK SAVED: ");}
           res.send("save");
       });
     }
@@ -743,8 +749,8 @@ app.post('/bookmark', function(req, res) {
 
 function setNotification(newNotification){
   db.notification.insert(newNotification, function(err, result){
-    if(err){ console.log("ERROR OCCURED: "+err);}
-      else{ console.log("NOTIFICATION SAVED: ");}
+    // if(err){ console.log("ERROR OCCURED: "+err);}
+    //   else{ console.log("NOTIFICATION SAVED: ");}
   });
 }
 
@@ -758,7 +764,7 @@ function setNotification(newNotification){
 
 app.post('/search', function(req, res) {
   var loc = req.body.location;
-  console.log(loc);
+  // console.log(loc);
    db.property.find({ addToSearch: {'$regex': loc} }, function (err, property) {
     res.send(property);
   });
@@ -766,7 +772,7 @@ app.post('/search', function(req, res) {
 
 app.post('/searchproperty', function(req, res) {
   var timestamp = req.body.timestamp;
-  console.log(timestamp);
+  // console.log(timestamp);
    db.property.findOne({ timestamp: timestamp}, function (err, property) {
     res.send(property);
   });
@@ -803,8 +809,8 @@ app.post('/detailedproperty/sendinterestinproperty', function(req, res){
   var message1 = "<br><br>It looks like you have shown interest in <span style='color: #4f4e56;'>"+propertyaddress+"</span> and we have successfully sent your thoughts to owner of mentioned property. You will here back soon if property owner is statisfied with your mentioned Quote<br><br>Thank you for using our service. ";
   var subject1 = "USA REAL ESTATES sent your message to property owner";
 
-  sendEmail(emailofposter, title, message, subject);
-  sendEmail(email, title1, message1, subject1);
+  sendEmail(emailofposter, subject, title, message);
+  sendEmail(email, subject1, title1, message1);
   res.render("message.ejs",{property: "REGISTERED", status: 'registered', message: 'Your email is successfully sent to the owner of the property....', link: '<a href="/propertiesbymaps">Click me to view our properties by google map...</a>'});
 });
 
@@ -852,9 +858,9 @@ app.post('/contactme', function(req, res){
         }
         setNotification(newNotification);
       }
-    console.log("In newpasswordupdate method: "+req.body.email);
-    sendEmail('shubham20.yeole@gmail.com', name+" contacted you through your Rental application", "<h1>"+name+" | "+email+" message...<br><br>"+comment+"</h1>",""+name+" contacted you via USA REAL ESTATES");
-    sendEmail(email, "THANK YOU FOR CONTACTING USA REAL ESTATES","We successfully received your message. We will be back soon as soon as possible", "CONTACT ME");
+    // console.log("In newpasswordupdate method: "+req.body.email);
+    sendEmail('shubham20.yeole@gmail.com', ""+name+" contacted you via USA REAL ESTATES", name+" contacted you through your Rental application", "<h1>"+name+" | "+email+" message...<br><br>"+comment+"</h1>");
+    sendEmail(email, "CONTACT ME", "THANK YOU FOR CONTACTING USA REAL ESTATES","We successfully received your message. We will be back soon as soon as possible");
     res.render("message.ejs",{status: 'addpost', message: 'Congratulations. Your email was sent to Owner of USA REAL ESTATES. We will get back to you as soon as possible. Thank you for your time and using our services.', link: '<a href="/contact">Go Back</a>'});
 });
 app.get('/paypal', function(req, res) {
@@ -866,7 +872,7 @@ app.get('/paypal', function(req, res) {
 
 
 app.listen(port, function() {
-  console.log('Listening on port ' + port)
+  console.log('SHUBHAM PROJECT RUNNING ON: http://localhost:' + port)
 });
 
 // db.users.update({},{$set : {"subscription": 0}},{upsert:true,multi:true}) ;
@@ -896,16 +902,16 @@ app.post('/submitnewtimetable', function(req, res){
     solvedquestions: 0,
     totalcategories: category.length,
   }
-  console.log(category);
+  // console.log(category);
     if(category.length == 0){
-      console.log(splitDate(from));
+      // console.log(splitDate(from));
     }else{
       db.timetable.insert(newTimetable, function(err, result){
        if(err){console.log(err);}
        else{ 
-        console.log("Category Saved successfully"); 
+        // console.log("Category Saved successfully"); 
         for(i=0; i<category.length;i++){
-        console.log(splitDate(from[i]));
+        // console.log(splitDate(from[i]));
         var timetableid = ""+result._id+"";
         var newCategoty = {
             timetableid: timetableid,
@@ -924,7 +930,7 @@ app.post('/submitnewtimetable', function(req, res){
             db.timetablecategory.insert(newCategoty, function(error, result2){
                 if(error){console.log(error);}
                 else{ 
-                  console.log("Category Saved successfully"); 
+                  // console.log("Category Saved successfully"); 
                 }
             });
           }
@@ -969,7 +975,7 @@ app.post('/addnewcategory', function(req, res){
           status: req.body.status,
           percent: Number(req.body.percent)
         }
-  console.log(newcategory);
+  // console.log(newcategory);
   // db.timetablecategory.update({uniqueid: catuniqueid},{$set : {totalquestions: questionnumber}},{upsert:true,multi:false});
   db.timetable.update({timestamp: Number(req.body.timestamp)},{$inc : {'totalcategories': 1}},{upsert:false,multi:false});
   db.timetablecategory.update({timestamp: Number(req.body.timestamp)},{$inc : {'totalcategories': 1}},{upsert:false,multi:true});
@@ -1026,7 +1032,7 @@ app.post('/addquestion', function(req, res){
           var percentcalculation = Math.round((elem.solvedquestions/elem.totalquestions)*100);
           db.timetable.update({timestamp: Number(req.body.timestamp)},{$set: {percent: percentcalculation}});
         });
-        console.log(cattimestamp);
+        // console.log(cattimestamp);
         res.send('ok');
         });
      });
@@ -1043,7 +1049,7 @@ app.post('/getquestion', function(req, res){
 
 
 app.post('/updatequeanswer', function(req, res){
-  console.log();
+  // console.log();
   var queuniqueid = req.body.queuniqueid ;
   var answer = req.body.answer ;
   var question = req.body.question ;
@@ -1068,7 +1074,7 @@ app.post('/postanswer', function(req, res){
           }
         }
       var percent = Math.round((total/catego.length) * 100);
-      console.log("PERCENT: "+catuniqueid+"%");
+      // console.log("PERCENT: "+catuniqueid+"%");
       var resee = catuniqueid.split("-");
     db.timetable.update({timestamp: Number(resee[0])},{$inc : {'solvedquestions': 1}},{upsert:true,multi:true});
     db.timetablecategory.update({uniqueid: catuniqueid},{$set : {percent: percent}},{upsert:true,multi:false});
